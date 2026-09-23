@@ -95,13 +95,48 @@ button{font:inherit}
 @media(max-width:720px){.detail-grid{grid-template-columns:1fr}.illustration{position:relative;top:auto;max-width:390px;margin:auto}.tiles{grid-template-columns:1fr 1fr}}
 @media(max-width:450px){.app{width:min(100% - 18px,940px)}.welcome{padding:8px}.welcome-box{padding:48px 18px 42px;border-radius:28px}.tiles{grid-template-columns:1fr}.tile{min-height:125px}.detail-grid{gap:12px}}
 
-.audio-control{position:fixed;right:14px;bottom:14px;z-index:20;display:none;align-items:center;gap:8px;
-background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:999px;padding:7px 10px;
-box-shadow:0 8px 25px #9d235420;backdrop-filter:blur(8px)}
-.audio-control.show{display:flex}
-.audio-control button{border:0;background:var(--soft);color:var(--deep);width:38px;height:38px;border-radius:50%;cursor:pointer}
-.audio-control input{width:80px;accent-color:var(--pink)}
-.audio-label{font-size:12px;color:var(--muted);font-weight:700}
+
+/* v6 modern interaction layer */
+body{
+  background:
+    radial-gradient(circle at 8% 4%,#ffdbe9 0,transparent 24%),
+    radial-gradient(circle at 92% 18%,#ffeef5 0,transparent 22%),
+    linear-gradient(180deg,#fff9fc,#fff);
+}
+.app{max-width:980px}
+.hero-orbit{position:absolute;inset:0;pointer-events:none}
+.spark{position:absolute;width:7px;height:7px;border-radius:50%;background:#e83f83aa;animation:drift 4s ease-in-out infinite}
+.spark.s1{left:12%;top:24%}.spark.s2{right:16%;top:30%;animation-delay:.8s}.spark.s3{left:24%;bottom:20%;animation-delay:1.6s}.spark.s4{right:24%;bottom:18%;animation-delay:2.4s}
+@keyframes drift{50%{transform:translateY(-12px) scale(1.25);opacity:.55}}
+.menu-intro{padding:6px 3px 18px}
+.menu-intro .eyebrow{color:var(--deep);font-weight:850;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.menu-intro h2{font-size:clamp(28px,7vw,42px);margin:5px 0}
+.menu-intro p{margin:0;color:var(--muted);line-height:1.5}
+.tile{position:relative;overflow:hidden}
+.tile:after{content:"→";position:absolute;right:17px;bottom:15px;color:var(--pink);font-size:22px;opacity:.45;transition:.2s}
+.tile:hover:after{opacity:1;transform:translateX(4px)}
+.tile .micro{display:inline-flex;align-items:center;gap:5px;margin-top:12px;color:var(--deep);font-size:12px;font-weight:750}
+.detail-head .eyebrow{color:var(--deep);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+.detail-grid{align-items:stretch}
+.illustration{min-height:100%;display:flex;flex-direction:column;justify-content:center}
+.info-card{transition:transform .2s,box-shadow .2s}
+.info-card:hover{transform:translateY(-2px);box-shadow:0 9px 25px #9d23540a}
+.reveal{overflow:hidden}
+.reveal summary{list-style:none;cursor:pointer;padding:2px 0;font-weight:800;color:var(--deep)}
+.reveal summary::-webkit-details-marker{display:none}
+.reveal summary:after{content:"＋";float:right;font-size:20px}
+.reveal[open] summary:after{content:"−"}
+.reveal .reveal-body{padding-top:10px;color:var(--muted)}
+.tap-hint{display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:var(--muted);font-size:12px}
+.mini-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
+.flow-item{padding:12px;border:1px solid var(--line);border-radius:15px;background:#fff;text-align:center}
+.flow-item b{display:block;font-size:13px}.flow-item span{display:block;font-size:11px;color:var(--muted);margin-top:3px}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice-btn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:15px;text-align:left;cursor:pointer}
+.choice-btn:hover{border-color:#db7ca2;background:#fff8fb}
+.choice-result{display:none;margin-top:12px}.choice-result.show{display:block}
+.scroll-note{margin:14px 0;padding:13px 15px;border-radius:15px;background:linear-gradient(135deg,#fff0f6,#fff);border:1px solid var(--line);color:var(--muted);font-size:13px}
+@media(max-width:450px){.mini-flow{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -111,11 +146,13 @@ box-shadow:0 8px 25px #9d235420;backdrop-filter:blur(8px)}
 <section id="welcome" class="screen active">
   <div class="welcome">
     <div class="welcome-box">
+      <div class="hero-orbit"><span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span><span class="spark s4"></span></div>
       <div class="ribbon">🎀</div>
       <h1>Outubro Rosa</h1>
       <p><strong>Informação também é cuidado.</strong><br>
       Uma jornada para conhecer seu corpo, entender seus exames e saber quando procurar a unidade de saúde.</p>
       <button class="start" id="startJourney">Começar a jornada 🌷</button>
+      <div class="tap-hint" style="justify-content:center">✨ Uma experiência rápida e interativa</div>
     </div>
   </div>
 </section>
@@ -124,130 +161,125 @@ box-shadow:0 8px 25px #9d235420;backdrop-filter:blur(8px)}
 <section id="menu" class="screen">
   <div class="top">
     <button class="back" data-back="welcome" aria-label="Voltar">←</button>
-    <div><h1>Vamos começar</h1><p>Escolha um tema para explorar.</p></div>
+    <div><h1>Vamos começar</h1><p>Explore no seu ritmo.</p></div>
+  </div>
+  <div class="menu-intro">
+    <div class="eyebrow">Sua jornada de cuidado</div>
+    <h2>O que você quer descobrir?</h2>
+    <p>Toque em um tema. As informações aparecem aos poucos para você explorar, em vez de jogar um paredão de texto na sua cara.</p>
   </div>
   <div class="tiles">
-    <button class="tile" data-open="mamas"><span class="emoji">🌸</span><h2>Saúde das mamas</h2><p>Conheça sinais de alerta e a mamografia.</p></button>
-    <button class="tile" data-open="preventivo"><span class="emoji">🩺</span><h2>Exame preventivo</h2><p>Entenda o rastreamento e veja como se preparar.</p></button>
-    <button class="tile" data-open="situacoes"><span class="emoji">💗</span><h2>O que eu faço?</h2><p>Escolha uma situação e veja uma orientação.</p></button>
-    <button class="tile" data-open="quiz"><span class="emoji">🧠</span><h2>Quiz</h2><p>Teste seus conhecimentos sobre prevenção.</p></button>
+    <button class="tile" data-open="mamas"><span class="emoji">🌸</span><h2>Saúde das mamas</h2><p>Sinais de alerta, fatores de risco e mamografia.</p><span class="micro">Explorar tema</span></button>
+    <button class="tile" data-open="preventivo"><span class="emoji">🩺</span><h2>Exame preventivo</h2><p>Rastreamento, HPV e o Papanicolau.</p><span class="micro">Explorar tema</span></button>
+    <button class="tile" data-open="situacoes"><span class="emoji">💗</span><h2>O que eu faço?</h2><p>Situações do dia a dia e próximos passos.</p><span class="micro">Ver situações</span></button>
+    <button class="tile" data-open="quiz"><span class="emoji">🧠</span><h2>Quiz</h2><p>Aprenda respondendo perguntas rápidas.</p><span class="micro">Começar quiz</span></button>
   </div>
+  <div class="scroll-note">💡 Você não precisa ler tudo de uma vez. Escolha um tema e vá descobrindo.</div>
   <div class="footer">Informação educativa. Em caso de dúvida, procure sua unidade de saúde.</div>
 </section>
 
 <!-- TELA 3: MAMAS -->
 <section id="mamas" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Saúde das mamas</h1><p>Conheça seu corpo e os sinais de alerta.</p></div></div>
-  <div class="detail-head"><div class="mini">🌸</div><h1>Conheça suas mamas</h1><p>A maior parte dos cânceres de mama é descoberta pelas próprias mulheres. Conhecer o que é normal para você ajuda a perceber mudanças.</p></div>
+  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Saúde das mamas</h1><p>Descubra o que observar.</p></div></div>
+  <div class="detail-head">
+    <div class="eyebrow">01 • MAMAS</div>
+    <div class="mini">🌸</div>
+    <h1>Conheça suas mamas</h1>
+    <p>Conhecer o que é normal para você ajuda a perceber mudanças. Explore os pontos abaixo.</p>
+  </div>
   <div class="detail-grid">
     <div class="illustration">
       <svg viewBox="0 0 360 500" role="img" aria-label="Ilustração de uma mulher de corpo natural com destaque suave na região das mamas">
-<defs>
- <linearGradient id="skinA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c6bb"/><stop offset="1" stop-color="#dfa091"/></linearGradient>
- <linearGradient id="dressA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a2bd"/><stop offset="1" stop-color="#df6e9a"/></linearGradient>
- <filter id="softA"><feGaussianBlur stdDeviation="8"/></filter>
-</defs>
-<ellipse cx="180" cy="472" rx="112" ry="12" fill="#d84c8212"/>
-<path d="M124 96 C126 51 151 27 181 27 C214 27 237 54 237 96 C237 126 215 149 181 149 C147 149 124 126 124 96Z" fill="url(#skinA)"/>
-<path d="M121 94 C122 51 149 18 184 22 C216 26 238 51 239 87 C222 66 204 55 181 55 C158 55 140 69 121 94Z" fill="#754653"/>
-<path d="M127 79 C142 54 158 45 180 45 C203 45 222 56 235 79" fill="none" stroke="#915766" stroke-width="7" stroke-linecap="round" opacity=".35"/>
-<path d="M156 141 C158 158 157 168 151 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
-<path d="M206 141 C204 158 205 168 211 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
-<path d="M104 177 C124 155 151 148 181 148 C211 148 238 155 258 177 L292 309 C298 336 278 357 253 348 L229 291 L242 432 L198 466 L181 466 L164 466 L120 432 L133 291 L109 348 C84 357 64 336 70 309Z" fill="url(#dressA)"/>
-<path d="M103 178 C82 204 72 251 72 299 C73 322 85 337 103 334 L126 275 L137 199Z" fill="url(#skinA)"/>
-<path d="M259 178 C280 204 290 251 290 299 C289 322 277 337 259 334 L236 275 L225 199Z" fill="url(#skinA)"/>
-<path d="M112 180 C134 168 157 163 181 163 C205 163 228 168 250 180 L236 277 C220 289 200 296 181 296 C162 296 142 289 126 277Z" fill="#f6c0d0" opacity=".92"/>
-<path d="M126 209 C145 190 163 188 181 207 C199 188 217 190 236 209" fill="none" stroke="#df6e9a" stroke-width="4" opacity=".6"/>
-<circle cx="150" cy="224" r="8" fill="#e83f83"/>
-<circle cx="212" cy="224" r="8" fill="#e83f83"/>
-<circle cx="151" cy="224" r="27" fill="#e83f8312"/>
-<circle cx="211" cy="224" r="27" fill="#e83f8312"/>
-<path d="M143 325 C159 335 202 335 219 325" fill="none" stroke="#b85c78" stroke-width="4" stroke-linecap="round" opacity=".35"/>
-<path d="M134 289 C144 311 161 325 181 325 C201 325 218 311 228 289" fill="none" stroke="#fbd8e3" stroke-width="4" opacity=".8"/>
-<circle cx="278" cy="224" r="27" fill="#fff" opacity=".92"/>
-<circle cx="278" cy="224" r="24" fill="#e83f8318"/>
-<path d="M268 224h20M278 214v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
-</svg>
+        <defs><linearGradient id="skinA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c6bb"/><stop offset="1" stop-color="#dfa091"/></linearGradient><linearGradient id="dressA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a2bd"/><stop offset="1" stop-color="#df6e9a"/></linearGradient></defs>
+        <ellipse cx="180" cy="472" rx="112" ry="12" fill="#d84c8212"/>
+        <path d="M124 96C126 51 151 27 181 27C214 27 237 54 237 96C237 126 215 149 181 149C147 149 124 126 124 96Z" fill="url(#skinA)"/>
+        <path d="M121 94C122 51 149 18 184 22C216 26 238 51 239 87C222 66 204 55 181 55C158 55 140 69 121 94Z" fill="#754653"/>
+        <path d="M156 141C158 158 157 168 151 178M206 141C204 158 205 168 211 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
+        <path d="M104 177C124 155 151 148 181 148C211 148 238 155 258 177L292 309C298 336 278 357 253 348L229 291L242 432L198 466L181 466L164 466L120 432L133 291L109 348C84 357 64 336 70 309Z" fill="url(#dressA)"/>
+        <path d="M103 178C82 204 72 251 72 299C73 322 85 337 103 334L126 275L137 199ZM259 178C280 204 290 251 290 299C289 322 277 337 259 334L236 275L225 199Z" fill="url(#skinA)"/>
+        <path d="M112 180C134 168 157 163 181 163C205 163 228 168 250 180L236 277C220 289 200 296 181 296C162 296 142 289 126 277Z" fill="#f6c0d0" opacity=".92"/>
+        <path d="M126 209C145 190 163 188 181 207C199 188 217 190 236 209" fill="none" stroke="#df6e9a" stroke-width="4" opacity=".6"/>
+        <circle cx="150" cy="224" r="8" fill="#e83f83"/><circle cx="212" cy="224" r="8" fill="#e83f83"/>
+        <circle cx="151" cy="224" r="27" fill="#e83f8312"/><circle cx="211" cy="224" r="27" fill="#e83f8312"/>
+        <path d="M143 325C159 335 202 335 219 325" fill="none" stroke="#b85c78" stroke-width="4" stroke-linecap="round" opacity=".35"/>
+        <circle cx="278" cy="224" r="27" fill="#fff" opacity=".92"/><circle cx="278" cy="224" r="24" fill="#e83f8318"/>
+        <path d="M268 224h20M278 214v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
       <p class="hint">Ilustração educativa, não representa uma pessoa específica.</p>
     </div>
     <div class="info-list">
-      <article class="info-card"><span class="pill">SINAIS DE ALERTA</span><h2>O que merece avaliação?</h2><ul><li>Caroço ou nódulo novo.</li><li>Mudança na pele ou no formato da mama.</li><li>Alteração ou retração do mamilo.</li><li>Secreção sanguinolenta pelo mamilo.</li></ul><p>Uma alteração não significa necessariamente câncer, mas deve ser avaliada por um profissional de saúde.</p></article>
-      <article class="info-card highlight"><span class="pill">MAMOGRAFIA</span><h2>Rastreamento no SUS</h2><p>A recomendação de rastreamento populacional é para mulheres de <strong>50 a 74 anos, a cada dois anos</strong>. Fora dessa faixa, a indicação pode ser individualizada conforme avaliação profissional.</p></article>
-      <article class="info-card"><span class="pill">CUIDADO</span><h2>Conheça seu corpo</h2><p>Não é preciso esperar aparecer dor. Ao perceber uma mudança nova ou persistente, procure a unidade de saúde para avaliação.</p></article>
-      <div class="action-row"><button class="primary" data-open="preventivo">Conhecer o preventivo →</button><button class="secondary" data-back="menu">Voltar aos temas</button></div>
+      <article class="info-card"><span class="pill">PRIMEIRO PASSO</span><h2>O que observar?</h2><p>Você não precisa decorar uma lista enorme. O principal é perceber <strong>mudanças novas e persistentes</strong>.</p>
+        <details class="reveal"><summary>Ver exemplos</summary><div class="reveal-body">Caroço ou nódulo novo, mudança na pele ou no formato da mama, alteração ou retração do mamilo e secreção sanguinolenta pelo mamilo.</div></details>
+      </article>
+      <article class="info-card highlight"><span class="pill">MAMOGRAFIA</span><h2>Quando o rastreamento é recomendado?</h2><p>No SUS, o rastreamento populacional é recomendado para mulheres de <strong>50 a 74 anos, a cada dois anos</strong>.</p>
+        <details class="reveal"><summary>Por que existe uma faixa?</summary><div class="reveal-body">As recomendações de rastreamento são definidas considerando benefícios, riscos e evidências para diferentes faixas etárias. A avaliação individual pode ser diferente.</div></details>
+      </article>
+      <article class="info-card"><span class="pill">IMPORTANTE</span><h2>Achou alguma alteração?</h2><p>Uma alteração não significa automaticamente câncer. Mas uma mudança nova ou persistente merece avaliação profissional.</p>
+        <div class="tap-hint">💗 Não espere sentir dor para procurar orientação.</div>
+      </article>
+      <div class="action-row"><button class="primary" data-open="preventivo">Agora: conhecer o preventivo →</button><button class="secondary" data-back="menu">Voltar aos temas</button></div>
     </div>
   </div>
-  <div class="sources">Fonte: Instituto Nacional de Câncer (INCA) e Ministério da Saúde. <a href="https://www.gov.br/inca/pt-br/assuntos/cancer/tipos/mama/versao-para-populacao" target="_blank" rel="noopener">Informações oficiais sobre câncer de mama</a>.</div>
+  <div class="sources">Fonte: INCA e Ministério da Saúde. <a href="https://www.gov.br/inca/pt-br/assuntos/cancer/tipos/mama/versao-para-populacao" target="_blank" rel="noopener">Informações oficiais</a>.</div>
 </section>
 
 <!-- TELA 4: PREVENTIVO -->
 <section id="preventivo" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Exame preventivo</h1><p>Prevenção do câncer do colo do útero.</p></div></div>
-  <div class="detail-head"><div class="mini">🩺</div><h1>O preventivo também é cuidado</h1><p>O rastreamento ajuda a encontrar alterações antes que elas possam evoluir para câncer.</p></div>
+  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Exame preventivo</h1><p>Descubra como funciona.</p></div></div>
+  <div class="detail-head">
+    <div class="eyebrow">02 • COLO DO ÚTERO</div>
+    <div class="mini">🩺</div>
+    <h1>O preventivo também é cuidado</h1>
+    <p>Em vez de decorar termos, vamos por partes. Toque nos tópicos para descobrir.</p>
+  </div>
   <div class="detail-grid">
     <div class="illustration">
       <svg viewBox="0 0 360 500" role="img" aria-label="Ilustração de uma mulher de corpo natural com destaque suave na região pélvica">
-<defs>
- <linearGradient id="skinA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c6bb"/><stop offset="1" stop-color="#dfa091"/></linearGradient>
- <linearGradient id="dressA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a2bd"/><stop offset="1" stop-color="#df6e9a"/></linearGradient>
- <filter id="softA"><feGaussianBlur stdDeviation="8"/></filter>
-</defs>
-<ellipse cx="180" cy="472" rx="112" ry="12" fill="#d84c8212"/>
-<path d="M124 96 C126 51 151 27 181 27 C214 27 237 54 237 96 C237 126 215 149 181 149 C147 149 124 126 124 96Z" fill="url(#skinA)"/>
-<path d="M121 94 C122 51 149 18 184 22 C216 26 238 51 239 87 C222 66 204 55 181 55 C158 55 140 69 121 94Z" fill="#754653"/>
-<path d="M127 79 C142 54 158 45 180 45 C203 45 222 56 235 79" fill="none" stroke="#915766" stroke-width="7" stroke-linecap="round" opacity=".35"/>
-<path d="M156 141 C158 158 157 168 151 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
-<path d="M206 141 C204 158 205 168 211 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
-<path d="M104 177 C124 155 151 148 181 148 C211 148 238 155 258 177 L292 309 C298 336 278 357 253 348 L229 291 L242 432 L198 466 L181 466 L164 466 L120 432 L133 291 L109 348 C84 357 64 336 70 309Z" fill="url(#dressA)"/>
-<path d="M103 178 C82 204 72 251 72 299 C73 322 85 337 103 334 L126 275 L137 199Z" fill="url(#skinA)"/>
-<path d="M259 178 C280 204 290 251 290 299 C289 322 277 337 259 334 L236 275 L225 199Z" fill="url(#skinA)"/>
-<path d="M112 180 C134 168 157 163 181 163 C205 163 228 168 250 180 L236 277 C220 289 200 296 181 296 C162 296 142 289 126 277Z" fill="#f6c0d0" opacity=".92"/>
-<path d="M126 209 C145 190 163 188 181 207 C199 188 217 190 236 209" fill="none" stroke="#df6e9a" stroke-width="4" opacity=".6"/>
-<circle cx="181" cy="316" r="9" fill="#e83f83"/>
-<circle cx="181" cy="316" r="35" fill="#e83f8312"/>
-<circle cx="181" cy="316" r="58" fill="none" stroke="#e83f83" stroke-width="2" stroke-dasharray="5 7" opacity=".5"/>
-<path d="M171 316h20M181 306v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
-<path d="M143 325 C159 335 202 335 219 325" fill="none" stroke="#b85c78" stroke-width="4" stroke-linecap="round" opacity=".35"/>
-<path d="M134 289 C144 311 161 325 181 325 C201 325 218 311 228 289" fill="none" stroke="#fbd8e3" stroke-width="4" opacity=".8"/>
-<circle cx="278" cy="316" r="27" fill="#fff" opacity=".92"/>
-<circle cx="278" cy="316" r="24" fill="#e83f8318"/>
-<path d="M268 316h20M278 306v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
-</svg>
+        <defs><linearGradient id="skinB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c6bb"/><stop offset="1" stop-color="#dfa091"/></linearGradient><linearGradient id="dressB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a2bd"/><stop offset="1" stop-color="#df6e9a"/></linearGradient></defs>
+        <ellipse cx="180" cy="472" rx="112" ry="12" fill="#d84c8212"/>
+        <path d="M124 96C126 51 151 27 181 27C214 27 237 54 237 96C237 126 215 149 181 149C147 149 124 126 124 96Z" fill="url(#skinB)"/>
+        <path d="M121 94C122 51 149 18 184 22C216 26 238 51 239 87C222 66 204 55 181 55C158 55 140 69 121 94Z" fill="#754653"/>
+        <path d="M156 141C158 158 157 168 151 178M206 141C204 158 205 168 211 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
+        <path d="M104 177C124 155 151 148 181 148C211 148 238 155 258 177L292 309C298 336 278 357 253 348L229 291L242 432L198 466L181 466L164 466L120 432L133 291L109 348C84 357 64 336 70 309Z" fill="url(#dressB)"/>
+        <path d="M103 178C82 204 72 251 72 299C73 322 85 337 103 334L126 275L137 199ZM259 178C280 204 290 251 290 299C289 322 277 337 259 334L236 275L225 199Z" fill="url(#skinB)"/>
+        <path d="M112 180C134 168 157 163 181 163C205 163 228 168 250 180L236 277C220 289 200 296 181 296C162 296 142 289 126 277Z" fill="#f6c0d0" opacity=".55"/>
+        <ellipse cx="181" cy="327" rx="58" ry="55" fill="#fff" opacity=".8"/>
+        <ellipse cx="181" cy="327" rx="58" ry="55" fill="#e83f8312"/>
+        <circle cx="181" cy="327" r="9" fill="#e83f83"/>
+        <circle cx="181" cy="327" r="48" fill="none" stroke="#e83f83" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+        <circle cx="278" cy="327" r="27" fill="#fff" opacity=".92"/><circle cx="278" cy="327" r="24" fill="#e83f8318"/>
+        <path d="M268 327h20M278 317v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
       <p class="hint">Ilustração educativa, não representa uma pessoa específica.</p>
     </div>
     <div class="info-list">
-      <article class="info-card"><span class="pill">QUEM DEVE FAZER?</span><h2>População-alvo</h2><p>O rastreamento é destinado a <strong>pessoas com colo do útero de 25 a 64 anos que já tiveram atividade sexual</strong>.</p></article>
-      <article class="info-card highlight"><span class="pill">NOVO RASTREAMENTO</span><h2>DNA-HPV</h2><p>O Brasil está implantando progressivamente o <strong>teste molecular de DNA-HPV</strong> como exame primário de rastreamento.</p></article>
-      <article class="info-card"><span class="pill">PAPANICOLAU</span><h2>E onde o DNA-HPV ainda não está disponível?</h2><p>O exame citopatológico, conhecido como <strong>Papanicolau</strong>, continua sendo uma técnica segura e eficaz para o rastreamento nesses locais.</p></article>
-      <article class="info-card"><span class="pill">RESULTADO</span><h2>Um resultado alterado não é diagnóstico de câncer</h2><p>Alterações podem exigir repetição do exame, investigação ou acompanhamento. O importante é seguir a orientação da equipe de saúde.</p></article>
-      <article class="info-card prep-inside">
-        <span class="pill">ANTES DA COLETA</span>
-        <h2>Como se preparar para o preventivo?</h2>
-        <p>Alguns cuidados ajudam a obter uma amostra adequada.</p>
-        <ul>
-          <li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li>
-          <li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li>
-          <li>Evite exames intravaginais nesse período.</li>
-          <li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li>
-        </ul>
-        <div class="note"><strong>Depois da coleta:</strong> retorne para saber o resultado e receber a orientação da equipe.</div>
+      <article class="info-card"><span class="pill">QUEM?</span><h2>Quem está na população-alvo?</h2><p>O rastreamento é destinado a <strong>pessoas com colo do útero de 25 a 64 anos que já tiveram atividade sexual</strong>.</p>
+        <details class="reveal"><summary>Por que essa faixa?</summary><div class="reveal-body">O rastreamento populacional é organizado por faixa etária para concentrar os exames onde há evidências de benefício. A orientação individual pode variar.</div></details>
       </article>
-      <div class="action-row"><button class="secondary" data-back="menu">Voltar aos temas</button></div>
+      <article class="info-card highlight"><span class="pill">COMO?</span><h2>DNA-HPV e Papanicolau</h2><p>O Brasil está implantando o <strong>teste molecular de DNA-HPV</strong> como método primário de rastreamento.</p>
+        <details class="reveal"><summary>E o Papanicolau?</summary><div class="reveal-body">Onde o teste molecular ainda não está disponível, o exame citopatológico, conhecido como Papanicolau, continua sendo utilizado.</div></details>
+      </article>
+      <article class="info-card"><span class="pill">ANTES DA COLETA</span><h2>Como se preparar?</h2><p>Alguns cuidados ajudam a obter uma amostra adequada.</p>
+        <details class="reveal" open><summary>Ver orientações</summary><div class="reveal-body"><ul><li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li><li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li><li>Evite exames intravaginais nesse período.</li><li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li></ul></div></details>
+      </article>
+      <article class="info-card"><span class="pill">E SE DER ALTERADO?</span><h2>Resultado alterado não é sinônimo de câncer</h2><p>Pode ser necessário repetir o exame, investigar ou acompanhar. O importante é seguir a orientação da equipe.</p></article>
+      <div class="action-row"><button class="primary" data-open="situacoes">Quero ver situações práticas →</button><button class="secondary" data-back="menu">Voltar aos temas</button></div>
     </div>
   </div>
-  <div class="sources">Fonte: Instituto Nacional de Câncer (INCA) e Ministério da Saúde. <a href="https://www.gov.br/inca/pt-br/assuntos/gestor-e-profissional-de-saude/controle-do-cancer-do-colo-do-utero/acoes/deteccao-precoce" target="_blank" rel="noopener">Detecção precoce do câncer do colo do útero</a>.</div>
+  <div class="sources">Fonte: INCA e Ministério da Saúde. <a href="https://www.gov.br/inca/pt-br/assuntos/gestor-e-profissional-de-saude/controle-do-cancer-do-colo-do-utero/acoes/deteccao-precoce" target="_blank" rel="noopener">Detecção precoce</a>.</div>
 </section>
 
 <!-- TELA 6: SITUAÇÕES -->
 <section id="situacoes" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>O que eu faço?</h1><p>Situações comuns e próximos passos.</p></div></div>
-  <div class="info-list">
-    <button class="answer" data-sit="0"><strong>🔴 Percebi um caroço na mama.</strong><br>O que devo fazer?</button>
-    <button class="answer" data-sit="1"><strong>🩺 Estou na idade de fazer o preventivo.</strong><br>Como começo?</button>
-    <button class="answer" data-sit="2"><strong>📄 Meu exame veio alterado.</strong><br>Isso significa câncer?</button>
-    <button class="answer" data-sit="3"><strong>💬 Tenho vergonha ou medo do exame.</strong><br>Posso conversar com a equipe?</button>
+  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>O que eu faço?</h1><p>Escolha uma situação.</p></div></div>
+  <div class="detail-head"><div class="eyebrow">NA VIDA REAL</div><div class="mini">💗</div><h1>Qual dessas situações parece com você?</h1><p>Toque em uma delas e veja um próximo passo simples.</p></div>
+  <div class="choice-grid">
+    <button class="choice-btn" data-sit="0"><strong>🔴 Percebi um caroço na mama.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
+    <button class="choice-btn" data-sit="1"><strong>🩺 Estou na idade de fazer o preventivo.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
+    <button class="choice-btn" data-sit="2"><strong>📄 Meu exame veio alterado.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
+    <button class="choice-btn" data-sit="3"><strong>💬 Tenho vergonha ou medo do exame.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
   </div>
-  <div id="sitResult" class="note" style="display:none"></div>
+  <div id="sitResult" class="note choice-result"></div>
 </section>
 
 <!-- TELA 7: QUIZ -->
@@ -256,11 +288,6 @@ box-shadow:0 8px 25px #9d235420;backdrop-filter:blur(8px)}
   <div class="quiz-card" id="quizCard"></div>
 </section>
 
-<div class="audio-control" id="audioControl" aria-label="Controle da música">
-  <button id="musicToggle" type="button" aria-label="Pausar música">🔊</button>
-  <span class="audio-label">Música</span>
-  <input id="musicVolume" type="range" min="0" max="100" value="22" aria-label="Volume da música">
-</div>
 </main>
 
 <script>
@@ -270,70 +297,83 @@ function go(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-let audioCtx=null, masterGain=null, musicTimer=null, musicPlaying=false, musicStep=0;
-const audioControl=document.getElementById('audioControl');
-const musicToggle=document.getElementById('musicToggle');
-const musicVolume=document.getElementById('musicVolume');
+document.getElementById('startJourney').addEventListener('click',()=>go('menu'));
 
-function startCalmMusic(){
-  if(!audioCtx){
-    const AC=window.AudioContext||window.webkitAudioContext;
-    if(!AC)return;
-    audioCtx=new AC();
-    masterGain=audioCtx.createGain();
-    masterGain.gain.value=0.028;
-    masterGain.connect(audioCtx.destination);
-  }
-  if(audioCtx.state==='suspended')audioCtx.resume();
-  if(musicPlaying)return;
-  musicPlaying=true;
-  audioControl.classList.add('show');
-  musicToggle.textContent='🔊';
-  musicToggle.setAttribute('aria-label','Pausar música');
-
-  // Ambient major-7th chords: lento, suave e sem timbres agudos assustadores.
-  const chords=[
-    [261.63,329.63,392.00,493.88], // Cmaj7
-    [220.00,261.63,329.63,392.00], // Am7
-    [174.61,220.00,261.63,329.63], // Fmaj7
-    [196.00,246.94,293.66,392.00]  // G7
-  ];
-  const playChord=()=>{
-    if(!musicPlaying||!audioCtx)return;
-    const chord=chords[musicStep%chords.length]; musicStep++;
-    const now=audioCtx.currentTime;
-    chord.forEach((freq,i)=>{
-      const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
-      osc.type='sine'; osc.frequency.value=freq;
-      gain.gain.setValueAtTime(0.0001,now);
-      gain.gain.linearRampToValueAtTime(0.10/(i+1),now+1.5);
-      gain.gain.setValueAtTime(0.10/(i+1),now+5.0);
-      gain.gain.exponentialRampToValueAtTime(0.0001,now+8.5);
-      osc.connect(gain);gain.connect(masterGain);
-      osc.start(now);osc.stop(now+9);
-    });
-  };
-  playChord();
-  musicTimer=setInterval(playChord,7000);
-}
-function stopCalmMusic(){
-  musicPlaying=false;
-  if(musicTimer){clearInterval(musicTimer);musicTimer=null}
-  musicToggle.textContent='🔇';
-  musicToggle.setAttribute('aria-label','Tocar música');
-}
-musicToggle.onclick=()=>musicPlaying?stopCalmMusic():startCalmMusic();
-musicVolume.oninput=()=>{
-  if(masterGain)masterGain.gain.value=(Number(musicVolume.value)/100)*0.13;
-};
-document.getElementById('startJourney').onclick=()=>{
-  startCalmMusic();
-  go('menu');
-};
-document.addEventListener('visibilitychange',()=>{
-  if(document.hidden && audioCtx && audioCtx.state==='running') audioCtx.suspend();
-  else if(!document.hidden && musicPlaying && audioCtx && audioCtx.state==='suspended') audioCtx.resume();
-});
 </script>
 </body>
-</html>
+</htmlconst situations=[
+ ['🔴 Percebi um caroço na mama.','Procure a unidade de saúde para avaliação. Uma alteração nova ou persistente merece atenção. Isso não significa automaticamente câncer, mas precisa ser avaliado.'],
+ ['🩺 Estou na idade de fazer o preventivo.','Procure sua unidade de saúde para verificar o método de rastreamento disponível e realizar o acompanhamento indicado.'],
+ ['📄 Meu exame veio alterado.','Um resultado alterado não significa automaticamente câncer. Pode ser necessário repetir o exame, investigar ou acompanhar. Siga a orientação da equipe.'],
+ ['💬 Tenho vergonha ou medo do exame.','Você pode conversar com a equipe de saúde antes da coleta. Explique suas dúvidas e desconfortos. Informação e acolhimento também fazem parte do cuidado.']
+];
+
+const screenIds=['welcome','menu','mamas','preventivo','situacoes','quiz'];
+function go(id){
+  if(!screenIds.includes(id)) return;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.addEventListener('click',(event)=>{
+  const target=event.target.closest('[data-open],[data-back],[data-sit]');
+  if(!target)return;
+  if(target.dataset.open==='quiz'){startQuiz();return;}
+  if(target.dataset.open){go(target.dataset.open);return;}
+  if(target.dataset.back){go(target.dataset.back);return;}
+  if(target.dataset.sit!==undefined){
+    const s=situations[Number(target.dataset.sit)];
+    const box=document.getElementById('sitResult');
+    box.className='note choice-result show';
+    box.innerHTML='<strong>'+s[0]+'</strong><p>'+s[1]+'</p>';
+    box.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+});
+
+document.getElementById('startJourney').addEventListener('click',()=>go('menu'));
+
+const qs=[
+ ['O preventivo ajuda no rastreamento do câncer do colo do útero.','Verdadeiro','O rastreamento busca identificar alterações que podem ser acompanhadas e tratadas.'],
+ ['A mamografia de rastreamento no SUS é indicada para toda mulher a partir dos 30 anos.','Falso','Para rastreamento populacional, a recomendação é de 50 a 74 anos, a cada dois anos.'],
+ ['Homens também podem desenvolver câncer de mama.','Verdadeiro','É menos frequente, mas homens também podem desenvolver câncer de mama.'],
+ ['O Papanicolau continua sendo usado onde o teste DNA-HPV ainda não está disponível.','Verdadeiro','O citopatológico continua sendo utilizado nos locais onde o teste molecular ainda não foi implantado.'],
+ ['Um resultado alterado no preventivo significa automaticamente câncer.','Falso','Resultado alterado pode exigir investigação ou acompanhamento, mas não significa automaticamente câncer.']
+];
+let qi=0,score=0,answered=false;
+function startQuiz(){qi=0;score=0;go('quiz');renderQuiz()}
+function renderQuiz(){
+  const q=qs[qi],pct=(qi/qs.length)*100;answered=false;
+  document.getElementById('quizCard').innerHTML='<span class="pill">PERGUNTA '+(qi+1)+' DE '+qs.length+'</span>'+
+    '<div class="progress"><i style="width:'+pct+'%"></i></div><h2>'+q[0]+'</h2>'+
+    '<button class="answer" data-answer="Verdadeiro">✅ Verdadeiro</button>'+
+    '<button class="answer" data-answer="Falso">❌ Falso</button>';
+}
+document.addEventListener('click',(event)=>{
+  const b=event.target.closest('[data-answer]');
+  if(!b || !document.getElementById('quiz').classList.contains('active')) return;
+  answerQuiz(b.dataset.answer);
+});
+function answerQuiz(v){
+  if(answered)return;answered=true;
+  const q=qs[qi],ok=v===q[1];if(ok)score++;
+  document.querySelectorAll('#quizCard [data-answer]').forEach(b=>{
+    if(b.dataset.answer===q[1])b.classList.add('correct');
+    else if(b.dataset.answer===v)b.classList.add('wrong');
+  });
+  document.getElementById('quizCard').insertAdjacentHTML('beforeend',
+    '<div class="note"><strong>'+(ok?'🎉 Correto!':'📚 Vamos corrigir.')+
+    '</strong><p>'+q[2]+'</p><button class="primary" data-next-quiz="1">'+
+    (qi===qs.length-1?'Ver resultado':'Próxima')+'</button></div>');
+}
+document.addEventListener('click',(event)=>{
+  const b=event.target.closest('[data-next-quiz]');
+  if(!b)return;
+  if(qi<qs.length-1){qi++;renderQuiz()}else finishQuiz();
+});
+function finishQuiz(){
+  document.getElementById('quizCard').innerHTML='<div style="text-align:center"><div style="font-size:55px">🎀</div><span class="pill">RESULTADO</span><h2>Você terminou!</h2><p>Você acertou <strong>'+score+' de '+qs.length+'</strong>.</p><p>Mais importante que a pontuação é saber onde buscar informação e manter o acompanhamento de saúde em dia.</p><button class="primary" data-restart-quiz="1">Refazer quiz</button></div>';
+}
+document.addEventListener('click',(event)=>{
+  if(event.target.closest('[data-restart-quiz]'))startQuiz();
+});
+>
