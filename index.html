@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Outubro Rosa - informação e prevenção sobre saúde das mamas e do colo do útero.">
+<title>Outubro Rosa | Saúde da Mulher</title>
+<style>
+:root{
+  --pink:#d84c82;--pink-dark:#a82e60;--soft:#fff1f6;--soft2:#fde0eb;
+  --ink:#422633;--muted:#765d68;--line:#ead4df;--white:#fff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#fff7fa,#fff);color:var(--ink);
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit}
+.container{width:min(920px,calc(100% - 28px));margin:auto}
+.hero{margin:24px auto 16px;padding:42px 22px;text-align:center;border:1px solid var(--line);
+border-radius:30px;background:linear-gradient(135deg,#fff5f8,#f9dce8)}
+.ribbon{font-size:64px;line-height:1}
+h1{font-size:clamp(32px,7vw,54px);margin:10px 0 8px;letter-spacing:-1px}
+.subtitle{max-width:650px;margin:auto;color:var(--muted);line-height:1.6;font-size:17px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--white);border-radius:20px;padding:20px;text-align:left;
+min-height:140px;cursor:pointer;transition:.2s;box-shadow:0 5px 18px rgba(120,50,80,.05)}
+.card:hover{transform:translateY(-3px);border-color:#d58aa7}
+.card:focus-visible,.answer:focus-visible,.primary:focus-visible{outline:3px solid #e7a6bf;outline-offset:2px}
+.card .icon{font-size:29px}.card h2{font-size:18px;margin:10px 0 6px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+.panel,.quiz{display:none;background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;margin:16px 0;box-shadow:0 8px 25px rgba(120,50,80,.06)}
+.panel.show,.quiz.show{display:block}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--pink-dark);
+font-weight:800;font-size:12px;letter-spacing:.5px}
+.panel h2,.quiz h2{font-size:27px;margin:10px 0}.panel p,.panel li,.quiz p{line-height:1.65}
+.panel ul{padding-left:21px}
+.note{background:var(--soft);padding:16px;border-radius:16px;margin-top:18px}
+.quiz .answers{display:grid;gap:10px;margin-top:16px}
+.answer{border:1px solid var(--line);background:#fff;border-radius:15px;padding:15px;text-align:left;cursor:pointer}
+.answer.correct{background:#eef8f1;border-color:#8bc6a0}.answer.wrong{background:#fff0f0;border-color:#dda0a0}
+.feedback{margin-top:15px;padding:14px;border-radius:14px;background:#faf5f7}
+.primary{border:0;background:var(--pink);color:#fff;border-radius:14px;padding:13px 18px;font-weight:750;cursor:pointer}
+.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:12px 16px;cursor:pointer}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 0 30px;line-height:1.5}
+@media(max-width:700px){.nav{grid-template-columns:1fr 1fr}}
+@media(max-width:430px){.nav{grid-template-columns:1fr}.hero{padding:32px 18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="container">
+<section class="hero">
+  <div class="ribbon">🎀</div>
+  <h1>Outubro Rosa</h1>
+  <p class="subtitle"><strong>Informação também é cuidado.</strong><br>
+  Conheça os cuidados com as mamas e com o colo do útero, entenda os exames e teste seus conhecimentos.</p>
+</section>
+
+<section class="nav" aria-label="Temas">
+  <button class="card" data-topic="mamas"><span class="icon">🌸</span><h2>Mamas</h2><p>Sinais de alerta e informações sobre mamografia.</p></button>
+  <button class="card" data-topic="preventivo"><span class="icon">🩺</span><h2>Preventivo</h2><p>Entenda o rastreamento do câncer do colo do útero.</p></button>
+  <button class="card" data-topic="preparo"><span class="icon">📋</span><h2>Antes do exame</h2><p>Orientações para a coleta do preventivo.</p></button>
+  <button class="card" data-topic="quiz"><span class="icon">🧠</span><h2>Mitos ou verdades</h2><p>Teste seus conhecimentos sobre prevenção.</p></button>
+</section>
+
+<section id="panel" class="panel" aria-live="polite"></section>
+<section id="quiz" class="quiz" aria-live="polite"></section>
+
+<footer>
+Conteúdo educativo. As recomendações podem ser atualizadas. Procure sua unidade de saúde para orientação individual.
+</footer>
+</main>
+
+<script>
+const panel=document.getElementById('panel');
+const quiz=document.getElementById('quiz');
+
+const topics={
+mamas:{
+tag:'SAÚDE DAS MAMAS',title:'Conheça suas mamas',
+html:`
+<p>É importante conhecer o próprio corpo e perceber alterações novas ou persistentes.</p>
+<ul>
+<li>Caroço ou nódulo novo.</li>
+<li>Mudança na pele ou no formato da mama.</li>
+<li>Alteração ou retração do mamilo.</li>
+<li>Secreção sanguinolenta pelo mamilo.</li>
+</ul>
+<p>Uma alteração não significa necessariamente câncer, mas deve ser avaliada por um profissional de saúde.</p>
+<div class="note"><strong>Mamografia no SUS:</strong> para rastreamento populacional, a recomendação é para mulheres de <strong>50 a 74 anos, a cada dois anos</strong>.</div>`
+},
+preventivo:{
+tag:'COLO DO ÚTERO',title:'O preventivo também é prevenção',
+html:`
+<p>O rastreamento do câncer do colo do útero é destinado a pessoas com colo do útero de <strong>25 a 64 anos que já tiveram atividade sexual</strong>.</p>
+<p>O Brasil está implantando o teste molecular de <strong>DNA-HPV</strong> como exame primário de rastreamento.</p>
+<p>Onde o teste molecular ainda não estiver disponível, o <strong>exame citopatológico, conhecido como Papanicolau</strong>, continua sendo utilizado.</p>
+<div class="note"><strong>Importante:</strong> fazer o exame e buscar o resultado faz parte do cuidado. Um resultado alterado não significa automaticamente câncer, mas pode exigir acompanhamento.</div>`
+},
+preparo:{
+tag:'PREPARAÇÃO',title:'Como se preparar para o preventivo',
+html:`
+<p>Para aumentar a chance de obter uma amostra adequada:</p>
+<ul>
+<li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li>
+<li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li>
+<li>Evite exames intravaginais nesse período.</li>
+<li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li>
+</ul>
+<p>Se houver uma situação específica, siga a orientação da equipe da unidade de saúde.</p>
+<div class="note"><strong>Depois da coleta:</strong> lembre-se de retornar para saber o resultado e receber a orientação adequada.</div>`
+}
+};
+
+document.querySelectorAll('[data-topic]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const key=btn.dataset.topic;
+    if(key==='quiz') startQuiz();
+    else showTopic(key);
+  });
+});
+
+function showTopic(key){
+  quiz.classList.remove('show');
+  const t=topics[key];
+  panel.innerHTML=`<span class="tag">${t.tag}</span><h2>${t.title}</h2>${t.html}
+  <div class="actions"><button class="secondary" id="closeInfo">Fechar</button></div>`;
+  panel.classList.add('show');
+  document.getElementById('closeInfo').onclick=()=>panel.classList.remove('show');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+const questions=[
+ {q:'O exame preventivo ajuda no rastreamento do câncer do colo do útero.',a:['Verdadeiro','Falso'],c:0,e:'O rastreamento permite identificar alterações que podem ser acompanhadas e tratadas.'},
+ {q:'A mamografia de rastreamento no SUS é indicada para toda mulher a partir dos 30 anos.',a:['Verdadeiro','Falso'],c:1,e:'Para rastreamento populacional, a recomendação é de 50 a 74 anos, a cada dois anos.'},
+ {q:'Homens também podem desenvolver câncer de mama.',a:['Verdadeiro','Falso'],c:0,e:'Embora seja muito menos frequente, homens também podem desenvolver câncer de mama.'},
+ {q:'O Papanicolau continua sendo utilizado onde o teste DNA-HPV ainda não está disponível.',a:['Verdadeiro','Falso'],c:0,e:'O citopatológico continua sendo uma estratégia de rastreamento onde o teste molecular ainda não foi implantado.'}
+];
+
+let current=0,score=0,answered=false;
+
+function startQuiz(){
+  panel.classList.remove('show'); quiz.classList.add('show'); current=0; score=0; renderQuestion();
+  quiz.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  quiz.innerHTML=`<span class="tag">PERGUNTA ${current+1} DE ${questions.length}</span>
+  <h2>${q.q}</h2><div class="answers">
+  ${q.a.map((a,i)=>`<button class="answer" data-i="${i}">${a}</button>`).join('')}</div>
+  <div id="feedback"></div>`;
+  quiz.querySelectorAll('.answer').forEach(b=>b.onclick=()=>answer(Number(b.dataset.i)));
+}
+function answer(i){
+  if(answered)return; answered=true;
+  const q=questions[current], buttons=quiz.querySelectorAll('.answer'), ok=i===q.c;
+  if(ok)score++;
+  buttons[q.c].classList.add('correct');
+  if(!ok)buttons[i].classList.add('wrong');
+  const feedback=quiz.querySelector('#feedback');
+  feedback.className='feedback';
+  feedback.innerHTML=`<strong>${ok?'Correto!':'Vamos corrigir.'}</strong><p>${q.e}</p>
+  <button class="primary" id="next">${current===questions.length-1?'Ver resultado':'Próxima pergunta'}</button>`;
+  document.getElementById('next').onclick=()=>{
+    if(current<questions.length-1){current++;renderQuestion()}else finishQuiz();
+  };
+}
+function finishQuiz(){
+  quiz.innerHTML=`<span class="tag">RESULTADO</span><h2>Você terminou! 🎀</h2>
+  <p>Você acertou <strong>${score} de ${questions.length}</strong>.</p>
+  <p>Mais importante que a pontuação é saber onde buscar informação e manter o acompanhamento de saúde em dia.</p>
+  <div class="actions"><button class="primary" id="again">Refazer quiz</button>
+  <button class="secondary" id="closeQuiz">Fechar</button></div>`;
+  document.getElementById('again').onclick=startQuiz;
+  document.getElementById('closeQuiz').onclick=()=>quiz.classList.remove('show');
+}
+</script>
+</body>
+</html>
