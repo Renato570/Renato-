@@ -105,6 +105,19 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
   .tile{min-height:400px}.tile .figure{height:235px}.tile h2{font-size:20px}
   .tile p{font-size:11.5px}.tile .tag{font-size:9px}
 }
+
+.service-note{
+  border:1px solid #e4b8c9;
+  background:linear-gradient(135deg,#fff0f6,#fff9fb);
+  border-radius:22px;
+  padding:19px;
+}
+.service-note h3{margin:8px 0;color:var(--deep);font-size:19px}
+.service-note p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+.service-note .service-points{display:grid;gap:9px;margin-top:13px}
+.service-point{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:13px;line-height:1.45}
+.service-point b{color:var(--deep)}
+
 </style>
 </head>
 <body>
@@ -115,7 +128,7 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
     <div class="welcome-box">
       <div class="ribbon">🎀</div>
       <h1>Outubro Rosa</h1>
-      <p><strong>Informação também é cuidado.</strong><br>Conheça seu corpo, entenda seus exames e descubra quando procurar a unidade de saúde.</p>
+      <p><strong>Informação também é cuidado.</strong><br>Conheça seu corpo, entenda seus exames e descubra, com tranquilidade, quando vale a pena procurar a unidade de saúde.</p>
       <button class="start" id="startJourney">Começar a jornada ✨</button>
     </div>
   </div>
@@ -129,8 +142,8 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
 
   <div class="menu-title">
     <div class="eyebrow">Sua jornada de cuidado</div>
-    <h2>Escolha o que você quer descobrir</h2>
-    <p>Toque em um tema e explore as informações aos poucos.</p>
+    <h2>Vamos descobrir juntos</h2>
+    <p>Escolha um tema e descubra as informações no seu ritmo.</p>
   </div>
 
   <div class="tiles">
@@ -155,45 +168,62 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
 
   <div class="more-grid">
     <button class="small-card" data-open="situacoes"><div class="emoji">💗</div><h3>O que eu faço?</h3><p>Escolha uma situação e veja um próximo passo.</p></button>
-    <button class="small-card" data-open="quiz"><div class="emoji">🧠</div><h3>Quiz interativo</h3><p>Aprenda respondendo perguntas rápidas.</p></button>
+    <button class="small-card" data-open="quiz"><div class="emoji">🧠</div><h3>Quiz interativo</h3><p>Vamos aprender brincando perguntas rápidas.</p></button>
   </div>
 
   <div class="tip">💡 Você não precisa ler tudo de uma vez. Escolha um tema e vá descobrindo.</div>
-  <div class="footer">Informação educativa. Em caso de dúvida, procure sua unidade de saúde.</div>
+  <div class="footer">Informação para cuidar de você. Quando tiver alguma dúvida, nossa equipe de saúde pode ajudar.</div>
 </section>
 
 <section id="mamas" class="screen">
   <div class="top"><button class="back" data-back="menu">←</button><div><h1>Saúde das mamas</h1><p>Conheça e observe seu corpo</p></div></div>
-  <div class="detail-hero"><div class="eyebrow">MAMAS</div><h2>Conheça suas mamas</h2><p>Não é preciso decorar uma lista enorme. O mais importante é perceber mudanças novas e persistentes.</p></div>
+  <div class="detail-hero"><div class="eyebrow">MAMAS</div><h2>Vamos conhecer suas mamas</h2><p>Você não precisa decorar uma lista enorme. O mais importante é conhecer o que é normal para você e perceber quando algo mudar.</p></div>
   <div class="detail-grid">
     <div class="figure-panel"><img src="mulher-mamas.png" alt="Ilustração educativa de mulher com destaque nas mamas"><div class="hint">Ilustração educativa, não representa uma pessoa específica.</div></div>
     <div class="info-list">
-      <article class="info-card"><span class="pill">PRIMEIRO PASSO</span><h3>O que observar?</h3><p>Observe mudanças novas no formato ou na pele da mama, presença de caroço ou nódulo, alterações no mamilo e secreção sanguinolenta.</p><details class="reveal"><summary>Por que conhecer o normal ajuda?</summary><p>Porque você consegue perceber com mais facilidade quando alguma característica muda. Nem toda alteração significa câncer, mas mudanças persistentes merecem avaliação.</p></details></article>
+      <article class="info-card"><span class="pill">PRIMEIRO PASSO</span><h3>O que vale a pena observar?</h3><p>Observe mudanças novas no formato ou na pele da mama, presença de caroço ou nódulo, alterações no mamilo e secreção sanguinolenta.</p><details class="reveal"><summary>Por que conhecer o normal ajuda?</summary><p>Porque você consegue perceber com mais facilidade quando alguma característica muda. Nem toda alteração significa câncer, mas mudanças persistentes merecem avaliação.</p></details></article>
       <article class="info-card"><span class="pill">MAMOGRAFIA</span><h3>Quando é feito o rastreamento?</h3><p>No SUS, a recomendação de rastreamento populacional é para mulheres de <strong>50 a 74 anos</strong>, a cada dois anos.</p><details class="reveal"><summary>Existe avaliação fora dessa faixa?</summary><p>Sim. Pessoas com sintomas, alterações ou situações de maior risco podem receber orientação individual diferente.</p></details></article>
-      <article class="info-card"><span class="pill">IMPORTANTE</span><h3>Percebeu uma alteração?</h3><p>Procure sua unidade de saúde para avaliação. Não espere a alteração ficar dolorosa para buscar orientação.</p></article>
-      <div class="actions"><button class="primary" data-open="preventivo">Conhecer o preventivo →</button><button class="secondary" data-back="menu">Voltar</button></div>
+      <article class="info-card"><span class="pill">IMPORTANTE</span><h3>Percebeu alguma mudança?</h3><p>Se perceber alguma mudança nova ou que não passa, procure a unidade de saúde. A equipe está ali para ouvir você e orientar com calma.</p></article>
+      <div class="actions"><button class="primary" data-open="preventivo">Agora vamos falar do preventivo →</button><button class="secondary" data-back="menu">Voltar</button></div>
     </div>
   </div>
 </section>
 
 <section id="preventivo" class="screen">
-  <div class="top"><button class="back" data-back="menu">←</button><div><h1>Exame preventivo</h1><p>Saúde do colo do útero</p></div></div>
-  <div class="detail-hero"><div class="eyebrow">COLO DO ÚTERO</div><h2>O preventivo também é cuidado</h2><p>Em vez de decorar termos, vamos por partes. Abra os tópicos e descubra como funciona.</p></div>
+  <div class="top"><button class="back" data-back="menu">←</button><div><h1>Exame preventivo</h1><p>Um cuidado importante para você</p></div></div>
+  <div class="detail-hero"><div class="eyebrow">COLO DO ÚTERO</div><h2>Cuidar do colo do útero também é cuidar de você</h2><p>Vamos por partes, sem complicação. Abra os tópicos e descubra como o exame funciona na UBS.</p></div>
   <div class="detail-grid">
     <div class="figure-panel"><img src="mulher-preventivo.png" alt="Ilustração educativa de mulher com destaque na região pélvica"><div class="hint">Ilustração educativa, não representa uma pessoa específica.</div></div>
     <div class="info-list">
-      <article class="info-card"><span class="pill">QUEM?</span><h3>Quem está na população-alvo?</h3><p>O rastreamento é destinado a pessoas com colo do útero de <strong>25 a 64 anos</strong> que já tiveram atividade sexual.</p><details class="reveal"><summary>Por que existe uma faixa?</summary><p>O rastreamento populacional é organizado por faixa etária com base nas evidências disponíveis. A avaliação individual pode ser diferente.</p></details></article>
+      <article class="info-card"><span class="pill">QUEM?</span><h3>Quem pode fazer o rastreamento?</h3><p>O rastreamento é destinado a pessoas com colo do útero de <strong>25 a 64 anos</strong> que já tiveram atividade sexual.</p><details class="reveal"><summary>Por que existe uma faixa?</summary><p>O rastreamento populacional é organizado por faixa etária com base nas evidências disponíveis. A avaliação individual pode ser diferente.</p></details></article>
       <article class="info-card"><span class="pill">COMO?</span><h3>DNA-HPV e Papanicolau</h3><p>O Brasil está implantando o teste molecular de DNA-HPV como método primário de rastreamento.</p><details class="reveal"><summary>E o Papanicolau?</summary><p>Onde o teste molecular ainda não está disponível, o exame citopatológico, conhecido como Papanicolau, continua sendo utilizado.</p></details></article>
-      <article class="info-card"><span class="pill">ANTES DA COLETA</span><h3>Como se preparar?</h3><details class="reveal" open><summary>Ver orientações</summary><ul><li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li><li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li><li>Evite exames intravaginais nesse período.</li><li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li></ul></details></article>
+      <article class="info-card"><span class="pill">ANTES DA COLETA</span><h3>Como posso me preparar?</h3><details class="reveal" open><summary>Ver orientações</summary><ul><li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li><li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li><li>Evite exames intravaginais nesse período.</li><li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li></ul></details></article>
+
+<article class="service-note">
+  <span class="pill">NA UBS</span>
+  <h3>Como funciona o preventivo na unidade?</h3>
+  <p>Na UBS, o preventivo é realizado pela <strong>enfermeira</strong>, em todos os dias de atendimento da unidade, sempre com <strong>agendamento</strong>. É um exame rápido, seguro e feito com todo cuidado.</p>
+  <div class="service-points">
+    <div class="service-point">🩺 <span><b>Quem faz:</b> enfermeira da unidade.</span></div>
+    <div class="service-point">📅 <span><b>Quando:</b> nos dias de atendimento, mediante agendamento.</span></div>
+    <div class="service-point">⏱️ <span><b>Como é:</b> rápido e seguro.</span></div>
+  </div>
+</article>
+
+<article class="service-note">
+  <span class="pill">MESMO SE FIZER NO PARTICULAR</span>
+  <h3>Fez o exame fora da UBS? Traga o resultado para a gente</h3>
+  <p>Se você fizer o preventivo ou a mamografia no particular, tudo bem. 💗 Quando receber o resultado, leve uma cópia para a <strong>enfermeira da unidade</strong>. Assim, ela pode registrar o resultado no seu prontuário do SUS e ajudar a manter seu acompanhamento sempre atualizado.</p>
+</article>
       <article class="info-card"><span class="pill">RESULTADO</span><h3>Se vier alterado, não significa automaticamente câncer</h3><p>Pode ser necessário repetir o exame, investigar ou acompanhar. O mais importante é seguir a orientação da equipe.</p></article>
-      <div class="actions"><button class="primary" data-open="situacoes">Ver situações práticas →</button><button class="secondary" data-back="menu">Voltar</button></div>
+      <div class="actions"><button class="primary" data-open="situacoes">Ver situações do dia a dia →</button><button class="secondary" data-back="menu">Voltar</button></div>
     </div>
   </div>
 </section>
 
 <section id="situacoes" class="screen">
-  <div class="top"><button class="back" data-back="menu">←</button><div><h1>O que eu faço?</h1><p>Orientação rápida</p></div></div>
-  <div class="detail-hero"><div class="eyebrow">NA VIDA REAL</div><h2>Qual situação parece com você?</h2><p>Toque em uma opção e veja um próximo passo.</p></div>
+  <div class="top"><button class="back" data-back="menu">←</button><div><h1>O que eu faço?</h1><p>Vamos conversar sobre isso</p></div></div>
+  <div class="detail-hero"><div class="eyebrow">NA VIDA REAL</div><h2>Tem alguma dessas situações a ver com você?</h2><p>Escolha uma opção e veja, de forma simples, o que você pode fazer.</p></div>
   <div class="choice-grid">
     <button class="choice-btn" data-sit="0">🔴 <strong>Notei uma alteração na mama</strong></button>
     <button class="choice-btn" data-sit="1">🩺 <strong>Quero fazer meu preventivo</strong></button>
@@ -204,7 +234,7 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
 </section>
 
 <section id="quiz" class="screen">
-  <div class="top"><button class="back" data-back="menu">←</button><div><h1>Quiz</h1><p>Aprenda respondendo</p></div></div>
+  <div class="top"><button class="back" data-back="menu">←</button><div><h1>Quiz</h1><p>Vamos aprender brincando</p></div></div>
   <div class="quiz-card" id="quizCard"></div>
 </section>
 
@@ -220,10 +250,10 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
   }
 
   const situations=[
-    ['🔴 Alteração na mama','Procure sua unidade de saúde para avaliação. Nem toda alteração é câncer, mas uma mudança nova ou persistente merece atenção.'],
-    ['🩺 Quero fazer o preventivo','Procure sua unidade de saúde para verificar o rastreamento indicado e o método disponível no local.'],
-    ['📄 Exame alterado','Um resultado alterado não significa automaticamente câncer. Leve o resultado à equipe e siga a orientação para investigação ou acompanhamento.'],
-    ['💬 Medo ou vergonha','Você pode conversar com a equipe antes da coleta. Explique suas dúvidas, receios e desconfortos. Acolhimento também faz parte do cuidado.']
+    ['🔴 Percebi uma mudança na mama','Se você percebeu uma mudança nova ou que não passa, procure a unidade de saúde. Nem toda alteração é câncer, mas vale conversar com um profissional e receber orientação.'],
+    ['🩺 Quero fazer meu preventivo','Converse com a sua unidade de saúde para saber quando você pode fazer o exame e qual é o método disponível por aí.'],
+    ['📄 Meu exame veio alterado','Um resultado alterado não quer dizer, por si só, que você tenha câncer. Leve o resultado para a equipe de saúde. Ela vai explicar com calma o que ele significa e orientar os próximos passos.'],
+    ['💬 Estou com vergonha ou medo','Se estiver com vergonha, medo ou qualquer preocupação, converse com a equipe antes da coleta. Pode perguntar, contar o que está sentindo e tirar suas dúvidas. Você merece ser atendida com respeito e tranquilidade.']
   ];
 
   const questions=[
@@ -253,7 +283,7 @@ padding:23px 18px 12px;text-align:center;overflow:hidden;cursor:pointer;box-shad
       '<div class="choice-result show" style="display:block;margin-top:16px"><strong>'+(ok?'🎉 Correto!':'📚 Vamos corrigir.')+'</strong><p>'+q[2]+'</p><button class="primary" data-next="1">'+(qi===questions.length-1?'Ver resultado':'Próxima pergunta →')+'</button></div>');
   }
   function finish(){
-    document.getElementById('quizCard').innerHTML='<div style="text-align:center"><div style="font-size:56px">🎀</div><span class="pill">RESULTADO</span><h2 style="color:var(--deep)">Você terminou!</h2><p style="color:var(--muted)">Acertos: <strong>'+score+' de '+questions.length+'</strong>.</p><button class="primary" data-restart="1">Refazer quiz</button></div>';
+    document.getElementById('quizCard').innerHTML='<div style="text-align:center"><div style="font-size:56px">🎀</div><span class="pill">RESULTADO</span><h2 style="color:var(--deep)">Você chegou ao final!</h2><p style="color:var(--muted)">Você acertou: <strong>'+score+' de '+questions.length+'</strong>.</p><button class="primary" data-restart="1">Tentar novamente</button></div>';
   }
 
   document.addEventListener('click',function(e){
