@@ -2,431 +2,178 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#e83f83">
-<meta name="description" content="Outubro Rosa: informação e prevenção sobre câncer de mama e câncer do colo do útero.">
-<title>Outubro Rosa • Informação também é cuidado</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Outubro Rosa - informação e prevenção sobre saúde das mamas e do colo do útero.">
+<title>Outubro Rosa | Saúde da Mulher</title>
 <style>
 :root{
-  --pink:#e83f83;--pink2:#f58db4;--deep:#9d2354;--soft:#fff0f6;
-  --ink:#40232f;--muted:#765b68;--line:#eccbd9;--white:#fff;
+  --pink:#d84c82;--pink-dark:#a82e60;--soft:#fff1f6;--soft2:#fde0eb;
+  --ink:#422633;--muted:#765d68;--line:#ead4df;--white:#fff;
 }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
-body{background:linear-gradient(180deg,#fff8fb,#fff)}
+body{margin:0;background:linear-gradient(180deg,#fff7fa,#fff);color:var(--ink);
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 button{font:inherit}
-.app{width:min(940px,calc(100% - 24px));margin:auto;min-height:100vh;padding:14px 0 28px}
-.screen{display:none;animation:enter .38s ease}
-.screen.active{display:block}
-@keyframes enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.screen{animation:none}html{scroll-behavior:auto}}
-/* abertura */
-.welcome{
-  min-height:calc(100vh - 42px);display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:20px;
-}
-.welcome-box{
-  position:relative;overflow:hidden;width:100%;max-width:680px;padding:58px 24px 50px;
-  border:1px solid var(--line);border-radius:34px;
-  background:linear-gradient(145deg,#fff,#ffe0ec);
-  box-shadow:0 18px 55px #9d235414;
-}
-.welcome-box:before,.welcome-box:after{content:"";position:absolute;border-radius:50%;background:#f28db522}
-.welcome-box:before{width:220px;height:220px;left:-115px;top:-105px}
-.welcome-box:after{width:260px;height:260px;right:-145px;bottom:-155px}
-.ribbon{position:relative;font-size:76px;line-height:1;animation:float 3s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-7px)}}
-.welcome h1{position:relative;font-size:clamp(37px,9vw,60px);margin:18px 0 9px;letter-spacing:-2.5px}
-.welcome p{position:relative;color:var(--muted);font-size:18px;line-height:1.6;margin:0 auto 28px;max-width:560px}
-.start{
-  position:relative;border:0;border-radius:999px;padding:15px 25px;background:var(--pink);
-  color:#fff;font-weight:850;cursor:pointer;box-shadow:0 9px 25px #e83f8340;
-}
-.start:active,.tile:active,.back:active{transform:scale(.98)}
-/* menu */
-.top{display:flex;align-items:center;gap:12px;margin:12px 0 18px}
-.back{
-  border:1px solid var(--line);background:#fff;color:var(--deep);border-radius:13px;
-  min-width:46px;height:46px;cursor:pointer;font-size:20px
-}
-.top h1{font-size:23px;margin:0}
-.top p{margin:2px 0 0;color:var(--muted);font-size:13px}
-.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.tile{
-  border:1px solid var(--line);background:#fff;border-radius:22px;padding:22px 18px;
-  text-align:left;min-height:160px;cursor:pointer;box-shadow:0 9px 25px #9d23540b;
-  transition:.2s
-}
-.tile:hover{transform:translateY(-4px);border-color:#db7ca2}
-.tile .emoji{font-size:34px}.tile h2{font-size:20px;margin:12px 0 6px}.tile p{color:var(--muted);font-size:14px;line-height:1.45;margin:0}
-/* detail */
-.detail-head{text-align:center;padding:18px 8px 8px}
-.detail-head .mini{font-size:42px}
-.detail-head h1{font-size:clamp(28px,7vw,42px);margin:7px 0}
-.detail-head p{color:var(--muted);line-height:1.5;max-width:620px;margin:auto}
-.detail-grid{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start;margin-top:18px}
-.illustration{
-  background:radial-gradient(circle at 50% 18%,#ffe4ef 0,#fff4f8 38%,#fff 72%);
-  border:1px solid var(--line);border-radius:28px;padding:14px;text-align:center;
-  position:sticky;top:10px;box-shadow:0 12px 32px #9d23540b;
-}
-.illustration svg{width:100%;height:auto;display:block}
-.illustration .hint{font-size:12px;color:var(--muted);margin:5px 0 0}
-.info-list{display:grid;gap:12px}
-.info-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:19px}
-.info-card h2{font-size:19px;margin:0 0 7px}
-.info-card p,.info-card li{line-height:1.58}
-.info-card ul{padding-left:20px;margin-bottom:0}
-.highlight{background:var(--soft);border-color:#e8abc2}
-.pill{display:inline-block;background:var(--soft);color:var(--deep);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:850}
-.action-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
-.primary,.secondary{border-radius:13px;padding:12px 17px;cursor:pointer}
-.primary{border:0;background:var(--pink);color:#fff;font-weight:800}.secondary{border:1px solid var(--line);background:#fff;color:var(--ink)}
-/* quiz */
-.quiz-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;margin-top:15px}
-.progress{height:8px;border-radius:99px;background:#f6dbe6;overflow:hidden;margin:12px 0 20px}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),#ff9fc4);transition:.25s}
-.answer{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:14px;text-align:left;cursor:pointer;margin-top:9px}
-.answer.correct{background:#eff9f2;border-color:#8ac69e}.answer.wrong{background:#fff0f2;border-color:#df9bad}
-.note{margin-top:14px;background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:14px;line-height:1.55}
-.sources{margin-top:20px;padding:13px 15px;border-radius:15px;background:#fff;border:1px dashed var(--line);color:var(--muted);font-size:12px;line-height:1.5}
-.sources a{color:var(--deep)}
-.footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;margin-top:20px;padding-bottom:10px}
-@media(max-width:720px){.detail-grid{grid-template-columns:1fr}.illustration{position:relative;top:auto;max-width:390px;margin:auto}.tiles{grid-template-columns:1fr 1fr}}
-@media(max-width:450px){.app{width:min(100% - 18px,940px)}.welcome{padding:8px}.welcome-box{padding:48px 18px 42px;border-radius:28px}.tiles{grid-template-columns:1fr}.tile{min-height:125px}.detail-grid{gap:12px}}
-
-
-/* v6 modern interaction layer */
-body{
-  background:
-    radial-gradient(circle at 8% 4%,#ffdbe9 0,transparent 24%),
-    radial-gradient(circle at 92% 18%,#ffeef5 0,transparent 22%),
-    linear-gradient(180deg,#fff9fc,#fff);
-}
-.app{max-width:980px}
-.hero-orbit{position:absolute;inset:0;pointer-events:none}
-.spark{position:absolute;width:7px;height:7px;border-radius:50%;background:#e83f83aa;animation:drift 4s ease-in-out infinite}
-.spark.s1{left:12%;top:24%}.spark.s2{right:16%;top:30%;animation-delay:.8s}.spark.s3{left:24%;bottom:20%;animation-delay:1.6s}.spark.s4{right:24%;bottom:18%;animation-delay:2.4s}
-@keyframes drift{50%{transform:translateY(-12px) scale(1.25);opacity:.55}}
-.menu-intro{padding:6px 3px 18px}
-.menu-intro .eyebrow{color:var(--deep);font-weight:850;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.menu-intro h2{font-size:clamp(28px,7vw,42px);margin:5px 0}
-.menu-intro p{margin:0;color:var(--muted);line-height:1.5}
-.tile{position:relative;overflow:hidden}
-.tile:after{content:"→";position:absolute;right:17px;bottom:15px;color:var(--pink);font-size:22px;opacity:.45;transition:.2s}
-.tile:hover:after{opacity:1;transform:translateX(4px)}
-.tile .micro{display:inline-flex;align-items:center;gap:5px;margin-top:12px;color:var(--deep);font-size:12px;font-weight:750}
-.detail-head .eyebrow{color:var(--deep);font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
-.detail-grid{align-items:stretch}
-.illustration{min-height:100%;display:flex;flex-direction:column;justify-content:center}
-.info-card{transition:transform .2s,box-shadow .2s}
-.info-card:hover{transform:translateY(-2px);box-shadow:0 9px 25px #9d23540a}
-.reveal{overflow:hidden}
-.reveal summary{list-style:none;cursor:pointer;padding:2px 0;font-weight:800;color:var(--deep)}
-.reveal summary::-webkit-details-marker{display:none}
-.reveal summary:after{content:"＋";float:right;font-size:20px}
-.reveal[open] summary:after{content:"−"}
-.reveal .reveal-body{padding-top:10px;color:var(--muted)}
-.tap-hint{display:inline-flex;align-items:center;gap:6px;margin-top:10px;color:var(--muted);font-size:12px}
-.mini-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}
-.flow-item{padding:12px;border:1px solid var(--line);border-radius:15px;background:#fff;text-align:center}
-.flow-item b{display:block;font-size:13px}.flow-item span{display:block;font-size:11px;color:var(--muted);margin-top:3px}
-.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.choice-btn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:15px;text-align:left;cursor:pointer}
-.choice-btn:hover{border-color:#db7ca2;background:#fff8fb}
-.choice-result{display:none;margin-top:12px}.choice-result.show{display:block}
-.scroll-note{margin:14px 0;padding:13px 15px;border-radius:15px;background:linear-gradient(135deg,#fff0f6,#fff);border:1px solid var(--line);color:var(--muted);font-size:13px}
-@media(max-width:450px){.mini-flow{grid-template-columns:1fr}.choice-grid{grid-template-columns:1fr}}
+.container{width:min(920px,calc(100% - 28px));margin:auto}
+.hero{margin:24px auto 16px;padding:42px 22px;text-align:center;border:1px solid var(--line);
+border-radius:30px;background:linear-gradient(135deg,#fff5f8,#f9dce8)}
+.ribbon{font-size:64px;line-height:1}
+h1{font-size:clamp(32px,7vw,54px);margin:10px 0 8px;letter-spacing:-1px}
+.subtitle{max-width:650px;margin:auto;color:var(--muted);line-height:1.6;font-size:17px}
+.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.card{border:1px solid var(--line);background:var(--white);border-radius:20px;padding:20px;text-align:left;
+min-height:140px;cursor:pointer;transition:.2s;box-shadow:0 5px 18px rgba(120,50,80,.05)}
+.card:hover{transform:translateY(-3px);border-color:#d58aa7}
+.card:focus-visible,.answer:focus-visible,.primary:focus-visible{outline:3px solid #e7a6bf;outline-offset:2px}
+.card .icon{font-size:29px}.card h2{font-size:18px;margin:10px 0 6px}.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+.panel,.quiz{display:none;background:#fff;border:1px solid var(--line);border-radius:24px;padding:26px;margin:16px 0;box-shadow:0 8px 25px rgba(120,50,80,.06)}
+.panel.show,.quiz.show{display:block}
+.tag{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--pink-dark);
+font-weight:800;font-size:12px;letter-spacing:.5px}
+.panel h2,.quiz h2{font-size:27px;margin:10px 0}.panel p,.panel li,.quiz p{line-height:1.65}
+.panel ul{padding-left:21px}
+.note{background:var(--soft);padding:16px;border-radius:16px;margin-top:18px}
+.quiz .answers{display:grid;gap:10px;margin-top:16px}
+.answer{border:1px solid var(--line);background:#fff;border-radius:15px;padding:15px;text-align:left;cursor:pointer}
+.answer.correct{background:#eef8f1;border-color:#8bc6a0}.answer.wrong{background:#fff0f0;border-color:#dda0a0}
+.feedback{margin-top:15px;padding:14px;border-radius:14px;background:#faf5f7}
+.primary{border:0;background:var(--pink);color:#fff;border-radius:14px;padding:13px 18px;font-weight:750;cursor:pointer}
+.secondary{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:14px;padding:12px 16px;cursor:pointer}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:12px 0 30px;line-height:1.5}
+@media(max-width:700px){.nav{grid-template-columns:1fr 1fr}}
+@media(max-width:430px){.nav{grid-template-columns:1fr}.hero{padding:32px 18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
-<main class="app">
-
-<!-- TELA 1 -->
-<section id="welcome" class="screen active">
-  <div class="welcome">
-    <div class="welcome-box">
-      <div class="hero-orbit"><span class="spark s1"></span><span class="spark s2"></span><span class="spark s3"></span><span class="spark s4"></span></div>
-      <div class="ribbon">🎀</div>
-      <h1>Outubro Rosa</h1>
-      <p><strong>Informação também é cuidado.</strong><br>
-      Uma jornada para conhecer seu corpo, entender seus exames e saber quando procurar a unidade de saúde.</p>
-      <button class="start" id="startJourney">Começar a jornada 🌷</button>
-      <div class="tap-hint" style="justify-content:center">✨ Uma experiência rápida e interativa</div>
-    </div>
-  </div>
+<main class="container">
+<section class="hero">
+  <div class="ribbon">🎀</div>
+  <h1>Outubro Rosa</h1>
+  <p class="subtitle"><strong>Informação também é cuidado.</strong><br>
+  Conheça os cuidados com as mamas e com o colo do útero, entenda os exames e teste seus conhecimentos.</p>
 </section>
 
-<!-- TELA 2 -->
-<section id="menu" class="screen">
-  <div class="top">
-    <button class="back" data-back="welcome" aria-label="Voltar">←</button>
-    <div><h1>Vamos começar</h1><p>Explore no seu ritmo.</p></div>
-  </div>
-  <div class="menu-intro">
-    <div class="eyebrow">Sua jornada de cuidado</div>
-    <h2>O que você quer descobrir?</h2>
-    <p>Toque em um tema. As informações aparecem aos poucos para você explorar, em vez de jogar um paredão de texto na sua cara.</p>
-  </div>
-  <div class="tiles">
-    <button class="tile" data-open="mamas"><span class="emoji">🌸</span><h2>Saúde das mamas</h2><p>Sinais de alerta, fatores de risco e mamografia.</p><span class="micro">Explorar tema</span></button>
-    <button class="tile" data-open="preventivo"><span class="emoji">🩺</span><h2>Exame preventivo</h2><p>Rastreamento, HPV e o Papanicolau.</p><span class="micro">Explorar tema</span></button>
-    <button class="tile" data-open="situacoes"><span class="emoji">💗</span><h2>O que eu faço?</h2><p>Situações do dia a dia e próximos passos.</p><span class="micro">Ver situações</span></button>
-    <button class="tile" data-open="quiz"><span class="emoji">🧠</span><h2>Quiz</h2><p>Aprenda respondendo perguntas rápidas.</p><span class="micro">Começar quiz</span></button>
-  </div>
-  <div class="scroll-note">💡 Você não precisa ler tudo de uma vez. Escolha um tema e vá descobrindo.</div>
-  <div class="footer">Informação educativa. Em caso de dúvida, procure sua unidade de saúde.</div>
+<section class="nav" aria-label="Temas">
+  <button class="card" data-topic="mamas"><span class="icon">🌸</span><h2>Mamas</h2><p>Sinais de alerta e informações sobre mamografia.</p></button>
+  <button class="card" data-topic="preventivo"><span class="icon">🩺</span><h2>Preventivo</h2><p>Entenda o rastreamento do câncer do colo do útero.</p></button>
+  <button class="card" data-topic="preparo"><span class="icon">📋</span><h2>Antes do exame</h2><p>Orientações para a coleta do preventivo.</p></button>
+  <button class="card" data-topic="quiz"><span class="icon">🧠</span><h2>Mitos ou verdades</h2><p>Teste seus conhecimentos sobre prevenção.</p></button>
 </section>
 
-<!-- TELA 3: MAMAS -->
-<section id="mamas" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Saúde das mamas</h1><p>Descubra o que observar.</p></div></div>
-  <div class="detail-head">
-    <div class="eyebrow">01 • MAMAS</div>
-    <div class="mini">🌸</div>
-    <h1>Conheça suas mamas</h1>
-    <p>Conhecer o que é normal para você ajuda a perceber mudanças. Explore os pontos abaixo.</p>
-  </div>
-  <div class="detail-grid">
-    <div class="illustration">
-      <svg viewBox="0 0 360 500" role="img" aria-label="Ilustração de uma mulher de corpo natural com destaque suave na região das mamas">
-        <defs><linearGradient id="skinA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c6bb"/><stop offset="1" stop-color="#dfa091"/></linearGradient><linearGradient id="dressA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a2bd"/><stop offset="1" stop-color="#df6e9a"/></linearGradient></defs>
-        <ellipse cx="180" cy="472" rx="112" ry="12" fill="#d84c8212"/>
-        <path d="M124 96C126 51 151 27 181 27C214 27 237 54 237 96C237 126 215 149 181 149C147 149 124 126 124 96Z" fill="url(#skinA)"/>
-        <path d="M121 94C122 51 149 18 184 22C216 26 238 51 239 87C222 66 204 55 181 55C158 55 140 69 121 94Z" fill="#754653"/>
-        <path d="M156 141C158 158 157 168 151 178M206 141C204 158 205 168 211 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
-        <path d="M104 177C124 155 151 148 181 148C211 148 238 155 258 177L292 309C298 336 278 357 253 348L229 291L242 432L198 466L181 466L164 466L120 432L133 291L109 348C84 357 64 336 70 309Z" fill="url(#dressA)"/>
-        <path d="M103 178C82 204 72 251 72 299C73 322 85 337 103 334L126 275L137 199ZM259 178C280 204 290 251 290 299C289 322 277 337 259 334L236 275L225 199Z" fill="url(#skinA)"/>
-        <path d="M112 180C134 168 157 163 181 163C205 163 228 168 250 180L236 277C220 289 200 296 181 296C162 296 142 289 126 277Z" fill="#f6c0d0" opacity=".92"/>
-        <path d="M126 209C145 190 163 188 181 207C199 188 217 190 236 209" fill="none" stroke="#df6e9a" stroke-width="4" opacity=".6"/>
-        <circle cx="150" cy="224" r="8" fill="#e83f83"/><circle cx="212" cy="224" r="8" fill="#e83f83"/>
-        <circle cx="151" cy="224" r="27" fill="#e83f8312"/><circle cx="211" cy="224" r="27" fill="#e83f8312"/>
-        <path d="M143 325C159 335 202 335 219 325" fill="none" stroke="#b85c78" stroke-width="4" stroke-linecap="round" opacity=".35"/>
-        <circle cx="278" cy="224" r="27" fill="#fff" opacity=".92"/><circle cx="278" cy="224" r="24" fill="#e83f8318"/>
-        <path d="M268 224h20M278 214v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
-      </svg>
-      <p class="hint">Ilustração educativa, não representa uma pessoa específica.</p>
-    </div>
-    <div class="info-list">
-      <article class="info-card"><span class="pill">PRIMEIRO PASSO</span><h2>O que observar?</h2><p>Você não precisa decorar uma lista enorme. O principal é perceber <strong>mudanças novas e persistentes</strong>.</p>
-        <details class="reveal"><summary>Ver exemplos</summary><div class="reveal-body">Caroço ou nódulo novo, mudança na pele ou no formato da mama, alteração ou retração do mamilo e secreção sanguinolenta pelo mamilo.</div></details>
-      </article>
-      <article class="info-card highlight"><span class="pill">MAMOGRAFIA</span><h2>Quando o rastreamento é recomendado?</h2><p>No SUS, o rastreamento populacional é recomendado para mulheres de <strong>50 a 74 anos, a cada dois anos</strong>.</p>
-        <details class="reveal"><summary>Por que existe uma faixa?</summary><div class="reveal-body">As recomendações de rastreamento são definidas considerando benefícios, riscos e evidências para diferentes faixas etárias. A avaliação individual pode ser diferente.</div></details>
-      </article>
-      <article class="info-card"><span class="pill">IMPORTANTE</span><h2>Achou alguma alteração?</h2><p>Uma alteração não significa automaticamente câncer. Mas uma mudança nova ou persistente merece avaliação profissional.</p>
-        <div class="tap-hint">💗 Não espere sentir dor para procurar orientação.</div>
-      </article>
-      <div class="action-row"><button class="primary" data-open="preventivo">Agora: conhecer o preventivo →</button><button class="secondary" data-back="menu">Voltar aos temas</button></div>
-    </div>
-  </div>
-  <div class="sources">Fonte: INCA e Ministério da Saúde. <a href="https://www.gov.br/inca/pt-br/assuntos/cancer/tipos/mama/versao-para-populacao" target="_blank" rel="noopener">Informações oficiais</a>.</div>
-</section>
+<section id="panel" class="panel" aria-live="polite"></section>
+<section id="quiz" class="quiz" aria-live="polite"></section>
 
-<!-- TELA 4: PREVENTIVO -->
-<section id="preventivo" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Exame preventivo</h1><p>Descubra como funciona.</p></div></div>
-  <div class="detail-head">
-    <div class="eyebrow">02 • COLO DO ÚTERO</div>
-    <div class="mini">🩺</div>
-    <h1>O preventivo também é cuidado</h1>
-    <p>Em vez de decorar termos, vamos por partes. Toque nos tópicos para descobrir.</p>
-  </div>
-  <div class="detail-grid">
-    <div class="illustration">
-      <svg viewBox="0 0 360 500" role="img" aria-label="Ilustração de uma mulher de corpo natural com destaque suave na região pélvica">
-        <defs><linearGradient id="skinB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c6bb"/><stop offset="1" stop-color="#dfa091"/></linearGradient><linearGradient id="dressB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4a2bd"/><stop offset="1" stop-color="#df6e9a"/></linearGradient></defs>
-        <ellipse cx="180" cy="472" rx="112" ry="12" fill="#d84c8212"/>
-        <path d="M124 96C126 51 151 27 181 27C214 27 237 54 237 96C237 126 215 149 181 149C147 149 124 126 124 96Z" fill="url(#skinB)"/>
-        <path d="M121 94C122 51 149 18 184 22C216 26 238 51 239 87C222 66 204 55 181 55C158 55 140 69 121 94Z" fill="#754653"/>
-        <path d="M156 141C158 158 157 168 151 178M206 141C204 158 205 168 211 178" fill="none" stroke="#cf8d84" stroke-width="5" stroke-linecap="round"/>
-        <path d="M104 177C124 155 151 148 181 148C211 148 238 155 258 177L292 309C298 336 278 357 253 348L229 291L242 432L198 466L181 466L164 466L120 432L133 291L109 348C84 357 64 336 70 309Z" fill="url(#dressB)"/>
-        <path d="M103 178C82 204 72 251 72 299C73 322 85 337 103 334L126 275L137 199ZM259 178C280 204 290 251 290 299C289 322 277 337 259 334L236 275L225 199Z" fill="url(#skinB)"/>
-        <path d="M112 180C134 168 157 163 181 163C205 163 228 168 250 180L236 277C220 289 200 296 181 296C162 296 142 289 126 277Z" fill="#f6c0d0" opacity=".55"/>
-        <ellipse cx="181" cy="327" rx="58" ry="55" fill="#fff" opacity=".8"/>
-        <ellipse cx="181" cy="327" rx="58" ry="55" fill="#e83f8312"/>
-        <circle cx="181" cy="327" r="9" fill="#e83f83"/>
-        <circle cx="181" cy="327" r="48" fill="none" stroke="#e83f83" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-        <circle cx="278" cy="327" r="27" fill="#fff" opacity=".92"/><circle cx="278" cy="327" r="24" fill="#e83f8318"/>
-        <path d="M268 327h20M278 317v20" stroke="#e83f83" stroke-width="3.5" stroke-linecap="round"/>
-      </svg>
-      <p class="hint">Ilustração educativa, não representa uma pessoa específica.</p>
-    </div>
-    <div class="info-list">
-      <article class="info-card"><span class="pill">QUEM?</span><h2>Quem está na população-alvo?</h2><p>O rastreamento é destinado a <strong>pessoas com colo do útero de 25 a 64 anos que já tiveram atividade sexual</strong>.</p>
-        <details class="reveal"><summary>Por que essa faixa?</summary><div class="reveal-body">O rastreamento populacional é organizado por faixa etária para concentrar os exames onde há evidências de benefício. A orientação individual pode variar.</div></details>
-      </article>
-      <article class="info-card highlight"><span class="pill">COMO?</span><h2>DNA-HPV e Papanicolau</h2><p>O Brasil está implantando o <strong>teste molecular de DNA-HPV</strong> como método primário de rastreamento.</p>
-        <details class="reveal"><summary>E o Papanicolau?</summary><div class="reveal-body">Onde o teste molecular ainda não está disponível, o exame citopatológico, conhecido como Papanicolau, continua sendo utilizado.</div></details>
-      </article>
-      <article class="info-card"><span class="pill">ANTES DA COLETA</span><h2>Como se preparar?</h2><p>Alguns cuidados ajudam a obter uma amostra adequada.</p>
-        <details class="reveal" open><summary>Ver orientações</summary><div class="reveal-body"><ul><li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li><li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li><li>Evite exames intravaginais nesse período.</li><li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li></ul></div></details>
-      </article>
-      <article class="info-card"><span class="pill">E SE DER ALTERADO?</span><h2>Resultado alterado não é sinônimo de câncer</h2><p>Pode ser necessário repetir o exame, investigar ou acompanhar. O importante é seguir a orientação da equipe.</p></article>
-      <div class="action-row"><button class="primary" data-open="situacoes">Quero ver situações práticas →</button><button class="secondary" data-back="menu">Voltar aos temas</button></div>
-    </div>
-  </div>
-  <div class="sources">Fonte: INCA e Ministério da Saúde. <a href="https://www.gov.br/inca/pt-br/assuntos/gestor-e-profissional-de-saude/controle-do-cancer-do-colo-do-utero/acoes/deteccao-precoce" target="_blank" rel="noopener">Detecção precoce</a>.</div>
-</section>
-
-<!-- TELA 6: SITUAÇÕES -->
-<section id="situacoes" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>O que eu faço?</h1><p>Escolha uma situação.</p></div></div>
-  <div class="detail-head"><div class="eyebrow">NA VIDA REAL</div><div class="mini">💗</div><h1>Qual dessas situações parece com você?</h1><p>Toque em uma delas e veja um próximo passo simples.</p></div>
-  <div class="choice-grid">
-    <button class="choice-btn" data-sit="0"><strong>🔴 Percebi um caroço na mama.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
-    <button class="choice-btn" data-sit="1"><strong>🩺 Estou na idade de fazer o preventivo.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
-    <button class="choice-btn" data-sit="2"><strong>📄 Meu exame veio alterado.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
-    <button class="choice-btn" data-sit="3"><strong>💬 Tenho vergonha ou medo do exame.</strong><br><span class="tap-hint">Toque para descobrir →</span></button>
-  </div>
-  <div id="sitResult" class="note choice-result"></div>
-</section>
-
-<!-- TELA 7: QUIZ -->
-<section id="quiz" class="screen">
-  <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Quiz</h1><p>Teste seus conhecimentos.</p></div></div>
-  <div class="quiz-card" id="quizCard"></div>
-</section>
-
+<footer>
+Conteúdo educativo. As recomendações podem ser atualizadas. Procure sua unidade de saúde para orientação individual.
+</footer>
 </main>
 
-
 <script>
-(function(){
-  const screenIds=['welcome','menu','mamas','preventivo','situacoes','quiz'];
+const panel=document.getElementById('panel');
+const quiz=document.getElementById('quiz');
 
-  function go(id){
-    if(!screenIds.includes(id)) return;
-    document.querySelectorAll('.screen').forEach(function(screen){
-      screen.classList.toggle('active', screen.id === id);
-    });
-    window.scrollTo({top:0, behavior:'smooth'});
-  }
+const topics={
+mamas:{
+tag:'SAÚDE DAS MAMAS',title:'Conheça suas mamas',
+html:`
+<p>É importante conhecer o próprio corpo e perceber alterações novas ou persistentes.</p>
+<ul>
+<li>Caroço ou nódulo novo.</li>
+<li>Mudança na pele ou no formato da mama.</li>
+<li>Alteração ou retração do mamilo.</li>
+<li>Secreção sanguinolenta pelo mamilo.</li>
+</ul>
+<p>Uma alteração não significa necessariamente câncer, mas deve ser avaliada por um profissional de saúde.</p>
+<div class="note"><strong>Mamografia no SUS:</strong> para rastreamento populacional, a recomendação é para mulheres de <strong>50 a 74 anos, a cada dois anos</strong>.</div>`
+},
+preventivo:{
+tag:'COLO DO ÚTERO',title:'O preventivo também é prevenção',
+html:`
+<p>O rastreamento do câncer do colo do útero é destinado a pessoas com colo do útero de <strong>25 a 64 anos que já tiveram atividade sexual</strong>.</p>
+<p>O Brasil está implantando o teste molecular de <strong>DNA-HPV</strong> como exame primário de rastreamento.</p>
+<p>Onde o teste molecular ainda não estiver disponível, o <strong>exame citopatológico, conhecido como Papanicolau</strong>, continua sendo utilizado.</p>
+<div class="note"><strong>Importante:</strong> fazer o exame e buscar o resultado faz parte do cuidado. Um resultado alterado não significa automaticamente câncer, mas pode exigir acompanhamento.</div>`
+},
+preparo:{
+tag:'PREPARAÇÃO',title:'Como se preparar para o preventivo',
+html:`
+<p>Para aumentar a chance de obter uma amostra adequada:</p>
+<ul>
+<li>Quando possível, evite relações sexuais nas 48 horas anteriores.</li>
+<li>Evite medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</li>
+<li>Evite exames intravaginais nesse período.</li>
+<li>Preferencialmente, faça a coleta após cinco dias do término da menstruação.</li>
+</ul>
+<p>Se houver uma situação específica, siga a orientação da equipe da unidade de saúde.</p>
+<div class="note"><strong>Depois da coleta:</strong> lembre-se de retornar para saber o resultado e receber a orientação adequada.</div>`
+}
+};
 
-  // Navegação principal: usa delegação para que todos os botões continuem funcionando.
-  document.addEventListener('click', function(event){
-    const openBtn=event.target.closest('[data-open]');
-    const backBtn=event.target.closest('[data-back]');
-    const sitBtn=event.target.closest('[data-sit]');
-    const answerBtn=event.target.closest('[data-answer]');
-    const nextBtn=event.target.closest('[data-next-quiz]');
-    const restartBtn=event.target.closest('[data-restart-quiz]');
-
-    if(openBtn){
-      const target=openBtn.getAttribute('data-open');
-      if(target==='quiz'){ startQuiz(); return; }
-      go(target);
-      return;
-    }
-    if(backBtn){
-      go(backBtn.getAttribute('data-back'));
-      return;
-    }
-    if(sitBtn){
-      const index=Number(sitBtn.getAttribute('data-sit'));
-      const item=situations[index];
-      if(item){
-        const box=document.getElementById('sitResult');
-        box.className='note choice-result show';
-        box.innerHTML='<strong>'+item[0]+'</strong><p>'+item[1]+'</p>';
-        box.scrollIntoView({behavior:'smooth',block:'nearest'});
-      }
-      return;
-    }
-    if(answerBtn){
-      answerQuiz(answerBtn.getAttribute('data-answer'));
-      return;
-    }
-    if(nextBtn){
-      if(qi < qs.length-1){ qi++; renderQuiz(); }
-      else finishQuiz();
-      return;
-    }
-    if(restartBtn){
-      startQuiz();
-    }
+document.querySelectorAll('[data-topic]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const key=btn.dataset.topic;
+    if(key==='quiz') startQuiz();
+    else showTopic(key);
   });
+});
 
-  const start=document.getElementById('startJourney');
-  if(start) start.addEventListener('click',function(){go('menu');});
+function showTopic(key){
+  quiz.classList.remove('show');
+  const t=topics[key];
+  panel.innerHTML=`<span class="tag">${t.tag}</span><h2>${t.title}</h2>${t.html}
+  <div class="actions"><button class="secondary" id="closeInfo">Fechar</button></div>`;
+  panel.classList.add('show');
+  document.getElementById('closeInfo').onclick=()=>panel.classList.remove('show');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
 
-  const situations=[
-    ['🔴 Percebi um caroço na mama.','Procure a unidade de saúde para avaliação. Uma alteração nova ou persistente merece atenção. Isso não significa automaticamente câncer, mas precisa ser avaliado.'],
-    ['🩺 Estou na idade de fazer o preventivo.','Procure sua unidade de saúde para verificar o método de rastreamento disponível e realizar o acompanhamento indicado.'],
-    ['📄 Meu exame veio alterado.','Um resultado alterado não significa automaticamente câncer. Pode ser necessário repetir o exame, investigar ou acompanhar. Siga a orientação da equipe.'],
-    ['💬 Tenho vergonha ou medo do exame.','Você pode conversar com a equipe de saúde antes da coleta. Explique suas dúvidas e desconfortos. Informação e acolhimento também fazem parte do cuidado.']
-  ];
+const questions=[
+ {q:'O exame preventivo ajuda no rastreamento do câncer do colo do útero.',a:['Verdadeiro','Falso'],c:0,e:'O rastreamento permite identificar alterações que podem ser acompanhadas e tratadas.'},
+ {q:'A mamografia de rastreamento no SUS é indicada para toda mulher a partir dos 30 anos.',a:['Verdadeiro','Falso'],c:1,e:'Para rastreamento populacional, a recomendação é de 50 a 74 anos, a cada dois anos.'},
+ {q:'Homens também podem desenvolver câncer de mama.',a:['Verdadeiro','Falso'],c:0,e:'Embora seja muito menos frequente, homens também podem desenvolver câncer de mama.'},
+ {q:'O Papanicolau continua sendo utilizado onde o teste DNA-HPV ainda não está disponível.',a:['Verdadeiro','Falso'],c:0,e:'O citopatológico continua sendo uma estratégia de rastreamento onde o teste molecular ainda não foi implantado.'}
+];
 
-  const qs=[
-    ['O preventivo ajuda no rastreamento do câncer do colo do útero.','Verdadeiro','O rastreamento busca identificar alterações que podem ser acompanhadas e tratadas.'],
-    ['A mamografia de rastreamento no SUS é indicada para toda mulher a partir dos 30 anos.','Falso','Para rastreamento populacional, a recomendação é de 50 a 74 anos, a cada dois anos.'],
-    ['Homens também podem desenvolver câncer de mama.','Verdadeiro','É menos frequente, mas homens também podem desenvolver câncer de mama.'],
-    ['O Papanicolau continua sendo usado onde o teste DNA-HPV ainda não está disponível.','Verdadeiro','O citopatológico continua sendo utilizado nos locais onde o teste molecular ainda não foi implantado.'],
-    ['Um resultado alterado no preventivo significa automaticamente câncer.','Falso','Resultado alterado pode exigir investigação ou acompanhamento, mas não significa automaticamente câncer.']
-  ];
+let current=0,score=0,answered=false;
 
-  let qi=0;
-  let score=0;
-  let answered=false;
-
-  function startQuiz(){
-    qi=0;
-    score=0;
-    go('quiz');
-    renderQuiz();
-  }
-
-  function renderQuiz(){
-    const card=document.getElementById('quizCard');
-    if(!card) return;
-    const q=qs[qi];
-    const pct=(qi/qs.length)*100;
-    answered=false;
-    card.innerHTML=
-      '<span class="pill">PERGUNTA '+(qi+1)+' DE '+qs.length+'</span>'+
-      '<div class="progress"><i style="width:'+pct+'%"></i></div>'+
-      '<h2>'+q[0]+'</h2>'+
-      '<button class="answer" data-answer="Verdadeiro">✅ Verdadeiro</button>'+
-      '<button class="answer" data-answer="Falso">❌ Falso</button>';
-  }
-
-  function answerQuiz(value){
-    if(answered) return;
-    answered=true;
-    const q=qs[qi];
-    const correct=value===q[1];
-    if(correct) score++;
-
-    document.querySelectorAll('#quizCard [data-answer]').forEach(function(button){
-      if(button.getAttribute('data-answer')===q[1]) button.classList.add('correct');
-      else if(button.getAttribute('data-answer')===value) button.classList.add('wrong');
-    });
-
-    const card=document.getElementById('quizCard');
-    card.insertAdjacentHTML('beforeend',
-      '<div class="note"><strong>'+(correct?'🎉 Correto!':'📚 Vamos corrigir.')+
-      '</strong><p>'+q[2]+'</p>'+
-      '<button class="primary" data-next-quiz="1">'+
-      (qi===qs.length-1?'Ver resultado':'Próxima')+
-      '</button></div>');
-  }
-
-  function finishQuiz(){
-    const card=document.getElementById('quizCard');
-    card.innerHTML=
-      '<div style="text-align:center">'+
-      '<div style="font-size:55px">🎀</div>'+
-      '<span class="pill">RESULTADO</span>'+
-      '<h2>Você terminou!</h2>'+
-      '<p>Você acertou <strong>'+score+' de '+qs.length+'</strong>.</p>'+
-      '<p>Mais importante que a pontuação é saber onde buscar informação e manter o acompanhamento de saúde em dia.</p>'+
-      '<button class="primary" data-restart-quiz="1">Refazer quiz</button>'+
-      '</div>';
-  }
-
-  // Expor só o necessário para evitar conflitos com outras versões do script.
-  window.outubroRosa={go:go,startQuiz:startQuiz};
-})();
+function startQuiz(){
+  panel.classList.remove('show'); quiz.classList.add('show'); current=0; score=0; renderQuestion();
+  quiz.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function renderQuestion(){
+  answered=false;
+  const q=questions[current];
+  quiz.innerHTML=`<span class="tag">PERGUNTA ${current+1} DE ${questions.length}</span>
+  <h2>${q.q}</h2><div class="answers">
+  ${q.a.map((a,i)=>`<button class="answer" data-i="${i}">${a}</button>`).join('')}</div>
+  <div id="feedback"></div>`;
+  quiz.querySelectorAll('.answer').forEach(b=>b.onclick=()=>answer(Number(b.dataset.i)));
+}
+function answer(i){
+  if(answered)return; answered=true;
+  const q=questions[current], buttons=quiz.querySelectorAll('.answer'), ok=i===q.c;
+  if(ok)score++;
+  buttons[q.c].classList.add('correct');
+  if(!ok)buttons[i].classList.add('wrong');
+  const feedback=quiz.querySelector('#feedback');
+  feedback.className='feedback';
+  feedback.innerHTML=`<strong>${ok?'Correto!':'Vamos corrigir.'}</strong><p>${q.e}</p>
+  <button class="primary" id="next">${current===questions.length-1?'Ver resultado':'Próxima pergunta'}</button>`;
+  document.getElementById('next').onclick=()=>{
+    if(current<questions.length-1){current++;renderQuestion()}else finishQuiz();
+  };
+}
+function finishQuiz(){
+  quiz.innerHTML=`<span class="tag">RESULTADO</span><h2>Você terminou! 🎀</h2>
+  <p>Você acertou <strong>${score} de ${questions.length}</strong>.</p>
+  <p>Mais importante que a pontuação é saber onde buscar informação e manter o acompanhamento de saúde em dia.</p>
+  <div class="actions"><button class="primary" id="again">Refazer quiz</button>
+  <button class="secondary" id="closeQuiz">Fechar</button></div>`;
+  document.getElementById('again').onclick=startQuiz;
+  document.getElementById('closeQuiz').onclick=()=>quiz.classList.remove('show');
+}
 </script>
 </body>
 </html>
