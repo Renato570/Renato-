@@ -93,6 +93,14 @@ button{font:inherit}
 .footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.5;margin-top:20px;padding-bottom:10px}
 @media(max-width:720px){.detail-grid{grid-template-columns:1fr}.illustration{position:relative;top:auto;max-width:390px;margin:auto}.tiles{grid-template-columns:1fr 1fr}}
 @media(max-width:450px){.app{width:min(100% - 18px,940px)}.welcome{padding:8px}.welcome-box{padding:48px 18px 42px;border-radius:28px}.tiles{grid-template-columns:1fr}.tile{min-height:125px}.detail-grid{gap:12px}}
+
+.audio-control{position:fixed;right:14px;bottom:14px;z-index:20;display:none;align-items:center;gap:8px;
+background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:999px;padding:7px 10px;
+box-shadow:0 8px 25px #9d235420;backdrop-filter:blur(8px)}
+.audio-control.show{display:flex}
+.audio-control button{border:0;background:var(--soft);color:var(--deep);width:38px;height:38px;border-radius:50%;cursor:pointer}
+.audio-control input{width:80px;accent-color:var(--pink)}
+.audio-label{font-size:12px;color:var(--muted);font-weight:700}
 </style>
 </head>
 <body>
@@ -223,6 +231,12 @@ button{font:inherit}
   <div class="top"><button class="back" data-back="menu" aria-label="Voltar">←</button><div><h1>Quiz</h1><p>Teste seus conhecimentos.</p></div></div>
   <div class="quiz-card" id="quizCard"></div>
 </section>
+
+<div class="audio-control" id="audioControl" aria-label="Controle da música">
+  <button id="musicToggle" type="button" aria-label="Pausar música">🔊</button>
+  <span class="audio-label">Música</span>
+  <input id="musicVolume" type="range" min="0" max="100" value="22" aria-label="Volume da música">
+</div>
 </main>
 
 <script>
@@ -231,7 +245,62 @@ function go(id){
   screens.forEach(s=>s.classList.toggle('active',s.id===id));
   window.scrollTo({top:0,behavior:'smooth'});
 }
-document.getElementById('startJourney').onclick=()=>go('menu');
+
+let audioCtx=null, masterGain=null, musicTimer=null, musicPlaying=false;
+const audioControl=document.getElementById('audioControl');
+const musicToggle=document.getElementById('musicToggle');
+const musicVolume=document.getElementById('musicVolume');
+
+function startCalmMusic(){
+  if(!audioCtx){
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
+    audioCtx=new AC();
+    masterGain=audioCtx.createGain();
+    masterGain.gain.value=0.045;
+    masterGain.connect(audioCtx.destination);
+  }
+  if(audioCtx.state==='suspended') audioCtx.resume();
+  if(musicPlaying)return;
+  musicPlaying=true;
+  audioControl.classList.add('show');
+  musicToggle.textContent='🔊';
+  musicToggle.setAttribute('aria-label','Pausar música');
+
+  const notes=[261.63,329.63,392.00,329.63,293.66,349.23,440.00,349.23];
+  let n=0;
+  const playNote=()=>{
+    if(!musicPlaying||!audioCtx)return;
+    const now=audioCtx.currentTime;
+    const osc=audioCtx.createOscillator();
+    const gain=audioCtx.createGain();
+    osc.type='sine';
+    osc.frequency.value=notes[n%notes.length];
+    gain.gain.setValueAtTime(0,now);
+    gain.gain.linearRampToValueAtTime(0.20,now+0.6);
+    gain.gain.exponentialRampToValueAtTime(0.001,now+3.6);
+    osc.connect(gain);gain.connect(masterGain);
+    osc.start(now);osc.stop(now+3.8);
+    n++;
+  };
+  playNote();
+  musicTimer=setInterval(playNote,1800);
+}
+function stopCalmMusic(){
+  musicPlaying=false;
+  if(musicTimer){clearInterval(musicTimer);musicTimer=null}
+  musicToggle.textContent='🔇';
+  musicToggle.setAttribute('aria-label','Tocar música');
+}
+musicToggle.onclick=()=>musicPlaying?stopCalmMusic():startCalmMusic();
+musicVolume.oninput=()=>{
+  if(masterGain) masterGain.gain.value=(Number(musicVolume.value)/100)*0.20;
+};
+document.getElementById('startJourney').onclick=()=>{
+  startCalmMusic();
+  go('menu');
+};
+
 document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.back)));
 document.querySelectorAll('[data-open]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.open)));
 
@@ -292,6 +361,11 @@ function finishQuiz(){
   '<button class="primary" id="again">Refazer quiz</button></div>';
   document.getElementById('again').onclick=startQuiz;
 }
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden && audioCtx && audioCtx.state==='running') audioCtx.suspend();
+  else if(!document.hidden && musicPlaying && audioCtx && audioCtx.state==='suspended') audioCtx.resume();
+});
 </script>
 </body>
 </html>
