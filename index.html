@@ -290,90 +290,143 @@ body{
 
 </main>
 
+
 <script>
-const screens=[...document.querySelectorAll('.screen')];
-function go(id){
-  screens.forEach(s=>s.classList.toggle('active',s.id===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+(function(){
+  const screenIds=['welcome','menu','mamas','preventivo','situacoes','quiz'];
 
-document.getElementById('startJourney').addEventListener('click',()=>go('menu'));
+  function go(id){
+    if(!screenIds.includes(id)) return;
+    document.querySelectorAll('.screen').forEach(function(screen){
+      screen.classList.toggle('active', screen.id === id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
 
+  // Navegação principal: usa delegação para que todos os botões continuem funcionando.
+  document.addEventListener('click', function(event){
+    const openBtn=event.target.closest('[data-open]');
+    const backBtn=event.target.closest('[data-back]');
+    const sitBtn=event.target.closest('[data-sit]');
+    const answerBtn=event.target.closest('[data-answer]');
+    const nextBtn=event.target.closest('[data-next-quiz]');
+    const restartBtn=event.target.closest('[data-restart-quiz]');
+
+    if(openBtn){
+      const target=openBtn.getAttribute('data-open');
+      if(target==='quiz'){ startQuiz(); return; }
+      go(target);
+      return;
+    }
+    if(backBtn){
+      go(backBtn.getAttribute('data-back'));
+      return;
+    }
+    if(sitBtn){
+      const index=Number(sitBtn.getAttribute('data-sit'));
+      const item=situations[index];
+      if(item){
+        const box=document.getElementById('sitResult');
+        box.className='note choice-result show';
+        box.innerHTML='<strong>'+item[0]+'</strong><p>'+item[1]+'</p>';
+        box.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }
+      return;
+    }
+    if(answerBtn){
+      answerQuiz(answerBtn.getAttribute('data-answer'));
+      return;
+    }
+    if(nextBtn){
+      if(qi < qs.length-1){ qi++; renderQuiz(); }
+      else finishQuiz();
+      return;
+    }
+    if(restartBtn){
+      startQuiz();
+    }
+  });
+
+  const start=document.getElementById('startJourney');
+  if(start) start.addEventListener('click',function(){go('menu');});
+
+  const situations=[
+    ['🔴 Percebi um caroço na mama.','Procure a unidade de saúde para avaliação. Uma alteração nova ou persistente merece atenção. Isso não significa automaticamente câncer, mas precisa ser avaliado.'],
+    ['🩺 Estou na idade de fazer o preventivo.','Procure sua unidade de saúde para verificar o método de rastreamento disponível e realizar o acompanhamento indicado.'],
+    ['📄 Meu exame veio alterado.','Um resultado alterado não significa automaticamente câncer. Pode ser necessário repetir o exame, investigar ou acompanhar. Siga a orientação da equipe.'],
+    ['💬 Tenho vergonha ou medo do exame.','Você pode conversar com a equipe de saúde antes da coleta. Explique suas dúvidas e desconfortos. Informação e acolhimento também fazem parte do cuidado.']
+  ];
+
+  const qs=[
+    ['O preventivo ajuda no rastreamento do câncer do colo do útero.','Verdadeiro','O rastreamento busca identificar alterações que podem ser acompanhadas e tratadas.'],
+    ['A mamografia de rastreamento no SUS é indicada para toda mulher a partir dos 30 anos.','Falso','Para rastreamento populacional, a recomendação é de 50 a 74 anos, a cada dois anos.'],
+    ['Homens também podem desenvolver câncer de mama.','Verdadeiro','É menos frequente, mas homens também podem desenvolver câncer de mama.'],
+    ['O Papanicolau continua sendo usado onde o teste DNA-HPV ainda não está disponível.','Verdadeiro','O citopatológico continua sendo utilizado nos locais onde o teste molecular ainda não foi implantado.'],
+    ['Um resultado alterado no preventivo significa automaticamente câncer.','Falso','Resultado alterado pode exigir investigação ou acompanhamento, mas não significa automaticamente câncer.']
+  ];
+
+  let qi=0;
+  let score=0;
+  let answered=false;
+
+  function startQuiz(){
+    qi=0;
+    score=0;
+    go('quiz');
+    renderQuiz();
+  }
+
+  function renderQuiz(){
+    const card=document.getElementById('quizCard');
+    if(!card) return;
+    const q=qs[qi];
+    const pct=(qi/qs.length)*100;
+    answered=false;
+    card.innerHTML=
+      '<span class="pill">PERGUNTA '+(qi+1)+' DE '+qs.length+'</span>'+
+      '<div class="progress"><i style="width:'+pct+'%"></i></div>'+
+      '<h2>'+q[0]+'</h2>'+
+      '<button class="answer" data-answer="Verdadeiro">✅ Verdadeiro</button>'+
+      '<button class="answer" data-answer="Falso">❌ Falso</button>';
+  }
+
+  function answerQuiz(value){
+    if(answered) return;
+    answered=true;
+    const q=qs[qi];
+    const correct=value===q[1];
+    if(correct) score++;
+
+    document.querySelectorAll('#quizCard [data-answer]').forEach(function(button){
+      if(button.getAttribute('data-answer')===q[1]) button.classList.add('correct');
+      else if(button.getAttribute('data-answer')===value) button.classList.add('wrong');
+    });
+
+    const card=document.getElementById('quizCard');
+    card.insertAdjacentHTML('beforeend',
+      '<div class="note"><strong>'+(correct?'🎉 Correto!':'📚 Vamos corrigir.')+
+      '</strong><p>'+q[2]+'</p>'+
+      '<button class="primary" data-next-quiz="1">'+
+      (qi===qs.length-1?'Ver resultado':'Próxima')+
+      '</button></div>');
+  }
+
+  function finishQuiz(){
+    const card=document.getElementById('quizCard');
+    card.innerHTML=
+      '<div style="text-align:center">'+
+      '<div style="font-size:55px">🎀</div>'+
+      '<span class="pill">RESULTADO</span>'+
+      '<h2>Você terminou!</h2>'+
+      '<p>Você acertou <strong>'+score+' de '+qs.length+'</strong>.</p>'+
+      '<p>Mais importante que a pontuação é saber onde buscar informação e manter o acompanhamento de saúde em dia.</p>'+
+      '<button class="primary" data-restart-quiz="1">Refazer quiz</button>'+
+      '</div>';
+  }
+
+  // Expor só o necessário para evitar conflitos com outras versões do script.
+  window.outubroRosa={go:go,startQuiz:startQuiz};
+})();
 </script>
 </body>
-</htmlconst situations=[
- ['🔴 Percebi um caroço na mama.','Procure a unidade de saúde para avaliação. Uma alteração nova ou persistente merece atenção. Isso não significa automaticamente câncer, mas precisa ser avaliado.'],
- ['🩺 Estou na idade de fazer o preventivo.','Procure sua unidade de saúde para verificar o método de rastreamento disponível e realizar o acompanhamento indicado.'],
- ['📄 Meu exame veio alterado.','Um resultado alterado não significa automaticamente câncer. Pode ser necessário repetir o exame, investigar ou acompanhar. Siga a orientação da equipe.'],
- ['💬 Tenho vergonha ou medo do exame.','Você pode conversar com a equipe de saúde antes da coleta. Explique suas dúvidas e desconfortos. Informação e acolhimento também fazem parte do cuidado.']
-];
-
-const screenIds=['welcome','menu','mamas','preventivo','situacoes','quiz'];
-function go(id){
-  if(!screenIds.includes(id)) return;
-  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-document.addEventListener('click',(event)=>{
-  const target=event.target.closest('[data-open],[data-back],[data-sit]');
-  if(!target)return;
-  if(target.dataset.open==='quiz'){startQuiz();return;}
-  if(target.dataset.open){go(target.dataset.open);return;}
-  if(target.dataset.back){go(target.dataset.back);return;}
-  if(target.dataset.sit!==undefined){
-    const s=situations[Number(target.dataset.sit)];
-    const box=document.getElementById('sitResult');
-    box.className='note choice-result show';
-    box.innerHTML='<strong>'+s[0]+'</strong><p>'+s[1]+'</p>';
-    box.scrollIntoView({behavior:'smooth',block:'nearest'});
-  }
-});
-
-document.getElementById('startJourney').addEventListener('click',()=>go('menu'));
-
-const qs=[
- ['O preventivo ajuda no rastreamento do câncer do colo do útero.','Verdadeiro','O rastreamento busca identificar alterações que podem ser acompanhadas e tratadas.'],
- ['A mamografia de rastreamento no SUS é indicada para toda mulher a partir dos 30 anos.','Falso','Para rastreamento populacional, a recomendação é de 50 a 74 anos, a cada dois anos.'],
- ['Homens também podem desenvolver câncer de mama.','Verdadeiro','É menos frequente, mas homens também podem desenvolver câncer de mama.'],
- ['O Papanicolau continua sendo usado onde o teste DNA-HPV ainda não está disponível.','Verdadeiro','O citopatológico continua sendo utilizado nos locais onde o teste molecular ainda não foi implantado.'],
- ['Um resultado alterado no preventivo significa automaticamente câncer.','Falso','Resultado alterado pode exigir investigação ou acompanhamento, mas não significa automaticamente câncer.']
-];
-let qi=0,score=0,answered=false;
-function startQuiz(){qi=0;score=0;go('quiz');renderQuiz()}
-function renderQuiz(){
-  const q=qs[qi],pct=(qi/qs.length)*100;answered=false;
-  document.getElementById('quizCard').innerHTML='<span class="pill">PERGUNTA '+(qi+1)+' DE '+qs.length+'</span>'+
-    '<div class="progress"><i style="width:'+pct+'%"></i></div><h2>'+q[0]+'</h2>'+
-    '<button class="answer" data-answer="Verdadeiro">✅ Verdadeiro</button>'+
-    '<button class="answer" data-answer="Falso">❌ Falso</button>';
-}
-document.addEventListener('click',(event)=>{
-  const b=event.target.closest('[data-answer]');
-  if(!b || !document.getElementById('quiz').classList.contains('active')) return;
-  answerQuiz(b.dataset.answer);
-});
-function answerQuiz(v){
-  if(answered)return;answered=true;
-  const q=qs[qi],ok=v===q[1];if(ok)score++;
-  document.querySelectorAll('#quizCard [data-answer]').forEach(b=>{
-    if(b.dataset.answer===q[1])b.classList.add('correct');
-    else if(b.dataset.answer===v)b.classList.add('wrong');
-  });
-  document.getElementById('quizCard').insertAdjacentHTML('beforeend',
-    '<div class="note"><strong>'+(ok?'🎉 Correto!':'📚 Vamos corrigir.')+
-    '</strong><p>'+q[2]+'</p><button class="primary" data-next-quiz="1">'+
-    (qi===qs.length-1?'Ver resultado':'Próxima')+'</button></div>');
-}
-document.addEventListener('click',(event)=>{
-  const b=event.target.closest('[data-next-quiz]');
-  if(!b)return;
-  if(qi<qs.length-1){qi++;renderQuiz()}else finishQuiz();
-});
-function finishQuiz(){
-  document.getElementById('quizCard').innerHTML='<div style="text-align:center"><div style="font-size:55px">🎀</div><span class="pill">RESULTADO</span><h2>Você terminou!</h2><p>Você acertou <strong>'+score+' de '+qs.length+'</strong>.</p><p>Mais importante que a pontuação é saber onde buscar informação e manter o acompanhamento de saúde em dia.</p><button class="primary" data-restart-quiz="1">Refazer quiz</button></div>';
-}
-document.addEventListener('click',(event)=>{
-  if(event.target.closest('[data-restart-quiz]'))startQuiz();
-});
->
+</html>
