@@ -51,30 +51,36 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
 .stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
-.body-map{position:relative;min-height:590px;border-radius:32px;background:radial-gradient(circle at 50% 40%,#ffd6e6 0 27%,transparent 28%),linear-gradient(145deg,#fffafd,#fce5ef);border:1px solid var(--line);overflow:hidden;box-shadow:0 16px 42px rgba(99,37,63,.10)}
-.body-map.human-map{padding:0;background:radial-gradient(circle at 50% 42%,rgba(255,198,218,.85) 0 30%,transparent 31%),linear-gradient(145deg,#fffafd,#f9e1eb)}
-.figure-stage{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-end;z-index:2;pointer-events:none}
-.body-map .human-figure{width:auto;height:96%;max-width:86%;object-fit:contain;object-position:center bottom;display:block;filter:saturate(1.05) contrast(1.02);mix-blend-mode:screen;transform:translateY(1%)}
-.anatomy-glow{position:absolute;z-index:3;border-radius:50%;background:radial-gradient(circle,rgba(238,86,137,.42),rgba(238,86,137,.10) 55%,transparent 72%);filter:blur(1px);pointer-events:none}
-.mama-glow{width:290px;height:220px;top:39%;left:50%;transform:translate(-50%,-50%)}
-.hotspot-item{position:absolute;z-index:8;display:flex;align-items:center;gap:8px;pointer-events:none}
-.hotspot-item.left{left:6%;flex-direction:row}.hotspot-item.right{right:6%;flex-direction:row-reverse}
-.hotspot{position:relative;flex:0 0 auto;width:28px;height:28px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.16),0 5px 16px rgba(99,37,63,.18);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
+ .body-map{position:relative;min-height:620px;border-radius:32px;background:radial-gradient(circle at 50% 43%,rgba(255,191,216,.88) 0 29%,transparent 30%),linear-gradient(145deg,#fffafd,#fce5ef);border:1px solid var(--line);overflow:hidden;box-shadow:0 16px 42px rgba(99,37,63,.10)}
+.body-map.human-map{padding:0}
+.figure-stage{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;z-index:2;pointer-events:none}
+.body-map .human-figure{height:96%;width:auto;max-width:88%;object-fit:contain;object-position:center bottom;display:block;filter:saturate(1.04) contrast(1.01);mix-blend-mode:normal;transform:none}
+.anatomy-glow{position:absolute;z-index:3;border-radius:50%;background:radial-gradient(circle,rgba(238,86,137,.24),rgba(238,86,137,.08) 55%,transparent 72%);filter:blur(1px);pointer-events:none}
+.mama-glow{width:300px;height:230px;top:48%;left:50%;transform:translate(-50%,-50%)}
+.hotspot-item{position:absolute;z-index:8;width:30px;height:30px;pointer-events:none}
+.hotspot{position:absolute;inset:0;width:30px;height:30px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.16),0 5px 16px rgba(99,37,63,.18);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
 .hotspot:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(217,75,130,.35)}
-.hot-label{position:relative;min-width:112px;max-width:155px;padding:9px 12px;border-radius:18px;background:rgba(255,255,255,.97);border:1px solid #f1cfdd;color:var(--deep);font-size:12px;font-weight:900;line-height:1.15;box-shadow:0 8px 20px rgba(99,37,63,.12)}
+.hot-label{position:absolute;top:50%;transform:translateY(-50%);min-width:112px;max-width:155px;padding:9px 12px;border-radius:18px;background:rgba(255,255,255,.98);border:1px solid #f1cfdd;color:var(--deep);font-size:12px;font-weight:900;line-height:1.15;box-shadow:0 8px 20px rgba(99,37,63,.12);white-space:nowrap}
 .hot-label small{font-weight:700;color:var(--muted)}
-.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{content:"";position:absolute;top:50%;width:26px;height:2px;background:var(--pink2);transform:translateY(-50%)}
-.hotspot-item.left .hot-label:after{right:-26px}.hotspot-item.right .hot-label:after{left:-26px}
+.hotspot-item.left .hot-label{right:calc(100% + 18px)}
+.hotspot-item.right .hot-label{left:calc(100% + 18px)}
+.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{content:"";position:absolute;top:50%;width:18px;height:2px;background:var(--pink2);transform:translateY(-50%)}
+.hotspot-item.left .hot-label:after{right:-18px}.hotspot-item.right .hot-label:after{left:-18px}
 .hotspot-item.active .hot-label{border-color:var(--pink);box-shadow:0 10px 24px rgba(217,75,130,.18)}.hotspot-item.active .hotspot{transform:scale(1.12)}
-.hotspot-item[data-hotspot="axila"]{top:28%;left:7%}.hotspot-item[data-hotspot="skin"]{top:40%;left:4%}.hotspot-item[data-hotspot="shape"]{top:54%;left:6%}.hotspot-item[data-hotspot="nipple"]{top:41%;right:6%}.hotspot-item[data-hotspot="lump"]{top:52%;right:5%}
+/* pontos ancorados na anatomia da nova ilustração */
+.hotspot-item[data-hotspot="axila"]{top:27%;left:72%}
+.hotspot-item[data-hotspot="skin"]{top:53%;left:48%}
+.hotspot-item[data-hotspot="shape"]{top:60%;left:43%}
+.hotspot-item[data-hotspot="nipple"]{top:54%;left:63%}
+.hotspot-item[data-hotspot="lump"]{top:59%;left:67%}
 .anatomy-layer{position:absolute;z-index:4;width:210px;height:150px;left:50%;top:51%;transform:translate(-50%,-50%);opacity:.94;filter:drop-shadow(0 8px 14px rgba(217,75,130,.20));pointer-events:none}
 .anatomy-layer svg{width:100%;height:100%;overflow:visible}
-.body-map.preventivo-map .human-figure{height:98%;max-width:90%}
-.body-map.preventivo-map .hotspot-item[data-hotspot="uterus"]{top:47%;left:5%}
-.body-map.preventivo-map .hotspot-item[data-hotspot="tubes"]{top:39%;right:5%}
-.body-map.preventivo-map .hotspot-item[data-hotspot="cervix"]{top:58%;right:4%}
-.body-map.preventivo-map .hotspot-item[data-hotspot="vagina"]{top:69%;left:5%}
-.body-map.preventivo-map .anatomy-layer{top:57%;width:250px;height:190px}
+.body-map.preventivo-map .human-figure{height:96%;max-width:90%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="uterus"]{top:49%;left:43%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="tubes"]{top:43%;left:59%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="cervix"]{top:57%;left:51%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="vagina"]{top:64%;left:51%}
+.body-map.preventivo-map .anatomy-layer{top:53%;width:240px;height:182px}
 @keyframes pulse{50%{box-shadow:0 0 0 12px rgba(217,75,130,0)}}
 .human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:10}
 .hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
@@ -89,7 +95,29 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
-@media(max-width:560px){.body-map{min-height:620px}.figure-stage{width:68%;min-height:620px;align-items:flex-end}.body-map .human-figure{min-height:620px;transform:scale(1.02)}.hotspot-item.left{right:auto}.hotspot-item.right{left:auto}.hotspot-item[data-hotspot="axila"]{top:26%;left:2%}.hotspot-item[data-hotspot="skin"]{top:38%;left:2%}.hotspot-item[data-hotspot="shape"]{top:51%;left:2%}.hotspot-item[data-hotspot="nipple"]{top:38%;right:2%}.hotspot-item[data-hotspot="lump"]{top:49%;right:2%}.hot-label{min-width:104px;max-width:122px;font-size:11px;padding:8px 10px}.hotspot{width:28px;height:28px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:12px}.hotspot-item.left .hot-label:after{right:-12px}.hotspot-item.right .hot-label:after{left:-12px}.human-caption{font-size:11px;bottom:12px}.body-map .human-figure{min-height:620px}}
+@media(max-width:560px){
+ .body-map{min-height:620px}
+ .figure-stage{inset:0;align-items:flex-end}
+ .body-map .human-figure{height:96%;max-width:92%;width:auto;transform:none}
+ .hotspot-item{width:28px;height:28px}
+ .hotspot{width:28px;height:28px}
+ .hot-label{min-width:104px;max-width:128px;font-size:11px;padding:8px 10px}
+ .hotspot-item.left .hot-label{right:calc(100% + 12px)}
+ .hotspot-item.right .hot-label{left:calc(100% + 12px)}
+ .hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:12px}
+ .hotspot-item.left .hot-label:after{right:-12px}.hotspot-item.right .hot-label:after{left:-12px}
+ .hotspot-item[data-hotspot="axila"]{top:27%;left:73%}
+ .hotspot-item[data-hotspot="skin"]{top:53%;left:47%}
+ .hotspot-item[data-hotspot="shape"]{top:60%;left:42%}
+ .hotspot-item[data-hotspot="nipple"]{top:54%;left:64%}
+ .hotspot-item[data-hotspot="lump"]{top:59%;left:68%}
+ .body-map.preventivo-map .human-figure{height:95%;max-width:94%}
+ .body-map.preventivo-map .hotspot-item[data-hotspot="uterus"]{top:49%;left:43%}
+ .body-map.preventivo-map .hotspot-item[data-hotspot="tubes"]{top:43%;left:60%}
+ .body-map.preventivo-map .hotspot-item[data-hotspot="cervix"]{top:57%;left:51%}
+ .body-map.preventivo-map .hotspot-item[data-hotspot="vagina"]{top:64%;left:51%}
+ .human-caption{font-size:11px;bottom:12px}
+}
 @media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
 </style>
@@ -150,7 +178,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
   <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos. Eles mostram alterações que merecem atenção.</p></div>
   <div class="body-map human-map">
-    <div class="figure-stage"><img class="human-figure" src="mamas-site.png" alt="Mulher com representação educativa das mamas"></div><div class="anatomy-glow mama-glow"></div>
+    <div class="figure-stage"><img class="human-figure" src="mulher-mamas-hero-clean.png" alt="Mulher em ilustração educativa sobre saúde das mamas"></div><div class="anatomy-glow mama-glow"></div>
     <div class="hotspot-item left" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila"></button><span class="hot-label">Axila<br><small>gânglios</small></span></div>
     <div class="hotspot-item left" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><span class="hot-label">Pele<br><small>alterações</small></span></div>
     <div class="hotspot-item left" data-hotspot="shape"><button class="hotspot" data-hotspot="shape" aria-label="Formato e tamanho"></button><span class="hot-label">Formato e tamanho</span></div>
@@ -166,7 +194,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="topbar"><div class="brand">Exame preventivo<small>Colo do útero</small></div><button class="icon-btn" data-back="menu">←</button></div>
   <div class="section-head"><span class="pill">🌷 Explore</span><h2>Cuidar do colo do útero também é cuidar de você</h2><p>Toque nos pontos da imagem e depois marque seu checklist.</p></div>
   <div class="body-map human-map preventivo-map">
-    <div class="figure-stage"><img class="human-figure" src="preventivo-site.png" alt="Mulher com representação educativa do aparelho reprodutor feminino"></div>
+    <div class="figure-stage"><img class="human-figure" src="mulher-preventivo-realista-cut.png" alt="Mulher em ilustração educativa sobre o colo do útero"></div>
     <div class="anatomy-layer" aria-hidden="true"><svg viewBox="0 0 250 190" fill="none"><path d="M125 82 C93 46 61 47 42 64 C59 69 77 76 91 91" stroke="#d94b82" stroke-width="8" stroke-linecap="round"/><path d="M125 82 C157 46 189 47 208 64 C191 69 173 76 159 91" stroke="#d94b82" stroke-width="8" stroke-linecap="round"/><ellipse cx="125" cy="98" rx="45" ry="58" fill="#ffd1df" stroke="#c83f73" stroke-width="6"/><path d="M98 83 C107 72 143 72 152 83 C157 90 153 102 146 108 L137 116 L137 138 L113 138 L113 116 L104 108 C97 102 93 90 98 83Z" fill="#ed86a9" stroke="#c83f73" stroke-width="5"/><path d="M113 138 L113 167 C113 178 137 178 137 167 L137 138" stroke="#c83f73" stroke-width="7" stroke-linecap="round"/></svg></div>
     <div class="hotspot-item left" data-hotspot="uterus"><button class="hotspot" data-hotspot="uterus" aria-label="Útero"></button><span class="hot-label">Útero<br><small>onde o bebê se desenvolve</small></span></div>
     <div class="hotspot-item right" data-hotspot="tubes"><button class="hotspot" data-hotspot="tubes" aria-label="Trompas"></button><span class="hot-label">Trompas<br><small>ligam ao ovário</small></span></div>
