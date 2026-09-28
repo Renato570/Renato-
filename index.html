@@ -38,10 +38,9 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 10px 32px rgba(99,37,63,.07)}
 .tile{border:1px solid var(--line);border-radius:28px;padding:0;background:#fff;text-align:left;overflow:hidden;box-shadow:0 12px 32px rgba(99,37,63,.08);transition:.25s transform,.25s box-shadow}.tile:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(99,37,63,.13)}
-.tile-art{height:160px;background:#fff0f5;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.tile-art svg{width:100px;height:100px}
+.tile-art{height:210px;background:linear-gradient(135deg,#fff2f7,#fce0e9);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;position:relative}.tile-art img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block;transform:scale(1.04)}
 .tile-body{padding:18px}.tile-body span{color:var(--pink);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
-.small-card{padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(99,37,63,.06);text-align:left}
+.small-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.small-card{padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(99,37,63,.06);text-align:left}
 .section-head{margin:8px 0 18px}.section-head p{margin-top:4px}
 .pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#ffe5ee;color:var(--deep);font-weight:900;font-size:12px}
 .progress{height:8px;background:#f1dbe4;border-radius:99px;overflow:hidden;margin:14px 0}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink2));width:0;transition:.35s}
@@ -51,27 +50,33 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .option.selected{border-color:var(--pink);background:#ffe9f1}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
-
-/* ESTRUTURA COM A IMAGEM GERADA */
-.body-map{position:relative;width:100%;max-width:680px;margin:0 auto;border-radius:30px;background:#ffe5ee;border:2px solid var(--line);overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.body-map img.bg-illustration{width:100%;height:auto;display:block}
-
-/* PINS E ETIQUETAS SOBRE A IMAGEM */
-.pin-node{position:absolute;transform:translate(-50%,-50%);z-index:10;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.92);backdrop-filter:blur(4px);border:1px solid var(--pink2);padding:4px 10px 4px 4px;border-radius:99px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,0.12);transition:transform .2s ease,box-shadow .2s ease}
-.pin-node:hover,.pin-node.active{transform:translate(-50%,-50%) scale(1.08);background:#fff;box-shadow:0 6px 20px rgba(217,75,130,0.35);border-color:var(--pink)}
-.pin-node .num{width:24px;height:24px;background:var(--pink);color:#fff;font-weight:bold;font-size:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pin-node .txt{font-size:11px;font-weight:800;color:var(--deep);white-space:nowrap}
-
-/* POSICIONAMENTO EXATO NA SUA ILUSTRAÇÃO */
-#pin-axila{top:20%;left:61%}
-#pin-skin{top:48%;left:36%}
-#pin-shape{top:72%;left:38%}
-#pin-lump{top:62%;left:54%}
-#pin-nipple{top:51%;left:59%}
-
-#pin-cervix{top:64%;left:50%}
-#pin-bleed{top:82%;left:50%}
-
+.stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
+.body-map{position:relative;min-height:590px;border-radius:32px;background:radial-gradient(circle at 50% 40%,#ffd6e6 0 27%,transparent 28%),linear-gradient(145deg,#fffafd,#fce5ef);border:1px solid var(--line);overflow:hidden;box-shadow:0 16px 42px rgba(99,37,63,.10)}
+.body-map.human-map{padding:0;background:radial-gradient(circle at 50% 42%,rgba(255,198,218,.85) 0 30%,transparent 31%),linear-gradient(145deg,#fffafd,#f9e1eb)}
+.figure-stage{position:absolute;inset:0;display:flex;justify-content:center;align-items:flex-end;z-index:2;pointer-events:none}
+.body-map .human-figure{width:auto;height:96%;max-width:86%;object-fit:contain;object-position:center bottom;display:block;filter:saturate(1.05) contrast(1.02);mix-blend-mode:screen;transform:translateY(1%)}
+.anatomy-glow{position:absolute;z-index:3;border-radius:50%;background:radial-gradient(circle,rgba(238,86,137,.42),rgba(238,86,137,.10) 55%,transparent 72%);filter:blur(1px);pointer-events:none}
+.mama-glow{width:290px;height:220px;top:39%;left:50%;transform:translate(-50%,-50%)}
+.hotspot-item{position:absolute;z-index:8;display:flex;align-items:center;gap:8px;pointer-events:none}
+.hotspot-item.left{left:6%;flex-direction:row}.hotspot-item.right{right:6%;flex-direction:row-reverse}
+.hotspot{position:relative;flex:0 0 auto;width:28px;height:28px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.16),0 5px 16px rgba(99,37,63,.18);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
+.hotspot:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(217,75,130,.35)}
+.hot-label{position:relative;min-width:112px;max-width:155px;padding:9px 12px;border-radius:18px;background:rgba(255,255,255,.97);border:1px solid #f1cfdd;color:var(--deep);font-size:12px;font-weight:900;line-height:1.15;box-shadow:0 8px 20px rgba(99,37,63,.12)}
+.hot-label small{font-weight:700;color:var(--muted)}
+.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{content:"";position:absolute;top:50%;width:26px;height:2px;background:var(--pink2);transform:translateY(-50%)}
+.hotspot-item.left .hot-label:after{right:-26px}.hotspot-item.right .hot-label:after{left:-26px}
+.hotspot-item.active .hot-label{border-color:var(--pink);box-shadow:0 10px 24px rgba(217,75,130,.18)}.hotspot-item.active .hotspot{transform:scale(1.12)}
+.hotspot-item[data-hotspot="axila"]{top:28%;left:7%}.hotspot-item[data-hotspot="skin"]{top:40%;left:4%}.hotspot-item[data-hotspot="shape"]{top:54%;left:6%}.hotspot-item[data-hotspot="nipple"]{top:41%;right:6%}.hotspot-item[data-hotspot="lump"]{top:52%;right:5%}
+.anatomy-layer{position:absolute;z-index:4;width:210px;height:150px;left:50%;top:51%;transform:translate(-50%,-50%);opacity:.94;filter:drop-shadow(0 8px 14px rgba(217,75,130,.20));pointer-events:none}
+.anatomy-layer svg{width:100%;height:100%;overflow:visible}
+.body-map.preventivo-map .human-figure{height:98%;max-width:90%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="uterus"]{top:47%;left:5%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="tubes"]{top:39%;right:5%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="cervix"]{top:58%;right:4%}
+.body-map.preventivo-map .hotspot-item[data-hotspot="vagina"]{top:69%;left:5%}
+.body-map.preventivo-map .anatomy-layer{top:57%;width:250px;height:190px}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(217,75,130,0)}}
+.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:10}
 .hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
 .hotspot-card strong{display:block;color:var(--deep);margin-bottom:4px}
 .checklist{display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.check input{width:21px;height:21px;accent-color:var(--pink);margin-top:2px}.check.done{background:#fff7fa}
@@ -80,17 +85,13 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .flow{margin-top:14px;padding:20px;border-radius:24px;background:linear-gradient(145deg,#fff,#fff1f6);border:1px solid var(--line)}.flow ol{margin:10px 0 0;padding-left:22px;color:var(--muted);line-height:1.65}
 .feedback{margin-top:15px;padding:15px;border-radius:18px;background:#f7f1f4;color:var(--muted)}.feedback.ok{background:#edf9f3;color:#246447}.feedback.no{background:#fff1f4;color:#8e3150}
 .score{text-align:center;padding:22px;background:linear-gradient(145deg,#fff0f6,#fff);border-radius:26px;border:1px solid var(--line)}
-.score-number{font-size:52px;font-weight:950;color:var(--pink);letter-spacing:-.06em}.share{background:#25d366;color:#fff;display:block;width:100%;margin-top:12px;text-align:center;text-decoration:none}
+.score-number{font-size:52px;font-weight:950;color:var(--pink);letter-spacing:-.06em}.share{background:#25d366;color:#fff;display:block;width:100%;margin-top:12px}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
-@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}}
-@media(max-width:520px){
- .app{padding:12px 12px 36px}
- .hero{padding:28px 20px;border-radius:30px}
- .pin-node .txt{display:none}
- .pin-node{padding:0;border:2px solid #fff;border-radius:50%}
-}
+@media(max-width:560px){.body-map{min-height:620px}.figure-stage{width:68%;min-height:620px;align-items:flex-end}.body-map .human-figure{min-height:620px;transform:scale(1.02)}.hotspot-item.left{right:auto}.hotspot-item.right{left:auto}.hotspot-item[data-hotspot="axila"]{top:26%;left:2%}.hotspot-item[data-hotspot="skin"]{top:38%;left:2%}.hotspot-item[data-hotspot="shape"]{top:51%;left:2%}.hotspot-item[data-hotspot="nipple"]{top:38%;right:2%}.hotspot-item[data-hotspot="lump"]{top:49%;right:2%}.hot-label{min-width:104px;max-width:122px;font-size:11px;padding:8px 10px}.hotspot{width:28px;height:28px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:12px}.hotspot-item.left .hot-label:after{right:-12px}.hotspot-item.right .hot-label:after{left:-12px}.human-caption{font-size:11px;bottom:12px}.body-map .human-figure{min-height:620px}}
+@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
 </style>
 </head>
 <body>
@@ -104,38 +105,30 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
     <p class="lead">Uma jornada rápida para conhecer seu corpo, entender os exames e descobrir qual é o próximo passo no SUS.</p>
     <div class="actions"><button class="primary" data-open="menu">Começar a jornada ✨</button></div>
   </div>
-  <div class="card fade d2" style="margin-top:14px"><strong>Sem enrolação.</strong><p>Você escolhe o caminho. O guia explica de forma direta o que importa para sua saúde.</p></div>
+  <div class="card fade d2" style="margin-top:14px"><strong>Sem textão obrigatório.</strong><p>Você escolhe o caminho. O site explica só o que importa para a sua situação.</p></div>
 </section>
 
 <section id="menu" class="screen">
   <div class="topbar"><div class="brand">Outubro Rosa<small>Sua jornada de cuidado</small></div><button class="icon-btn" data-back="welcome">←</button></div>
-  <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão para navegar.</p></div>
+  <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão. Sim, agora a página tem menos palestra e mais interação.</p></div>
   <div class="grid">
     <button class="tile fade" data-open="triagem">
-      <div class="tile-art">
-        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="40" fill="#FFE5EE"/><path d="M35 50L45 60L65 40" stroke="#D94B82" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="tile-body"><span>Start</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
+      <div class="tile-art"><img src="mulher-mamas-realista.png" alt="Mulher iniciando uma jornada de cuidado"></div>
+      <div class="tile-body"><span>Comece aqui</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
     </button>
     <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art">
-        <svg viewBox="0 0 100 100" fill="none"><path d="M20 75C20 45 40 40 50 40C60 40 80 45 80 75" stroke="#ED86A9" stroke-width="6" stroke-linecap="round"/><circle cx="38" cy="62" r="5" fill="#D94B82"/><circle cx="62" cy="62" r="5" fill="#D94B82"/></svg>
-      </div>
-      <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Anatomia interativa para saber o que observar.</p></div>
+      <div class="tile-art"><img src="mulher-mamas-realista.png" alt="Mulher conhecendo as próprias mamas"></div>
+      <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Hotspots para descobrir o que observar.</p></div>
     </button>
     <button class="tile fade d3" data-open="preventivo">
-      <div class="tile-art">
-        <svg viewBox="0 0 100 100" fill="none"><path d="M50 25C38 25 30 40 30 55C30 70 42 80 50 80C58 80 70 70 70 55C70 40 62 25 50 25Z" fill="#FCE0E9" stroke="#ED86A9" stroke-width="5"/><circle cx="50" cy="68" r="6" fill="#D94B82"/></svg>
-      </div>
-      <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Anatomia, preparo e checklist de exames.</p></div>
+      <div class="tile-art"><img src="mulher-preventivo-realista.png" alt="Mulher conhecendo o cuidado com o colo do útero"></div>
+      <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Hotspots, preparo e checklist interativo.</p></div>
     </button>
     <button class="tile fade d4" data-open="situacoes">
-      <div class="tile-art">
-        <svg viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" stroke="#D94B82" stroke-width="6"/><path d="M50 30V52L65 65" stroke="#D94B82" stroke-width="6" stroke-linecap="round"/></svg>
-      </div>
+      <div class="tile-art"><img src="mulher-preventivo-realista.png" alt="Mulher em uma jornada de cuidado e informação"></div>
       <div class="tile-body"><span>Vida real</span><h3>O que eu faço?</h3><p>Escolha sua situação e veja o caminho resumido.</p></div>
     </button>
-    <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, teste seus conhecimentos e compartilhe.</p></button>
+    <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, receba feedback e compartilhe sua pontuação.</p></button>
     <button class="small-card fade d4" data-open="triagem"><strong>🩺 Minha próxima ação</strong><p>Não sabe por onde começar? A triagem resolve essa parte.</p></button>
   </div>
   <div class="footer">Informação educativa. Em caso de sintomas ou dúvida, procure a equipe de saúde.</div>
@@ -153,69 +146,46 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div id="triageResult" class="hidden"></div>
 </section>
 
-<!-- ANATOMIA DAS MAMAS COM SUA ILUSTRAÇÃO -->
 <section id="mamas" class="screen">
   <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a anatomia</h2><p>Toque nos pontos para ver o que observar em cada parte.</p></div>
-  
-  <div class="body-map">
-    <img src="https://i.ibb.co/3ykXG3m/1000012759.png" alt="Ilustração da anatomia das mamas" class="bg-illustration">
-
-    <div class="pin-node" id="pin-axila" data-hotspot="axila">
-      <span class="num">1</span><span class="txt">Axila (gânglios)</span>
-    </div>
-    <div class="pin-node" id="pin-skin" data-hotspot="skin">
-      <span class="num">2</span><span class="txt">Pele (alterações)</span>
-    </div>
-    <div class="pin-node" id="pin-shape" data-hotspot="shape">
-      <span class="num">3</span><span class="txt">Formato e tamanho</span>
-    </div>
-    <div class="pin-node" id="pin-nipple" data-hotspot="nipple">
-      <span class="num">5</span><span class="txt">Mamilo (secreção)</span>
-    </div>
-    <div class="pin-node" id="pin-lump" data-hotspot="lump">
-      <span class="num">4</span><span class="txt">Caroços (nódulos)</span>
-    </div>
+  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos. Eles mostram alterações que merecem atenção.</p></div>
+  <div class="body-map human-map">
+    <div class="figure-stage"><img class="human-figure" src="mamas-site.png" alt="Mulher com representação educativa das mamas"></div><div class="anatomy-glow mama-glow"></div>
+    <div class="hotspot-item left" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila"></button><span class="hot-label">Axila<br><small>gânglios</small></span></div>
+    <div class="hotspot-item left" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><span class="hot-label">Pele<br><small>alterações</small></span></div>
+    <div class="hotspot-item left" data-hotspot="shape"><button class="hotspot" data-hotspot="shape" aria-label="Formato e tamanho"></button><span class="hot-label">Formato e tamanho</span></div>
+    <div class="hotspot-item right" data-hotspot="nipple"><button class="hotspot" data-hotspot="nipple" aria-label="Mamilo"></button><span class="hot-label">Mamilo<br><small>secreção</small></span></div>
+    <div class="hotspot-item right" data-hotspot="lump"><button class="hotspot" data-hotspot="lump" aria-label="Caroço ou nódulo"></button><span class="hot-label">Caroço<br><small>nódulo</small></span></div>
+    <div class="human-caption">Toque nos pontos sobre a imagem para descobrir o que observar 💗</div>
   </div>
-
-  <div id="mamaTip" class="hotspot-card"><strong>Toque em um ponto 💗</strong><span>Identifique o que observar em cada parte durante o autoexame.</span></div>
-  <div class="card" style="margin-top:14px"><span class="pill">📅 Rastreamento</span><h3>Mamografia de rotina</h3><p>No SUS, a mamografia de rotina é indicada para mulheres de 50 a 74 anos, a cada dois anos. Fora dessa faixa etária, a conduta é avaliada individualmente com a equipe de saúde.</p><p class="note">Atenção: Se perceber qualquer sinal diferente, procure a UBS sem esperar a idade de rotina.</p></div>
+  <div id="mamaTip" class="hotspot-card"><strong>Toque em um ponto 💗</strong><span>Você não precisa decorar tudo. A ideia é reconhecer mudanças novas e persistentes.</span></div>
+  <div class="card" style="margin-top:14px"><span class="pill">📅 Rastreamento</span><h3>Mamografia de rotina</h3><p>No SUS, o rastreamento populacional é recomendado para mulheres de 50 a 74 anos, a cada dois anos. Fora dessa faixa, a conduta pode ser individualizada com profissional de saúde.</p><p class="note">Se houver sintoma ou alteração suspeita, não espere a idade de rastreamento: procure avaliação.</p></div>
 </section>
 
-<!-- ANATOMIA DO ÚTERO -->
 <section id="preventivo" class="screen">
   <div class="topbar"><div class="brand">Exame preventivo<small>Colo do útero</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌷 Anatomia</span><h2>Entenda a região examinada</h2><p>Toque nos pontos para saber o que é avaliado no preventivo.</p></div>
-  
-  <div class="body-map">
-    <div style="position:relative;width:100%;padding-top:100%;background:#fff0f5">
-      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100%">
-        <path d="M70 70 Q200 30 330 70 Q360 220 290 370 L110 370 Q40 220 70 70 Z" fill="#FDE8EFA0" opacity="0.5"/>
-        <path d="M140 120 C140 80 260 80 260 120 C260 170 230 200 230 240 L170 240 C170 200 140 170 140 120 Z" fill="#F8BBD0" stroke="#D94B82" stroke-width="4"/>
-        <path d="M140 110 C90 100 65 130 75 150 C80 160 90 150 85 140 C75 125 105 115 140 115" fill="#F8BBD0" stroke="#D94B82" stroke-width="3"/>
-        <path d="M260 110 C310 100 335 130 325 150 C320 160 310 150 315 140 C325 125 295 115 260 115" fill="#F8BBD0" stroke="#D94B82" stroke-width="3"/>
-        <ellipse cx="70" cy="155" rx="14" ry="10" fill="#FFF" stroke="#D94B82" stroke-width="3"/>
-        <ellipse cx="330" cy="155" rx="14" ry="10" fill="#FFF" stroke="#D94B82" stroke-width="3"/>
-        <rect x="170" y="240" width="60" height="40" rx="6" fill="#C2185B"/>
-        <circle cx="200" cy="260" r="5" fill="#FFF"/>
-        <path d="M175 280 L175 350 L225 350 L225 280 Z" fill="#F48FB1" stroke="#D94B82" stroke-width="3" stroke-dasharray="4 4"/>
-      </svg>
-    </div>
-
-    <div class="pin-node" id="pin-cervix" data-hotspot="cervix"><span class="num">1</span><span class="txt">Colo do Útero</span></div>
-    <div class="pin-node" id="pin-bleed" data-hotspot="bleed"><span class="num">2</span><span class="txt">Canal Vaginal</span></div>
+  <div class="section-head"><span class="pill">🌷 Explore</span><h2>Cuidar do colo do útero também é cuidar de você</h2><p>Toque nos pontos da imagem e depois marque seu checklist.</p></div>
+  <div class="body-map human-map preventivo-map">
+    <div class="figure-stage"><img class="human-figure" src="preventivo-site.png" alt="Mulher com representação educativa do aparelho reprodutor feminino"></div>
+    <div class="anatomy-layer" aria-hidden="true"><svg viewBox="0 0 250 190" fill="none"><path d="M125 82 C93 46 61 47 42 64 C59 69 77 76 91 91" stroke="#d94b82" stroke-width="8" stroke-linecap="round"/><path d="M125 82 C157 46 189 47 208 64 C191 69 173 76 159 91" stroke="#d94b82" stroke-width="8" stroke-linecap="round"/><ellipse cx="125" cy="98" rx="45" ry="58" fill="#ffd1df" stroke="#c83f73" stroke-width="6"/><path d="M98 83 C107 72 143 72 152 83 C157 90 153 102 146 108 L137 116 L137 138 L113 138 L113 116 L104 108 C97 102 93 90 98 83Z" fill="#ed86a9" stroke="#c83f73" stroke-width="5"/><path d="M113 138 L113 167 C113 178 137 178 137 167 L137 138" stroke="#c83f73" stroke-width="7" stroke-linecap="round"/></svg></div>
+    <div class="hotspot-item left" data-hotspot="uterus"><button class="hotspot" data-hotspot="uterus" aria-label="Útero"></button><span class="hot-label">Útero<br><small>onde o bebê se desenvolve</small></span></div>
+    <div class="hotspot-item right" data-hotspot="tubes"><button class="hotspot" data-hotspot="tubes" aria-label="Trompas"></button><span class="hot-label">Trompas<br><small>ligam ao ovário</small></span></div>
+    <div class="hotspot-item right" data-hotspot="cervix"><button class="hotspot" data-hotspot="cervix" aria-label="Colo do útero"></button><span class="hot-label">Colo do útero<br><small>cérvix</small></span></div>
+    <div class="hotspot-item left" data-hotspot="vagina"><button class="hotspot" data-hotspot="vagina" aria-label="Vagina"></button><span class="hot-label">Vagina<br><small>canal vaginal</small></span></div>
+    <div class="human-caption">A imagem é educativa. Toque nos pontos para entender cada região 🌷</div>
   </div>
-
-  <div id="cervixTip" class="hotspot-card"><strong>Toque em um número 🌸</strong><span>Entenda a região avaliada durante o exame Papanicolau/DNA-HPV.</span></div>
+  <div id="cervixTip" class="hotspot-card"><strong>Toque em um ponto 🌸</strong><span>Veja uma explicação curta sobre a região ou sinais que precisam de avaliação.</span></div>
   <div class="card" style="margin-top:14px">
     <span class="pill">☑️ Preparação</span><h3>Checklist antes da coleta</h3>
     <div class="checklist">
-      <div class="check"><input id="c1" type="checkbox"><label for="c1">Evitei relações sexuais nas 48 horas anteriores ao exame.</label></div>
-      <div class="check"><input id="c2" type="checkbox"><label for="c2">Não usei duchas, medicamentos vaginais ou lubrificantes nas 48 horas anteriores.</label></div>
-      <div class="check"><input id="c3" type="checkbox"><label for="c3">Agendei fora do período menstrual (o sangue interfere na análise do laboratório).</label></div>
+      <div class="check"><input id="c1" type="checkbox"><label for="c1">Se possível, evitei relações sexuais nas 48 horas anteriores.</label></div>
+      <div class="check"><input id="c2" type="checkbox"><label for="c2">Evitei medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</label></div>
+      <div class="check"><input id="c3" type="checkbox"><label for="c3">Evitei exames intravaginais nesse período.</label></div>
+      <div class="check"><input id="c4" type="checkbox"><label for="c4">Se possível, programei a coleta para depois do fim da menstruação.</label></div>
     </div>
+    <p class="note">As orientações podem variar conforme a situação. A equipe da UBS pode orientar você.</p>
   </div>
-  <div class="card" style="margin-top:14px"><span class="pill">🧬 Métodos</span><h3>DNA-HPV e Papanicolau</h3><p>O rastreamento do câncer do colo do útero é recomendado para mulheres e pessoas com útero de 25 a 64 anos que já iniciaram atividade sexual.</p></div>
+  <div class="card" style="margin-top:14px"><span class="pill">🧬 Rastreamento</span><h3>DNA-HPV e Papanicolau</h3><p>O teste molecular para DNA-HPV oncogênico passou a ser o método primário de rastreamento no Brasil, com implantação progressiva. Onde ele ainda não está disponível, o Papanicolau continua sendo uma opção segura e eficaz.</p><p>O rastreamento é destinado a pessoas com colo do útero de 25 a 64 anos que já tiveram atividade sexual.</p></div>
 </section>
 
 <section id="situacoes" class="screen">
@@ -248,27 +218,27 @@ document.addEventListener('click',e=>{
 });
 
 const hotspotText={
- axila:['1. Axila e Linfonodos','Perceber caroços, ínguas ou inchaço persistente na axila é um sinal importante que deve ser avaliado por um médico.'],
- skin:['2. Pele da mama','Preste atenção em vermelhidão, pele repuxada, enrugada ou com aspecto parecido com casca de laranja.'],
- shape:['3. Formato e Contorno','Alterações repentinas no tamanho ou no formato de uma das mamas merecem atenção.'],
- lump:['4. Quadrante e Nódulos','Perceber um nódulo (caroço) duro, fixo ou indolor na mama é o principal motivo para agendar uma consulta.'],
- nipple:['5. Mamilo e Secreção','Saída espontânea de líquido pelo mamilo (transparente ou com sangue) ou mamilo invertido recentemente pedem avaliação.'],
- cervix:['1. Colo do Útero (Cérvix)','É a entrada do útero, examinada no teste preventivo (Papanicolau/DNA-HPV) para identificar lesões antes que virem câncer.'],
- bleed:['2. Canal Vaginal e Sinais','Sangramentos fora da menstruação, dores frequentes ou sangramento após relações sexuais devem ser investigados na UBS.']
+ axila:['Axila','Caroços ou gânglios aumentados na axila também merecem atenção, especialmente quando são novos e persistentes.'],
+ skin:['Pele da mama','Observe mudanças novas, como retração, alteração persistente da pele ou aspecto diferente do habitual. Nem toda alteração significa câncer, mas merece avaliação.'],
+ shape:['Formato e tamanho','Perceba mudanças novas e persistentes no tamanho ou formato de uma mama e procure avaliação se isso acontecer.'],
+ lump:['Caroço ou nódulo','Um nódulo novo ou outra alteração persistente deve ser avaliado por profissional de saúde. Não tente decidir sozinha o que é.'],
+ nipple:['Mamilo e secreção','Alterações novas no mamilo ou secreção, especialmente sanguinolenta, precisam de avaliação.'],
+ cervix:['Colo do útero','É a região examinada no rastreamento do câncer do colo do útero. O rastreamento é organizado por faixa etária e método.'],
+ bleed:['Sinais de alerta','Sangramento vaginal anormal ou outra alteração persistente merece avaliação na UBS, sem esperar o próximo preventivo.']
 };
 function showHotspot(k){
  const data=hotspotText[k]; const target=['axila','skin','shape','lump','nipple'].includes(k)?document.getElementById('mamaTip'):document.getElementById('cervixTip');
  target.innerHTML='<strong>'+data[0]+'</strong><span>'+data[1]+'</span>';
- document.querySelectorAll('.pin-node').forEach(el=>el.classList.toggle('active',el.dataset.hotspot===k));
+ document.querySelectorAll('.hotspot-item').forEach(el=>el.classList.toggle('active',el.dataset.hotspot===k));
 }
 
 document.querySelectorAll('.check input').forEach(c=>c.addEventListener('change',()=>c.closest('.check').classList.toggle('done',c.checked)));
 
 const triageQuestions=[
  {label:'Idade',q:'Quantos anos você tem?',opts:['Menos de 25','25 a 49','50 a 64','65 a 74','75 ou mais']},
- {label:'Sintomas',q:'Você percebeu algum caroço, alteração na mama ou sinal diferente?',opts:['Sim','Não','Não tenho certeza']},
- {label:'Histórico',q:'Existe histórico de câncer de mama/ovário em mãe, irmã ou filha em idade jovem?',opts:['Sim','Não','Não sei']},
- {label:'Último exame',q:'Quando você fez seu último exame de rotina?',opts:['Menos de 1 ano','Entre 1 e 2 anos','Mais de 2 anos','Nunca fiz / Não lembro']}
+ {label:'Sintomas',q:'Você percebeu algum caroço, alteração nova na mama ou outro sintoma que preocupa?',opts:['Sim','Não','Não tenho certeza']},
+ {label:'Histórico',q:'Existe histórico familiar importante de câncer de mama ou ovário, especialmente em parentes próximos?',opts:['Sim','Não','Não sei']},
+ {label:'Último exame',q:'Quando foi seu último exame de rastreamento?',opts:['Há menos de 1 ano','Entre 1 e 2 anos','Há mais de 2 anos','Há mais de 5 anos / não lembro','Nunca fiz']}
 ];
 let triage={i:0,a:[]};
 function startTriage(){triage={i:0,a:[]};renderTriage();}
@@ -287,33 +257,36 @@ function finishTriage(){
  const breastRoutine=['50 a 64','65 a 74'].includes(age);
  const cervixRoutine=['25 a 49','50 a 64'].includes(age);
  let cls=symptomatic?'alert':(breastRoutine||cervixRoutine?'':'warn');
- let title=symptomatic?'Agende uma avaliação na sua Unidade de Saúde':'Seu panorama de exames recomendados';
+ let title=symptomatic?'Seu próximo passo é avaliação na UBS':'Seu caminho depende da idade e do exame';
  let html='<div class="result '+cls+'"><strong>'+title+'</strong><ul>';
- if(symptomatic) html+='<li>Por apresentar alterações ou dúvidas, procure a UBS para consulta com médico ou enfermeiro. Sintomas requerem investigação específica.</li>';
- if(breastRoutine&&!symptomatic) html+='<li><b>Mamas:</b> Sua faixa etária (50 a 74 anos) tem indicação de mamografia de rotina a cada 2 anos.</li>';
- if(!breastRoutine&&!symptomatic) html+='<li><b>Mamas:</b> Fora da faixa de 50 a 74 anos, exames de imagem de rotina são avaliados caso a caso.</li>';
- if(cervixRoutine) html+='<li><b>Colo do Útero:</b> Na faixa dos 25 aos 64 anos, é recomendado realizar o preventivo regularmente.</li>';
- if(fam==='Sim') html+='<li><b>Histórico familiar:</b> Informe a equipe da UBS sobre o histórico familiar direto para definir a melhor estratégia de acompanhamento.</li>';
- html+='</ul><div class="actions"><button class="primary" data-open="situacoes">Ver orientações práticas</button><button class="secondary" data-open="menu">Voltar ao início</button></div></div>';
+ if(symptomatic) html+='<li>Procure a unidade de saúde para avaliação. Sintomas não devem ser tratados como simples rastreamento de rotina.</li>';
+ if(breastRoutine&&!symptomatic) html+='<li><b>Mamas:</b> você está na faixa de rastreamento populacional de 50 a 74 anos. A mamografia de rotina é recomendada a cada dois anos.</li>';
+ if(!breastRoutine&&!symptomatic) html+='<li><b>Mamas:</b> fora de 50 a 74 anos, a mamografia de rotina não é automaticamente indicada para toda pessoa. Converse com profissional sobre riscos, benefícios e seu contexto.</li>';
+ if(cervixRoutine) html+='<li><b>Colo do útero:</b> se você tem colo do útero, tem 25 a 64 anos e já teve atividade sexual, está na população-alvo do rastreamento.</li>';
+ if(!cervixRoutine&&['Menos de 25','65 a 74','75 ou mais'].includes(age)) html+='<li><b>Colo do útero:</b> a faixa populacional de rastreamento é 25 a 64 anos. Situações individuais podem exigir conduta diferente.</li>';
+ if(fam==='Sim'||fam==='Não sei') html+='<li><b>Histórico familiar:</b> leve essa informação à equipe. Histórico importante pode justificar avaliação individualizada do risco.</li>';
+ if(last==='Há mais de 2 anos'||last==='Há mais de 5 anos / não lembro'||last==='Nunca fiz') html+='<li>Se você não lembra quando fez o exame ou está há bastante tempo sem rastrear, a UBS pode conferir seu histórico e orientar o próximo passo.</li>';
+ html+='</ul><div class="actions"><button class="primary" data-open="situacoes">Ver caminhos rápidos</button><button class="secondary" data-open="menu">Voltar ao início</button></div><p class="note">Esta triagem é educativa e não substitui avaliação profissional.</p></div>';
  document.getElementById('triageResult').innerHTML=html;document.getElementById('triageResult').classList.remove('hidden');
- document.getElementById('triageQuestion').innerHTML='<div class="question">Triagem concluída! 💗</div>';
+ document.getElementById('triageQuestion').innerHTML='<div class="question">Pronto. Seu caminho foi organizado. 💗</div>';
  document.getElementById('triageOptions').innerHTML='';
  document.getElementById('triageFeedback').innerHTML='';
 }
+document.addEventListener('click',e=>{const t=e.target.closest('[data-tri]');});
 
 const flows={
- alteracao:{title:'Você notou uma alteração na mama',text:'Sinais novos não devem aguardar o prazo da rotina.',steps:['Procure a Unidade Básica de Saúde (UBS) mais próxima.','Informe o que notou (caroço, secreção, dor ou mudança na pele) e há quanto tempo.','O profissional fará o exame clínico e solicitará os exames complementares necessários.']},
- preventivo:{title:'Agendando o preventivo',text:'O exame é simples e rápido.',steps:['Verifique na UBS do seu bairro os dias de coleta do preventivo.','Siga as recomendações prévias (sem relações nas 48h anteriores, sem duchas vaginais e fora da menstruação).','Compareça com documento de identidade e cartão do SUS.']},
- atrasado:{title:'Exame atrasado',text:'O importante é retomar o acompanhamento.',steps:['Procure a recepção da UBS para atualizar seus dados e agendar a coleta.','A equipe verificará seu histórico para orientar o intervalo correto.']},
- particular:{title:'Realizou exames na rede privada',text:'Integre seus exames ao seu histórico do SUS.',steps:['Leve uma cópia do laudo e das imagens na sua UBS.','Solicite a inserção da informação no seu prontuário para manter seu acompanhamento unificado.']}
+ alteracao:{title:'Você percebeu uma alteração',text:'Não espere a próxima mamografia de rotina.',steps:['Procure a UBS e conte o que mudou e há quanto tempo.','A equipe fará a avaliação e, se necessário, encaminhará para investigação diagnóstica.','Não tente concluir pelo sintoma sozinho. Nem toda alteração é câncer.']},
+ preventivo:{title:'Você quer fazer o preventivo',text:'Comece pela UBS e confira qual método está disponível no seu território.',steps:['Verifique a faixa etária e seu histórico.','Agende conforme o fluxo da unidade.','Siga as orientações de preparo da equipe.']},
+ atrasado:{title:'Seu exame está atrasado',text:'Atraso não é motivo para culpa. É motivo para retomar o cuidado.',steps:['Procure a UBS.','A equipe pode conferir seu histórico no SUS.','Você receberá orientação sobre qual exame e quando realizar.']},
+ particular:{title:'Você fez o exame no particular',text:'Leve o resultado para a UBS.',steps:['Entregue uma cópia à equipe.','Peça para o resultado ser registrado no prontuário do SUS.','Assim o acompanhamento fica mais organizado.']}
 };
 function showFlow(k){const f=flows[k];const el=document.getElementById('flowResult');el.innerHTML=`<h3>${f.title}</h3><p>${f.text}</p><ol>${f.steps.map(s=>`<li>${s}</li>`).join('')}</ol>`;el.classList.remove('hidden');el.scrollIntoView({behavior:'smooth',block:'nearest'});}
 
 const quiz=[
- {q:'“Todo caroço encontrado na mama é câncer.”',a:false,why:'Mito. A grande maioria dos nódulos nas mamas são cistos ou alterações benignas (como fibroadenomas). Mas qualquer nódulo novo deve ser avaliado.'},
- {q:'“Mulheres sem nenhum sintoma também devem fazer exames de rastreamento.”',a:true,why:'Verdade! O objetivo do rastreamento (como a mamografia dos 50 aos 74 anos e o preventivo dos 25 aos 64) é identificar alterações no início, antes que causem sintomas.'},
- {q:'“Se não houver casos de câncer de mama na família, não preciso me preocupar.”',a:true,why:'Mito. Cerca de 85% a 90% dos casos de câncer de mama acontecem em pessoas SEM histórico familiar direto.'},
- {q:'“O exame preventivo do colo do útero serve para detectar o HPV e lesões antes de virarem câncer.”',a:true,why:'Verdade. O exame identifica alterações nas células causadas pelo HPV, permitindo tratar as lesões preventivamente.'}
+ {q:'“Se eu não sinto nada, nunca preciso pensar em rastreamento.”',a:false,why:'O rastreamento existe justamente para pessoas sem sintomas. Para mama, a recomendação populacional atual no SUS é mamografia de 50 a 74 anos a cada dois anos.'},
+ {q:'“Um caroço na mama significa que a pessoa tem câncer.”',a:false,why:'Não. Um caroço pode ter várias causas. O ponto importante é procurar avaliação para descobrir o que está acontecendo.'},
+ {q:'“O teste de DNA-HPV passou a ser o método primário de rastreamento do colo do útero no Brasil.”',a:true,why:'Verdade. A implantação é progressiva. Onde o DNA-HPV ainda não está disponível, o Papanicolau continua sendo utilizado.'},
+ {q:'“Se fiz o exame no particular, posso levar o resultado para a UBS.”',a:true,why:'Sim. Levar uma cópia ajuda a equipe a registrar o resultado no prontuário do SUS e manter o acompanhamento organizado.'}
 ];
 let qi=0,score=0,locked=false;
 function startQuiz(){qi=0;score=0;locked=false;renderQuiz();}
@@ -324,12 +297,12 @@ function renderQuiz(){
 }
 function answerQuiz(v){
  if(locked)return;locked=true;const q=quiz[qi];const correct=v===q.a;if(correct)score++;
- const fb=document.getElementById('quizFeedback');fb.className='feedback '+(correct?'ok':'no');fb.innerHTML=(correct?'✅ <b>Exato!</b> ':'💡 <b>Atenção:</b> ')+q.why+`<div class="actions"><button class="primary" id="nextQuiz">Avançar →</button></div>`;
+ const fb=document.getElementById('quizFeedback');fb.className='feedback '+(correct?'ok':'no');fb.innerHTML=(correct?'✅ <b>Acertou!</b> ':'💡 <b>Quase!</b> ')+q.why+`<div class="actions"><button class="primary" id="nextQuiz">Continuar →</button></div>`;
  document.getElementById('nextQuiz').onclick=()=>{qi++;locked=false;renderQuiz()};
 }
 function finishQuiz(){
- const msg=encodeURIComponent(`Fiz o Quiz do Outubro Rosa e acertei ${score}/${quiz.length}! 🎀 Confira você também: ${location.href}`);
- document.getElementById('quizBox').innerHTML=`<div class="score"><div class="pill">🎀 Concluído</div><div class="score-number">${score}/${quiz.length}</div><h2>Parabéns!</h2><p>Conhecimento é a ferramenta mais forte para a prevenção e o autocuidado.</p><a class="share" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">Compartilhar no WhatsApp 💚</a><div class="actions"><button class="secondary" data-open="menu">Voltar ao início</button><button class="secondary" id="againQuiz">Refazer quiz</button></div></div>`;
+ const msg=encodeURIComponent(`Fiz o Quiz do Outubro Rosa e acertei ${score}/${quiz.length}! 💗 Faça você também: ${location.href}`);
+ document.getElementById('quizBox').innerHTML=`<div class="score"><div class="pill">🎀 Resultado</div><div class="score-number">${score}/${quiz.length}</div><h2>Você terminou!</h2><p>Informação boa é aquela que ajuda a tomar um próximo passo com mais segurança.</p><a class="share" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">Compartilhar no WhatsApp 💚</a><div class="actions"><button class="secondary" data-open="menu">Voltar ao início</button><button class="secondary" id="againQuiz">Refazer quiz</button></div></div>`;
  document.getElementById('againQuiz').onclick=startQuiz;
 }
 </script>
