@@ -38,8 +38,8 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 10px 32px rgba(99,37,63,.07)}
 .tile{border:1px solid var(--line);border-radius:28px;padding:0;background:#fff;text-align:left;overflow:hidden;box-shadow:0 12px 32px rgba(99,37,63,.08);transition:.25s transform,.25s box-shadow}.tile:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(99,37,63,.13)}
-.tile-art{height:180px;background:linear-gradient(135deg,#fff2f7,#fce0e9);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.tile-art svg{width:100%;height:100%}
+.tile-art{height:180px;background:#fff0f5;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.tile-art img{width:100%;height:100%;object-fit:cover}
 .tile-body{padding:18px}.tile-body span{color:var(--pink);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
 .small-card{padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(99,37,63,.06);text-align:left}
 .section-head{margin:8px 0 18px}.section-head p{margin-top:4px}
@@ -52,29 +52,30 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
 
-/* MAPA ANATÔMICO EM VETOR */
-.body-map{position:relative;width:100%;max-width:420px;margin:0 auto;border-radius:30px;background:linear-gradient(180deg, #fff5f8 0%, #ffebf2 100%);border:1px solid var(--line);overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.figure-stage{position:relative;width:100%;padding-top:100%;display:block}
-.figure-stage svg{position:absolute;top:0;left:0;width:100%;height:100%}
+/* NOVO CONTAINER DE ANATOMIA COM IMAGENS LIMPAS */
+.body-map{position:relative;width:100%;max-width:400px;margin:0 auto;border-radius:30px;background:#fff;border:1px solid var(--line);overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
+.figure-stage{position:relative;width:100%;padding-top:100%;display:block;background:#fff5f8}
+.figure-stage img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;padding:20px}
 
-/* HOTSPOTS POSICIONADOS EXATOS */
+/* HOTSPOTS POSICIONADOS SOBRE A ILUSTRAÇÃO */
 .hotspot-pin{position:absolute;transform:translate(-50%, -50%);z-index:10}
-.hotspot{width:32px;height:32px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 4px rgba(217,75,130,.3);padding:0;animation:pulse 2.1s infinite;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:bold}
-.hotspot-item.active .hotspot{transform:scale(1.25);background:var(--deep);box-shadow:0 0 0 6px rgba(99,37,63,.4)}
+.hotspot{width:34px;height:34px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 4px 12px rgba(217,75,130,.4);padding:0;animation:pulse 2.1s infinite;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:bold}
+.hotspot-item.active .hotspot{transform:scale(1.25);background:var(--deep);box-shadow:0 0 0 6px rgba(99,37,63,.3)}
 
-/* COORDENADAS ANATÔMICAS DAS MAMAS */
-#pin-axila{top:25%;left:22%}
-#pin-skin{top:45%;left:32%}
-#pin-shape{top:68%;left:36%}
-#pin-lump{top:42%;left:65%}
-#pin-nipple{top:58%;left:68%}
+/* COORDENADAS REAJUSTADAS PARA AS NOVAS ILUSTRAÇÕES */
+/* MAMAS */
+#pin-axila{top:20%;left:22%}
+#pin-skin{top:38%;left:65%}
+#pin-shape{top:72%;left:38%}
+#pin-lump{top:48%;left:40%}
+#pin-nipple{top:56%;left:62%}
 
-/* COORDENADAS ANATÔMICAS DO ÚTERO */
-#pin-cervix{top:62%;left:50%}
-#pin-bleed{top:80%;left:50%}
+/* ÚTERO */
+#pin-cervix{top:64%;left:50%}
+#pin-bleed{top:84%;left:50%}
 
 @keyframes pulse{50%{box-shadow:0 0 0 10px rgba(217,75,130,0)}}
-.human-caption{position:absolute;left:14px;right:14px;bottom:12px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;text-align:center;box-shadow:0 6px 20px rgba(99,37,63,.08);z-index:8}
+.human-caption{position:absolute;left:14px;right:14px;bottom:12px;padding:8px 12px;border-radius:14px;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);color:var(--deep);font-size:12px;font-weight:800;text-align:center;box-shadow:0 4px 15px rgba(99,37,63,.08);z-index:8}
 .hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
 .hotspot-card strong{display:block;color:var(--deep);margin-bottom:4px}
 .checklist{display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.check input{width:21px;height:21px;accent-color:var(--pink);margin-top:2px}.check.done{background:#fff7fa}
@@ -87,7 +88,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
-@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.small-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}}
 @media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}}
 </style>
 </head>
@@ -110,27 +111,19 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão para navegar.</p></div>
   <div class="grid">
     <button class="tile fade" data-open="triagem">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 120" fill="none"><rect width="200" height="120" fill="#FFEBF2"/><circle cx="100" cy="60" r="40" fill="#F472B6" opacity="0.3"/><path d="M85 60L95 70L115 50" stroke="#D94B82" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
+      <div class="tile-art"><img src="https://img.freepik.com/free-vector/breast-cancer-awareness-month-illustration_23-2148647242.jpg" alt="Triagem"></div>
       <div class="tile-body"><span>Start</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
     </button>
     <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 120" fill="none"><rect width="200" height="120" fill="#FFF0F5"/><path d="M60 80C60 55 80 50 100 50C120 50 140 55 140 80" stroke="#ED86A9" stroke-width="5"/><circle cx="82" cy="70" r="4" fill="#D94B82"/><circle cx="118" cy="70" r="4" fill="#D94B82"/></svg>
-      </div>
+      <div class="tile-art"><img src="https://img.freepik.com/free-vector/flat-breast-cancer-awareness-month-illustration_23-2148630713.jpg" alt="Mamas"></div>
       <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Anatomia interativa para saber o que observar.</p></div>
     </button>
     <button class="tile fade d3" data-open="preventivo">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 120" fill="none"><rect width="200" height="120" fill="#FFF2F7"/><path d="M100 35C80 35 70 55 70 70C70 85 85 95 100 95C115 95 130 85 130 70C130 55 120 35 100 35Z" fill="#FCE0E9" stroke="#ED86A9" stroke-width="4"/><circle cx="100" cy="80" r="5" fill="#D94B82"/></svg>
-      </div>
+      <div class="tile-art"><img src="https://img.freepik.com/free-vector/hand-drawn-female-reproductive-system-illustration_23-2149021884.jpg" alt="Colo do Útero"></div>
       <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Anatomia, preparo e checklist de exames.</p></div>
     </button>
     <button class="tile fade d4" data-open="situacoes">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 120" fill="none"><rect width="200" height="120" fill="#FFE9F1"/><path d="M70 60H130M130 60L115 45M130 60L115 75" stroke="#D94B82" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
+      <div class="tile-art"><img src="https://img.freepik.com/free-vector/flat-design-doctor-patient-illustration_23-2148862305.jpg" alt="Caminho rápido"></div>
       <div class="tile-body"><span>Vida real</span><h3>O que eu faço?</h3><p>Escolha sua situação e veja o caminho resumido.</p></div>
     </button>
     <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, teste seus conhecimentos e compartilhe.</p></button>
@@ -151,85 +144,48 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div id="triageResult" class="hidden"></div>
 </section>
 
-<!-- ANATOMIA DAS MAMAS -->
+<!-- ANATOMIA DAS MAMAS COM ILUSTRAÇÃO NÍTIDA -->
 <section id="mamas" class="screen">
   <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a anatomia</h2><p>Toque nos pontos para entender o que observar em cada região.</p></div>
+  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a anatomia</h2><p>Toque nos números para ver o que observar em cada ponto.</p></div>
   
   <div class="body-map">
     <div class="figure-stage">
-      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Tronco / Silhueta -->
-        <path d="M100 40 C140 35 260 35 300 40 C340 100 350 180 330 380 L70 380 C50 180 60 100 100 40 Z" fill="#FCE4EC" stroke="#F8BBD0" stroke-width="3"/>
-        <!-- Clavícula e Pescoço -->
-        <path d="M160 40 C180 80 220 80 240 40" stroke="#E91E63" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
-        <path d="M110 85 C150 100 180 100 200 105 C220 100 250 100 290 85" stroke="#E91E63" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
-        
-        <!-- Mama Esquerda (Visão da pessoa: Direita no desenho) -->
-        <path d="M200 150 C250 140 310 180 300 250 C290 310 210 320 200 250 Z" fill="#F8BBD0" opacity="0.6" stroke="#D94B82" stroke-width="3"/>
-        <circle cx="255" cy="230" r="18" fill="#F48FB1" stroke="#D94B82" stroke-width="2"/>
-        <circle cx="255" cy="230" r="6" fill="#D94B82"/>
-
-        <!-- Mama Direita (Visão da pessoa: Esquerda no desenho) -->
-        <path d="M200 150 C150 140 90 180 100 250 C110 310 190 320 200 250 Z" fill="#F8BBD0" opacity="0.6" stroke="#D94B82" stroke-width="3"/>
-        <circle cx="145" cy="230" r="18" fill="#F48FB1" stroke="#D94B82" stroke-width="2"/>
-        <circle cx="145" cy="230" r="6" fill="#D94B82"/>
-      </svg>
+      <img src="https://img.freepik.com/free-vector/breast-cancer-self-examination-concept-illustration_114360-7212.jpg" alt="Ilustração Anatomia da Mama">
     </div>
 
-    <!-- PONTOS ANATÔMICOS EXATOS -->
+    <!-- PONTOS INTERATIVOS REAJUSTADOS -->
     <div class="hotspot-pin hotspot-item" id="pin-axila" data-hotspot="axila"><button class="hotspot" data-hotspot="axila">1</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-skin" data-hotspot="skin"><button class="hotspot" data-hotspot="skin">2</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-shape" data-hotspot="shape"><button class="hotspot" data-hotspot="shape">3</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-lump" data-hotspot="lump"><button class="hotspot" data-hotspot="lump">4</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-nipple" data-hotspot="nipple"><button class="hotspot" data-hotspot="nipple">5</button></div>
 
-    <div class="human-caption">Toque nos números para ver os detalhes 💗</div>
+    <div class="human-caption">Toque nos números na ilustração 💗</div>
   </div>
 
-  <div id="mamaTip" class="hotspot-card"><strong>Toque em um ponto 💗</strong><span>Você não precisa decorar tudo. A ideia é reconhecer alterações no seu próprio corpo.</span></div>
+  <div id="mamaTip" class="hotspot-card"><strong>Toque em um número 💗</strong><span>Identifique o que observar em cada parte durante o autoexame.</span></div>
   <div class="card" style="margin-top:14px"><span class="pill">📅 Rastreamento</span><h3>Mamografia de rotina</h3><p>No SUS, a mamografia de rotina é indicada para mulheres de 50 a 74 anos, a cada dois anos. Fora dessa faixa etária, a conduta é avaliada individualmente com a equipe de saúde.</p><p class="note">Atenção: Se perceber qualquer sinal diferente, procure a UBS sem esperar a idade de rotina.</p></div>
 </section>
 
-<!-- ANATOMIA DO COLO DO ÚTERO -->
+<!-- ANATOMIA DO ÚTERO COM ILUSTRAÇÃO NÍTIDA -->
 <section id="preventivo" class="screen">
   <div class="topbar"><div class="brand">Exame preventivo<small>Colo do útero</small></div><button class="icon-btn" data-back="menu">←</button></div>
   <div class="section-head"><span class="pill">🌷 Anatomia</span><h2>Entenda a região examinada</h2><p>Toque nos pontos para saber o que é avaliado no preventivo.</p></div>
   
   <div class="body-map">
     <div class="figure-stage">
-      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Fundo de Pélvis -->
-        <path d="M80 80 Q200 40 320 80 Q350 220 280 360 L120 360 Q50 220 80 80 Z" fill="#FCE4EC" opacity="0.4"/>
-        
-        <!-- Útero (Corpo) -->
-        <path d="M140 130 C140 90 260 90 260 130 C260 180 230 210 230 240 L170 240 C170 210 140 180 140 130 Z" fill="#F48FB1" stroke="#D94B82" stroke-width="4"/>
-        
-        <!-- Trompas de Falópio -->
-        <path d="M140 120 C100 110 70 140 80 160 C85 170 95 160 90 150 C80 135 110 125 140 125" fill="#F48FB1" stroke="#D94B82" stroke-width="3"/>
-        <path d="M260 120 C300 110 330 140 320 160 C315 170 305 160 310 150 C320 135 290 125 260 125" fill="#F48FB1" stroke="#D94B82" stroke-width="3"/>
-        
-        <!-- Ovários -->
-        <circle cx="75" cy="165" r="14" fill="#FFF" stroke="#D94B82" stroke-width="3"/>
-        <circle cx="325" cy="165" r="14" fill="#FFF" stroke="#D94B82" stroke-width="3"/>
-
-        <!-- Colo do Útero (Cérvix) -->
-        <rect x="170" y="240" width="60" height="40" rx="8" fill="#AD1457" opacity="0.8"/>
-        <circle cx="200" cy="260" r="6" fill="#FFF"/>
-
-        <!-- Canal Vaginal -->
-        <path d="M175 280 L175 350 L225 350 L225 280 Z" fill="#F8BBD0" stroke="#D94B82" stroke-width="3" stroke-dasharray="4 4"/>
-      </svg>
+      <img src="https://img.freepik.com/free-vector/hand-drawn-female-reproductive-system_23-2149021882.jpg" alt="Ilustração do Sistema Reprodutor">
     </div>
 
-    <!-- PONTOS ANATÔMICOS EXATOS -->
+    <!-- PONTOS INTERATIVOS REAJUSTADOS -->
     <div class="hotspot-pin hotspot-item" id="pin-cervix" data-hotspot="cervix"><button class="hotspot" data-hotspot="cervix">1</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-bleed" data-hotspot="bleed"><button class="hotspot" data-hotspot="bleed">2</button></div>
 
-    <div class="human-caption">Toque nos pontos para entender a anatomia 🌷</div>
+    <div class="human-caption">Toque nos pontos interativos 🌷</div>
   </div>
 
-  <div id="cervixTip" class="hotspot-card"><strong>Toque em um ponto 🌸</strong><span>Veja uma explicação simples sobre a região do exame e o que observar.</span></div>
+  <div id="cervixTip" class="hotspot-card"><strong>Toque em um número 🌸</strong><span>Entenda a região avaliada durante o exame Papanicolau/DNA-HPV.</span></div>
   <div class="card" style="margin-top:14px">
     <span class="pill">☑️ Preparação</span><h3>Checklist antes da coleta</h3>
     <div class="checklist">
