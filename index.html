@@ -38,7 +38,8 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 10px 32px rgba(99,37,63,.07)}
 .tile{border:1px solid var(--line);border-radius:28px;padding:0;background:#fff;text-align:left;overflow:hidden;box-shadow:0 12px 32px rgba(99,37,63,.08);transition:.25s transform,.25s box-shadow}.tile:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(99,37,63,.13)}
-.tile-art{height:210px;background:linear-gradient(135deg,#fff2f7,#fce0e9);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;position:relative}.tile-art img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block;transform:scale(1.04)}
+.tile-art{height:210px;background:linear-gradient(135deg,#fff2f7,#fce0e9);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.tile-art svg{width:100%;height:100%;object-fit:contain}
 .tile-body{padding:18px}.tile-body span{color:var(--pink);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
 .small-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.small-card{padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(99,37,63,.06);text-align:left}
 .section-head{margin:8px 0 18px}.section-head p{margin-top:4px}
@@ -50,22 +51,28 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .option.selected{border-color:var(--pink);background:#ffe9f1}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
-.stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
-.body-map{position:relative;min-height:500px;border-radius:30px;background:radial-gradient(circle at 50% 38%,#ffdce8 0 23%,transparent 24%),linear-gradient(145deg,#fff8fb,#fbe3ec);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.body-map.human-map{padding:0}
-.figure-stage{position:relative;width:min(46%,330px);height:100%;min-height:500px;display:flex;align-items:center;justify-content:center;z-index:2}
-.body-map .human-figure{width:100%;height:96%;min-height:0;object-fit:contain;object-position:center top;display:block;filter:saturate(.98)}
-.hotspot-item{position:absolute;z-index:5;display:flex;align-items:center;gap:7px;pointer-events:none}
-.hotspot-item.left{left:0;flex-direction:row}.hotspot-item.right{right:0;flex-direction:row-reverse}
-.hotspot{position:relative;flex:0 0 auto;width:30px;height:30px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.17);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
-.hotspot:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(217,75,130,.35)}
-.hot-label{position:relative;min-width:112px;max-width:150px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.96);border:1px solid #f1cfdd;color:var(--deep);font-size:12px;font-weight:900;line-height:1.15;box-shadow:0 8px 20px rgba(99,37,63,.12);white-space:normal}
-.hotspot-item.active .hot-label{border-color:var(--pink);box-shadow:0 10px 24px rgba(217,75,130,.18)}.hotspot-item.active .hotspot{transform:scale(1.08)}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{content:"";position:absolute;top:50%;width:18px;height:2px;background:var(--pink2);transform:translateY(-50%)}
-.hotspot-item.left .hot-label:after{right:-18px}.hotspot-item.right .hot-label:after{left:-18px}
-.hotspot-item[data-hotspot="axila"]{top:28%;left:0}.hotspot-item[data-hotspot="skin"]{top:36%;left:5%}.hotspot-item[data-hotspot="lump"]{top:42%;right:0}.hotspot-item[data-hotspot="nipple"]{top:36%;right:5%}.hotspot-item[data-hotspot="shape"]{top:48%;left:2%}
-.hotspot-item[data-hotspot="cervix"]{top:55%;left:4%}.hotspot-item[data-hotspot="bleed"]{top:64%;right:3%}
-@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(217,75,130,0)}}
-.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:11px 14px;border-radius:16px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:8}
+
+/* MAPA CORPORAL E HOTSPOTS */
+.body-map{position:relative;width:100%;max-width:440px;margin:0 auto;height:520px;border-radius:30px;background:radial-gradient(circle at 50% 38%,#ffdce8 0 23%,transparent 24%),linear-gradient(145deg,#fff8fb,#fbe3ec);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
+.figure-stage{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.figure-stage svg{width:100%;height:100%;max-height:480px}
+
+/* Posicionamento dos botões Hotspots */
+.hotspot-pin{position:absolute;transform:translate(-50%, -50%);z-index:10}
+.hotspot{width:32px;height:32px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.2);padding:0;animation:pulse 2.1s infinite;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold}
+.hotspot-item.active .hotspot{transform:scale(1.2);background:var(--deep);box-shadow:0 0 0 9px rgba(99,37,63,.3)}
+
+/* Mapeamento percentual perfeito */
+#pin-axila{top:28%;left:22%}
+#pin-skin{top:43%;left:30%}
+#pin-shape{top:58%;left:36%}
+#pin-nipple{top:48%;left:60%}
+#pin-lump{top:42%;left:70%}
+#pin-cervix{top:68%;left:50%}
+#pin-bleed{top:80%;left:50%}
+
+@keyframes pulse{50%{box-shadow:0 0 0 14px rgba(217,75,130,0)}}
+.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:11px 14px;border-radius:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;text-align:center;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:8}
 .hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
 .hotspot-card strong{display:block;color:var(--deep);margin-bottom:4px}
 .checklist{display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.check input{width:21px;height:21px;accent-color:var(--pink);margin-top:2px}.check.done{background:#fff7fa}
@@ -74,13 +81,12 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .flow{margin-top:14px;padding:20px;border-radius:24px;background:linear-gradient(145deg,#fff,#fff1f6);border:1px solid var(--line)}.flow ol{margin:10px 0 0;padding-left:22px;color:var(--muted);line-height:1.65}
 .feedback{margin-top:15px;padding:15px;border-radius:18px;background:#f7f1f4;color:var(--muted)}.feedback.ok{background:#edf9f3;color:#246447}.feedback.no{background:#fff1f4;color:#8e3150}
 .score{text-align:center;padding:22px;background:linear-gradient(145deg,#fff0f6,#fff);border-radius:26px;border:1px solid var(--line)}
-.score-number{font-size:52px;font-weight:950;color:var(--pink);letter-spacing:-.06em}.share{background:#25d366;color:#fff;display:block;width:100%;margin-top:12px}
+.score-number{font-size:52px;font-weight:950;color:var(--pink);letter-spacing:-.06em}.share{background:#25d366;color:#fff;display:block;width:100%;margin-top:12px;text-align:center;text-decoration:none}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
-@media(max-width:560px){.body-map{min-height:500px}.figure-stage{width:46%;min-height:500px}.hotspot-item.left{left:0}.hotspot-item.right{right:0}.hotspot-item[data-hotspot="axila"]{top:34%}.hotspot-item[data-hotspot="skin"]{top:43%}.hotspot-item[data-hotspot="shape"]{top:56%}.hotspot-item[data-hotspot="nipple"]{top:43%}.hotspot-item[data-hotspot="lump"]{top:49%}.hot-label{min-width:92px;max-width:106px;font-size:11px;padding:7px 8px}.hotspot{width:27px;height:27px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:9px}.hotspot-item.left .hot-label:after{right:-9px}.hotspot-item.right .hot-label:after{left:-9px}.human-caption{font-size:11px}.body-map .human-figure{height:94%;min-height:0}}
 @media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
+@media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{height:460px}}
 </style>
 </head>
 <body>
@@ -99,22 +105,44 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 
 <section id="menu" class="screen">
   <div class="topbar"><div class="brand">Outubro Rosa<small>Sua jornada de cuidado</small></div><button class="icon-btn" data-back="welcome">←</button></div>
-  <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão. Sim, agora a página tem menos palestra e mais interação.</p></div>
+  <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão para navegar.</p></div>
   <div class="grid">
     <button class="tile fade" data-open="triagem">
-      <div class="tile-art"><img src="mulher-mamas-torso.png" alt="Mulher iniciando uma jornada de cuidado"></div>
+      <div class="tile-art">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
+          <path d="M100 50 C80 50 60 70 60 95 C60 130 100 160 100 160 C100 160 140 130 140 95 C140 70 120 50 100 50 Z" fill="#D94B82"/>
+        </svg>
+      </div>
       <div class="tile-body"><span>Comece aqui</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
     </button>
     <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art"><img src="mulher-mamas-torso.png" alt="Mulher conhecendo as próprias mamas"></div>
+      <div class="tile-art">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
+          <path d="M70 120 C70 90 90 80 100 80 C110 80 130 90 130 120" stroke="#D94B82" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="100" cy="110" r="6" fill="#D94B82"/>
+        </svg>
+      </div>
       <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Hotspots para descobrir o que observar.</p></div>
     </button>
     <button class="tile fade d3" data-open="preventivo">
-      <div class="tile-art"><img src="mulher-preventivo-realista-cut.png" alt="Mulher conhecendo o cuidado com o colo do útero"></div>
+      <div class="tile-art">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
+          <path d="M100 60 L100 140 M70 100 L130 100" stroke="#D94B82" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Hotspots, preparo e checklist interativo.</p></div>
     </button>
     <button class="tile fade d4" data-open="situacoes">
-      <div class="tile-art"><img src="mulher-preventivo-realista-cut.png" alt="Mulher em uma jornada de cuidado e informação"></div>
+      <div class="tile-art">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
+          <circle cx="100" cy="80" r="20" fill="#D94B82"/>
+          <path d="M60 150 C60 120 80 110 100 110 C120 110 140 120 140 150" fill="#D94B82"/>
+        </svg>
+      </div>
       <div class="tile-body"><span>Vida real</span><h3>O que eu faço?</h3><p>Escolha sua situação e veja o caminho resumido.</p></div>
     </button>
     <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, receba feedback e compartilhe sua pontuação.</p></button>
@@ -137,33 +165,57 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 
 <section id="mamas" class="screen">
   <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos. Eles mostram alterações que merecem atenção.</p></div>
-  <div class="body-map human-map">
+  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a anatomia</h2><p>Toque nos pontos rosa para entender quais sinais merecem atenção.</p></div>
+  
+  <div class="body-map">
     <div class="figure-stage">
-      <img class="human-figure" src="mulher-mamas-torso.png" alt="Ilustração de uma mulher observando suas mamas">
+      <!-- Ilustração SVG da silhueta feminina limpa e estilizada -->
+      <svg viewBox="0 0 300 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M150 50 C165 50 175 62 175 78 C175 94 165 106 150 106 C135 106 125 94 125 78 C125 62 135 50 150 50 Z" fill="#ED86A9"/>
+        <path d="M125 106 C110 115 80 130 65 170 C55 195 60 230 70 250 L85 245 C78 225 75 195 85 175 C95 155 120 135 130 130" fill="#FCE0E9"/>
+        <path d="M175 106 C190 115 220 130 235 170 C245 195 240 230 230 250 L215 245 C222 225 225 195 215 175 C205 155 180 135 170 130" fill="#FCE0E9"/>
+        <path d="M130 130 C120 150 100 180 100 210 C100 240 120 260 150 260 C180 260 200 240 200 210 C200 180 180 150 170 130 Z" fill="#FFE5EE"/>
+        <!-- Contornos de apoio para mamas -->
+        <circle cx="125" cy="200" r="28" stroke="#ED86A9" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+        <circle cx="175" cy="200" r="28" stroke="#ED86A9" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+        <circle cx="125" cy="200" r="3" fill="#D94B82"/>
+        <circle cx="175" cy="200" r="3" fill="#D94B82"/>
+      </svg>
     </div>
-    <div class="hotspot-item left" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila"></button><span class="hot-label">Axila<br><small>gânglios</small></span></div>
-    <div class="hotspot-item left" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><span class="hot-label">Pele<br><small>alterações</small></span></div>
-    <div class="hotspot-item left" data-hotspot="shape"><button class="hotspot" data-hotspot="shape" aria-label="Formato e tamanho"></button><span class="hot-label">Formato e tamanho</span></div>
-    <div class="hotspot-item right" data-hotspot="nipple"><button class="hotspot" data-hotspot="nipple" aria-label="Mamilo"></button><span class="hot-label">Mamilo<br><small>secreção</small></span></div>
-    <div class="hotspot-item right" data-hotspot="lump"><button class="hotspot" data-hotspot="lump" aria-label="Caroço ou nódulo"></button><span class="hot-label">Caroço<br><small>nódulo</small></span></div>
-    <div class="human-caption">Toque nos pontos sobre a imagem para descobrir o que observar 💗</div>
+
+    <!-- Hotspots posicionados anatomicamente em % -->
+    <div class="hotspot-pin hotspot-item" id="pin-axila" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila">1</button></div>
+    <div class="hotspot-pin hotspot-item" id="pin-skin" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele">2</button></div>
+    <div class="hotspot-pin hotspot-item" id="pin-shape" data-hotspot="shape"><button class="hotspot" data-hotspot="shape" aria-label="Formato">3</button></div>
+    <div class="hotspot-pin hotspot-item" id="pin-nipple" data-hotspot="nipple"><button class="hotspot" data-hotspot="nipple" aria-label="Mamilo">4</button></div>
+    <div class="hotspot-pin hotspot-item" id="pin-lump" data-hotspot="lump"><button class="hotspot" data-hotspot="lump" aria-label="Nódulo">5</button></div>
+
+    <div class="human-caption">Toque nos pontos numerados sobre a imagem 💗</div>
   </div>
+
   <div id="mamaTip" class="hotspot-card"><strong>Toque em um ponto 💗</strong><span>Você não precisa decorar tudo. A ideia é reconhecer mudanças novas e persistentes.</span></div>
   <div class="card" style="margin-top:14px"><span class="pill">📅 Rastreamento</span><h3>Mamografia de rotina</h3><p>No SUS, o rastreamento populacional é recomendado para mulheres de 50 a 74 anos, a cada dois anos. Fora dessa faixa, a conduta pode ser individualizada com profissional de saúde.</p><p class="note">Se houver sintoma ou alteração suspeita, não espere a idade de rastreamento: procure avaliação.</p></div>
 </section>
 
 <section id="preventivo" class="screen">
   <div class="topbar"><div class="brand">Exame preventivo<small>Colo do útero</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌷 Explore</span><h2>Cuidar do colo do útero também é cuidar de você</h2><p>Toque nos pontos da imagem e depois marque seu checklist.</p></div>
-  <div class="body-map human-map">
+  <div class="section-head"><span class="pill">🌷 Explore</span><h2>Cuidar do colo do útero também é cuidar de você</h2><p>Toque nos pontos da imagem para saber mais.</p></div>
+  
+  <div class="body-map">
     <div class="figure-stage">
-      <img class="human-figure" src="mulher-preventivo-realista-cut.png" alt="Ilustração de uma mulher com representação educativa do colo do útero">
+      <svg viewBox="0 0 300 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 120 C100 120 150 140 200 120 C200 200 180 280 150 380 C120 280 100 200 100 120 Z" fill="#FFE5EE" stroke="#ED86A9" stroke-width="2"/>
+        <path d="M130 250 C130 230 170 230 170 250 C170 300 150 330 150 330 C150 330 130 300 130 250 Z" fill="#ED86A9"/>
+        <circle cx="150" cy="300" r="12" fill="#D94B82"/>
+      </svg>
     </div>
-    <div class="hotspot-item left" data-hotspot="cervix"><button class="hotspot" data-hotspot="cervix" aria-label="Colo do útero"></button><span class="hot-label">Colo do útero<br><small>região</small></span></div>
-    <div class="hotspot-item right" data-hotspot="bleed"><button class="hotspot" data-hotspot="bleed" aria-label="Sinais que precisam de avaliação"></button><span class="hot-label">Sinais de alerta<br><small>sangramento ou alteração</small></span></div>
-    <div class="human-caption">A imagem é educativa. Toque nos pontos para saber mais 🌷</div>
+
+    <div class="hotspot-pin hotspot-item" id="pin-cervix" data-hotspot="cervix"><button class="hotspot" data-hotspot="cervix" aria-label="Colo do útero">1</button></div>
+    <div class="hotspot-pin hotspot-item" id="pin-bleed" data-hotspot="bleed"><button class="hotspot" data-hotspot="bleed" aria-label="Sinais de alerta">2</button></div>
+
+    <div class="human-caption">A imagem é educativa. Toque nos pontos 🌷</div>
   </div>
+
   <div id="cervixTip" class="hotspot-card"><strong>Toque em um ponto 🌸</strong><span>Veja uma explicação curta sobre a região ou sinais que precisam de avaliação.</span></div>
   <div class="card" style="margin-top:14px">
     <span class="pill">☑️ Preparação</span><h3>Checklist antes da coleta</h3>
@@ -208,13 +260,13 @@ document.addEventListener('click',e=>{
 });
 
 const hotspotText={
- axila:['Axila','Caroços ou gânglios aumentados na axila também merecem atenção, especialmente quando são novos e persistentes.'],
- skin:['Pele da mama','Observe mudanças novas, como retração, alteração persistente da pele ou aspecto diferente do habitual. Nem toda alteração significa câncer, mas merece avaliação.'],
- shape:['Formato e tamanho','Perceba mudanças novas e persistentes no tamanho ou formato de uma mama e procure avaliação se isso acontecer.'],
- lump:['Caroço ou nódulo','Um nódulo novo ou outra alteração persistente deve ser avaliado por profissional de saúde. Não tente decidir sozinha o que é.'],
- nipple:['Mamilo e secreção','Alterações novas no mamilo ou secreção, especialmente sanguinolenta, precisam de avaliação.'],
- cervix:['Colo do útero','É a região examinada no rastreamento do câncer do colo do útero. O rastreamento é organizado por faixa etária e método.'],
- bleed:['Sinais de alerta','Sangramento vaginal anormal ou outra alteração persistente merece avaliação na UBS, sem esperar o próximo preventivo.']
+ axila:['1. Axila e Linfonodos','Caroços ou gânglios aumentados na axila merecem atenção quando são novos e persistentes.'],
+ skin:['2. Pele da mama','Observe retração, vermelhidão ou aspecto de casca de laranja. Nem tudo é motivo de pânico, mas exige avaliação.'],
+ shape:['3. Formato e tamanho','Mudanças visíveis e recentes na assimetria das mamas devem ser observadas.'],
+ nipple:['4. Mamilo e secreção','Inversão recente do mamilo ou saída de líquido espontâneo (especialmente com sangue) pedem consulta.'],
+ lump:['5. Nódulo ou caroço','Perceber um nódulo firme e bem definido ao toque é o motivo principal para agendar consulta de avaliação.'],
+ cervix:['1. Colo do útero','Região examinada para prevenção de lesões precursoras. O rastreamento prioritário ocorre dos 25 aos 64 anos.'],
+ bleed:['2. Sinais de alerta','Sangramentos fora do período menstrual ou após relações sexuais pedem avaliação na UBS.']
 };
 function showHotspot(k){
  const data=hotspotText[k]; const target=['axila','skin','shape','lump','nipple'].includes(k)?document.getElementById('mamaTip'):document.getElementById('cervixTip');
@@ -262,7 +314,6 @@ function finishTriage(){
  document.getElementById('triageOptions').innerHTML='';
  document.getElementById('triageFeedback').innerHTML='';
 }
-document.addEventListener('click',e=>{const t=e.target.closest('[data-tri]');});
 
 const flows={
  alteracao:{title:'Você percebeu uma alteração',text:'Não espere a próxima mamografia de rotina.',steps:['Procure a UBS e conte o que mudou e há quanto tempo.','A equipe fará a avaliação e, se necessário, encaminhará para investigação diagnóstica.','Não tente concluir pelo sintoma sozinho. Nem toda alteração é câncer.']},
