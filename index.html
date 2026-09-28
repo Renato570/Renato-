@@ -51,13 +51,21 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
 .stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
-.body-map{position:relative;min-height:480px;border-radius:30px;background:linear-gradient(180deg,#fff7fa,#ffe9f1);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.body-map.human-map{padding:0;background:linear-gradient(145deg,#fff5f9,#f9dce8)}
-.body-map .human-figure{width:100%;height:100%;min-height:480px;object-fit:contain;object-position:center center;display:block;filter:saturate(.98)}.hotspot{position:absolute;width:28px;height:28px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.16);padding:0;animation:pulse 2.1s infinite}.hotspot:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(217,75,130,.35)}
+.body-map{position:relative;min-height:540px;border-radius:30px;background:linear-gradient(145deg,#fff7fa,#ffe8f1);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
+.body-map.human-map{padding:0;background:radial-gradient(circle at 50% 36%,#ffdce8 0 19%,transparent 20%),linear-gradient(145deg,#fff8fb,#fbe3ec)}
+.figure-stage{position:relative;width:min(48%,360px);height:100%;min-height:540px;display:flex;align-items:center;justify-content:center;z-index:2}
+.body-map .human-figure{width:100%;height:100%;min-height:540px;object-fit:contain;object-position:center center;display:block;filter:saturate(.98)}
+.hotspot-item{position:absolute;z-index:5;display:flex;align-items:center;gap:8px;pointer-events:none}
+.hotspot-item.left{right:calc(100% - 2px);flex-direction:row-reverse}.hotspot-item.right{left:calc(100% - 2px)}
+.hotspot{position:relative;flex:0 0 auto;width:30px;height:30px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.17);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
+.hotspot:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(217,75,130,.35)}
+.hot-label{position:relative;min-width:112px;max-width:150px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.96);border:1px solid #f1cfdd;color:var(--deep);font-size:12px;font-weight:900;line-height:1.15;box-shadow:0 8px 20px rgba(99,37,63,.12);white-space:normal}
+.hotspot-item.active .hot-label{border-color:var(--pink);box-shadow:0 10px 24px rgba(217,75,130,.18)}.hotspot-item.active .hotspot{transform:scale(1.08)}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{content:"";position:absolute;top:50%;width:18px;height:2px;background:var(--pink2);transform:translateY(-50%)}
+.hotspot-item.left .hot-label:after{right:-18px}.hotspot-item.right .hot-label:after{left:-18px}
+.hotspot-item[data-hotspot="axila"]{top:28%;left:0}.hotspot-item[data-hotspot="skin"]{top:36%;left:5%}.hotspot-item[data-hotspot="lump"]{top:42%;right:0}.hotspot-item[data-hotspot="nipple"]{top:36%;right:5%}.hotspot-item[data-hotspot="shape"]{top:48%;left:2%}
+.hotspot-item[data-hotspot="cervix"]{top:55%;left:4%}.hotspot-item[data-hotspot="bleed"]{top:64%;right:3%}
 @keyframes pulse{50%{box-shadow:0 0 0 12px rgba(217,75,130,0)}}
-.hotspot[data-hotspot="skin"]{left:43%;top:36%}.hotspot[data-hotspot="lump"]{left:54%;top:43%}.hotspot[data-hotspot="nipple"]{left:58%;top:39%}
-.hotspot[data-hotspot="cervix"]{left:50%;top:54%}.hotspot[data-hotspot="bleed"]{left:50%;top:58%}
-.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:11px 14px;border-radius:16px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(99,37,63,.12)}
+.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:11px 14px;border-radius:16px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:8}
 .hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
 .hotspot-card strong{display:block;color:var(--deep);margin-bottom:4px}
 .checklist{display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.check input{width:21px;height:21px;accent-color:var(--pink);margin-top:2px}.check.done{background:#fff7fa}
@@ -70,6 +78,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
+@media(max-width:560px){.body-map{min-height:520px}.figure-stage{width:46%;min-height:520px}.hotspot-item.left{right:auto;left:2%}.hotspot-item.right{left:auto;right:2%}.hotspot-item[data-hotspot="axila"]{top:27%}.hotspot-item[data-hotspot="skin"]{top:36%}.hotspot-item[data-hotspot="shape"]{top:47%}.hotspot-item[data-hotspot="nipple"]{top:36%}.hotspot-item[data-hotspot="lump"]{top:43%}.hot-label{min-width:94px;max-width:112px;font-size:11px;padding:7px 9px}.hotspot{width:27px;height:27px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:10px}.hotspot-item.left .hot-label:after{right:-10px}.hotspot-item.right .hot-label:after{left:-10px}.human-caption{font-size:11px}.body-map .human-figure{min-height:520px}}
 @media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
 </style>
@@ -130,8 +139,14 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
   <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos. Eles mostram alterações que merecem atenção.</p></div>
   <div class="body-map human-map">
-    <img class="human-figure" src="mulher-mamas-realista.png" alt="Ilustração de uma mulher observando suas mamas">
-    <button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><button class="hotspot" data-hotspot="lump" aria-label="Caroço ou nódulo"></button><button class="hotspot" data-hotspot="nipple" aria-label="Mamilo"></button>
+    <div class="figure-stage">
+      <img class="human-figure" src="mulher-mamas-realista-cut.png" alt="Ilustração de uma mulher observando suas mamas">
+    </div>
+    <div class="hotspot-item left" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila"></button><span class="hot-label">Axila<br><small>gânglios</small></span></div>
+    <div class="hotspot-item left" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><span class="hot-label">Pele<br><small>alterações</small></span></div>
+    <div class="hotspot-item left" data-hotspot="shape"><button class="hotspot" data-hotspot="shape" aria-label="Formato e tamanho"></button><span class="hot-label">Formato e tamanho</span></div>
+    <div class="hotspot-item right" data-hotspot="nipple"><button class="hotspot" data-hotspot="nipple" aria-label="Mamilo"></button><span class="hot-label">Mamilo<br><small>secreção</small></span></div>
+    <div class="hotspot-item right" data-hotspot="lump"><button class="hotspot" data-hotspot="lump" aria-label="Caroço ou nódulo"></button><span class="hot-label">Caroço<br><small>nódulo</small></span></div>
     <div class="human-caption">Toque nos pontos sobre a imagem para descobrir o que observar 💗</div>
   </div>
   <div id="mamaTip" class="hotspot-card"><strong>Toque em um ponto 💗</strong><span>Você não precisa decorar tudo. A ideia é reconhecer mudanças novas e persistentes.</span></div>
@@ -142,8 +157,11 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="topbar"><div class="brand">Exame preventivo<small>Colo do útero</small></div><button class="icon-btn" data-back="menu">←</button></div>
   <div class="section-head"><span class="pill">🌷 Explore</span><h2>Cuidar do colo do útero também é cuidar de você</h2><p>Toque nos pontos da imagem e depois marque seu checklist.</p></div>
   <div class="body-map human-map">
-    <img class="human-figure" src="mulher-preventivo-realista.png" alt="Ilustração de uma mulher com representação educativa do colo do útero">
-    <button class="hotspot" data-hotspot="cervix" aria-label="Colo do útero"></button><button class="hotspot" data-hotspot="bleed" aria-label="Sinais que precisam de avaliação"></button>
+    <div class="figure-stage">
+      <img class="human-figure" src="mulher-preventivo-realista-cut.png" alt="Ilustração de uma mulher com representação educativa do colo do útero">
+    </div>
+    <div class="hotspot-item left" data-hotspot="cervix"><button class="hotspot" data-hotspot="cervix" aria-label="Colo do útero"></button><span class="hot-label">Colo do útero<br><small>região</small></span></div>
+    <div class="hotspot-item right" data-hotspot="bleed"><button class="hotspot" data-hotspot="bleed" aria-label="Sinais que precisam de avaliação"></button><span class="hot-label">Sinais de alerta<br><small>sangramento ou alteração</small></span></div>
     <div class="human-caption">A imagem é educativa. Toque nos pontos para saber mais 🌷</div>
   </div>
   <div id="cervixTip" class="hotspot-card"><strong>Toque em um ponto 🌸</strong><span>Veja uma explicação curta sobre a região ou sinais que precisam de avaliação.</span></div>
@@ -190,15 +208,18 @@ document.addEventListener('click',e=>{
 });
 
 const hotspotText={
+ axila:['Axila','Caroços ou gânglios aumentados na axila também merecem atenção, especialmente quando são novos e persistentes.'],
  skin:['Pele da mama','Observe mudanças novas, como retração, alteração persistente da pele ou aspecto diferente do habitual. Nem toda alteração significa câncer, mas merece avaliação.'],
+ shape:['Formato e tamanho','Perceba mudanças novas e persistentes no tamanho ou formato de uma mama e procure avaliação se isso acontecer.'],
  lump:['Caroço ou nódulo','Um nódulo novo ou outra alteração persistente deve ser avaliado por profissional de saúde. Não tente decidir sozinha o que é.'],
  nipple:['Mamilo e secreção','Alterações novas no mamilo ou secreção, especialmente sanguinolenta, precisam de avaliação.'],
  cervix:['Colo do útero','É a região examinada no rastreamento do câncer do colo do útero. O rastreamento é organizado por faixa etária e método.'],
- bleed:['Sangramento','Sangramento vaginal anormal não deve ser usado para “esperar o próximo preventivo”. Procure a UBS para avaliação.']
+ bleed:['Sinais de alerta','Sangramento vaginal anormal ou outra alteração persistente merece avaliação na UBS, sem esperar o próximo preventivo.']
 };
 function showHotspot(k){
- const data=hotspotText[k]; const target=document.getElementById(k==='skin'||k==='lump'||k==='nipple'?'mamaTip':'cervixTip');
+ const data=hotspotText[k]; const target=['axila','skin','shape','lump','nipple'].includes(k)?document.getElementById('mamaTip'):document.getElementById('cervixTip');
  target.innerHTML='<strong>'+data[0]+'</strong><span>'+data[1]+'</span>';
+ document.querySelectorAll('.hotspot-item').forEach(el=>el.classList.toggle('active',el.dataset.hotspot===k));
 }
 
 document.querySelectorAll('.check input').forEach(c=>c.addEventListener('change',()=>c.closest('.check').classList.toggle('done',c.checked)));
