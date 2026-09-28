@@ -51,10 +51,10 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
 .stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
-.body-map{position:relative;min-height:600px;border-radius:30px;background:radial-gradient(circle at 50% 38%,#ffd9e7 0 24%,transparent 25%),linear-gradient(145deg,#fff8fb,#fde8f1);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.body-map.human-map{padding:0 0 68px;background:radial-gradient(circle at 50% 37%,#ffd7e5 0 23%,transparent 24%),linear-gradient(145deg,#fff9fb,#fbe4ee)}
-.figure-stage{position:relative;width:min(62%,500px);height:100%;min-height:600px;display:flex;align-items:flex-end;justify-content:center;z-index:2}
-.body-map .human-figure{width:100%;height:100%;min-height:600px;object-fit:contain;object-position:center bottom;display:block;filter:saturate(1.02);transform:scale(1.03)}
+.body-map{position:relative;min-height:540px;border-radius:30px;background:linear-gradient(145deg,#fff7fa,#ffe8f1);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
+.body-map.human-map{padding:0;background:radial-gradient(circle at 50% 36%,#ffdce8 0 19%,transparent 20%),linear-gradient(145deg,#fff8fb,#fbe3ec)}
+.figure-stage{position:relative;width:min(48%,360px);height:100%;min-height:540px;display:flex;align-items:center;justify-content:center;z-index:2}
+.body-map .human-figure{width:100%;height:100%;min-height:540px;object-fit:contain;object-position:center center;display:block;filter:saturate(.98)}
 .hotspot-item{position:absolute;z-index:5;display:flex;align-items:center;gap:8px;pointer-events:none}
 .hotspot-item.left{right:calc(100% - 2px);flex-direction:row-reverse}.hotspot-item.right{left:calc(100% - 2px)}
 .hotspot{position:relative;flex:0 0 auto;width:30px;height:30px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.17);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
@@ -78,7 +78,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
-@media(max-width:560px){.body-map{min-height:620px}.figure-stage{width:68%;min-height:620px;align-items:flex-end}.body-map .human-figure{min-height:620px;transform:scale(1.02)}.hotspot-item.left{right:auto}.hotspot-item.right{left:auto}.hotspot-item[data-hotspot="axila"]{top:26%;left:2%}.hotspot-item[data-hotspot="skin"]{top:38%;left:2%}.hotspot-item[data-hotspot="shape"]{top:51%;left:2%}.hotspot-item[data-hotspot="nipple"]{top:38%;right:2%}.hotspot-item[data-hotspot="lump"]{top:49%;right:2%}.hot-label{min-width:104px;max-width:122px;font-size:11px;padding:8px 10px}.hotspot{width:28px;height:28px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:12px}.hotspot-item.left .hot-label:after{right:-12px}.hotspot-item.right .hot-label:after{left:-12px}.human-caption{font-size:11px;bottom:12px}.body-map .human-figure{min-height:620px}}
+@media(max-width:560px){.body-map{min-height:520px}.figure-stage{width:46%;min-height:520px}.hotspot-item.left{right:auto;left:2%}.hotspot-item.right{left:auto;right:2%}.hotspot-item[data-hotspot="axila"]{top:27%}.hotspot-item[data-hotspot="skin"]{top:36%}.hotspot-item[data-hotspot="shape"]{top:47%}.hotspot-item[data-hotspot="nipple"]{top:36%}.hotspot-item[data-hotspot="lump"]{top:43%}.hot-label{min-width:94px;max-width:112px;font-size:11px;padding:7px 9px}.hotspot{width:27px;height:27px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:10px}.hotspot-item.left .hot-label:after{right:-10px}.hotspot-item.right .hot-label:after{left:-10px}.human-caption{font-size:11px}.body-map .human-figure{min-height:520px}}
 @media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
 </style>
@@ -102,19 +102,19 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão. Sim, agora a página tem menos palestra e mais interação.</p></div>
   <div class="grid">
     <button class="tile fade" data-open="triagem">
-      <div class="tile-art"><img src="mulher-mamas-realista.png" alt="Mulher iniciando uma jornada de cuidado"></div>
+      <div class="tile-art"><img src="mulher-mamas-realista-cut.png" alt="Mulher iniciando uma jornada de cuidado"></div>
       <div class="tile-body"><span>Comece aqui</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
     </button>
     <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art"><img src="mulher-mamas-realista.png" alt="Mulher conhecendo as próprias mamas"></div>
+      <div class="tile-art"><img src="mulher-mamas-realista-cut.png" alt="Mulher conhecendo as próprias mamas"></div>
       <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Hotspots para descobrir o que observar.</p></div>
     </button>
     <button class="tile fade d3" data-open="preventivo">
-      <div class="tile-art"><img src="mulher-preventivo-realista.png" alt="Mulher conhecendo o cuidado com o colo do útero"></div>
+      <div class="tile-art"><img src="mulher-preventivo-realista-cut.png" alt="Mulher conhecendo o cuidado com o colo do útero"></div>
       <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Hotspots, preparo e checklist interativo.</p></div>
     </button>
     <button class="tile fade d4" data-open="situacoes">
-      <div class="tile-art"><img src="mulher-preventivo-realista.png" alt="Mulher em uma jornada de cuidado e informação"></div>
+      <div class="tile-art"><img src="mulher-preventivo-realista-cut.png" alt="Mulher em uma jornada de cuidado e informação"></div>
       <div class="tile-body"><span>Vida real</span><h3>O que eu faço?</h3><p>Escolha sua situação e veja o caminho resumido.</p></div>
     </button>
     <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, receba feedback e compartilhe sua pontuação.</p></button>
@@ -140,7 +140,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos. Eles mostram alterações que merecem atenção.</p></div>
   <div class="body-map human-map">
     <div class="figure-stage">
-      <img class="human-figure" src="mulher-mamas-hero.png" alt="Ilustração de uma mulher observando suas mamas">
+      <img class="human-figure" src="mulher-mamas-realista-cut.png" alt="Ilustração de uma mulher observando suas mamas">
     </div>
     <div class="hotspot-item left" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila"></button><span class="hot-label">Axila<br><small>gânglios</small></span></div>
     <div class="hotspot-item left" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><span class="hot-label">Pele<br><small>alterações</small></span></div>
