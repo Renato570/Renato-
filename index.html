@@ -39,7 +39,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 10px 32px rgba(99,37,63,.07)}
 .tile{border:1px solid var(--line);border-radius:28px;padding:0;background:#fff;text-align:left;overflow:hidden;box-shadow:0 12px 32px rgba(99,37,63,.08);transition:.25s transform,.25s box-shadow}.tile:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(99,37,63,.13)}
 .tile-art{height:210px;background:linear-gradient(135deg,#fff2f7,#fce0e9);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.tile-art svg{width:100%;height:100%;object-fit:contain}
+.tile-art img{width:100%;height:100%;object-fit:cover;display:block}
 .tile-body{padding:18px}.tile-body span{color:var(--pink);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
 .small-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.small-card{padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(99,37,63,.06);text-align:left}
 .section-head{margin:8px 0 18px}.section-head p{margin-top:4px}
@@ -52,27 +52,28 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
 
-/* MAPA CORPORAL E HOTSPOTS */
-.body-map{position:relative;width:100%;max-width:440px;margin:0 auto;height:520px;border-radius:30px;background:radial-gradient(circle at 50% 38%,#ffdce8 0 23%,transparent 24%),linear-gradient(145deg,#fff8fb,#fbe3ec);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.figure-stage{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-.figure-stage svg{width:100%;height:100%;max-height:480px}
+/* CONTÊINER DA IMAGEM E PONTOS */
+.body-map{position:relative;width:100%;max-width:480px;margin:0 auto;border-radius:30px;background:#fff;border:1px solid var(--line);overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
+.figure-stage{position:relative;width:100%;display:block}
+.figure-stage img{width:100%;height:auto;display:block;object-fit:cover}
 
-/* Posicionamento dos botões Hotspots */
+/* ESTILO DOS HOTSPOTS (PONTOS) */
 .hotspot-pin{position:absolute;transform:translate(-50%, -50%);z-index:10}
-.hotspot{width:32px;height:32px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.2);padding:0;animation:pulse 2.1s infinite;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold}
-.hotspot-item.active .hotspot{transform:scale(1.2);background:var(--deep);box-shadow:0 0 0 9px rgba(99,37,63,.3)}
+.hotspot{width:30px;height:30px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 5px rgba(217,75,130,.3);padding:0;animation:pulse 2.1s infinite;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:bold}
+.hotspot-item.active .hotspot{transform:scale(1.2);background:var(--deep);box-shadow:0 0 0 8px rgba(99,37,63,.4)}
 
-/* Mapeamento percentual perfeito */
-#pin-axila{top:28%;left:22%}
-#pin-skin{top:43%;left:30%}
-#pin-shape{top:58%;left:36%}
-#pin-nipple{top:48%;left:60%}
-#pin-lump{top:42%;left:70%}
-#pin-cervix{top:68%;left:50%}
-#pin-bleed{top:80%;left:50%}
+/* POSICIONAMENTO ANATÔMICO EM % */
+#pin-axila{top:30%;left:30%}
+#pin-skin{top:50%;left:38%}
+#pin-shape{top:62%;left:42%}
+#pin-nipple{top:54%;left:60%}
+#pin-lump{top:48%;left:65%}
 
-@keyframes pulse{50%{box-shadow:0 0 0 14px rgba(217,75,130,0)}}
-.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:11px 14px;border-radius:16px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;text-align:center;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:8}
+#pin-cervix{top:52%;left:50%}
+#pin-bleed{top:68%;left:50%}
+
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(217,75,130,0)}}
+.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:11px 14px;border-radius:16px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;text-align:center;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:8}
 .hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
 .hotspot-card strong{display:block;color:var(--deep);margin-bottom:4px}
 .checklist{display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.check input{width:21px;height:21px;accent-color:var(--pink);margin-top:2px}.check.done{background:#fff7fa}
@@ -86,7 +87,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
 @media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{height:460px}}
+@media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -108,41 +109,19 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão para navegar.</p></div>
   <div class="grid">
     <button class="tile fade" data-open="triagem">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
-          <path d="M100 50 C80 50 60 70 60 95 C60 130 100 160 100 160 C100 160 140 130 140 95 C140 70 120 50 100 50 Z" fill="#D94B82"/>
-        </svg>
-      </div>
+      <div class="tile-art"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" alt="Triagem"></div>
       <div class="tile-body"><span>Comece aqui</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
     </button>
     <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
-          <path d="M70 120 C70 90 90 80 100 80 C110 80 130 90 130 120" stroke="#D94B82" stroke-width="8" stroke-linecap="round"/>
-          <circle cx="100" cy="110" r="6" fill="#D94B82"/>
-        </svg>
-      </div>
+      <div class="tile-art"><img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80" alt="Mamas"></div>
       <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Hotspots para descobrir o que observar.</p></div>
     </button>
     <button class="tile fade d3" data-open="preventivo">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
-          <path d="M100 60 L100 140 M70 100 L130 100" stroke="#D94B82" stroke-width="8" stroke-linecap="round"/>
-        </svg>
-      </div>
+      <div class="tile-art"><img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" alt="Preventivo"></div>
       <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Hotspots, preparo e checklist interativo.</p></div>
     </button>
     <button class="tile fade d4" data-open="situacoes">
-      <div class="tile-art">
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="80" fill="#FFE5EE"/>
-          <circle cx="100" cy="80" r="20" fill="#D94B82"/>
-          <path d="M60 150 C60 120 80 110 100 110 C120 110 140 120 140 150" fill="#D94B82"/>
-        </svg>
-      </div>
+      <div class="tile-art"><img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80" alt="Vida real"></div>
       <div class="tile-body"><span>Vida real</span><h3>O que eu faço?</h3><p>Escolha sua situação e veja o caminho resumido.</p></div>
     </button>
     <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, receba feedback e compartilhe sua pontuação.</p></button>
@@ -165,32 +144,21 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 
 <section id="mamas" class="screen">
   <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a anatomia</h2><p>Toque nos pontos rosa para entender quais sinais merecem atenção.</p></div>
+  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos para entender quais sinais merecem atenção.</p></div>
   
   <div class="body-map">
     <div class="figure-stage">
-      <!-- Ilustração SVG da silhueta feminina limpa e estilizada -->
-      <svg viewBox="0 0 300 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M150 50 C165 50 175 62 175 78 C175 94 165 106 150 106 C135 106 125 94 125 78 C125 62 135 50 150 50 Z" fill="#ED86A9"/>
-        <path d="M125 106 C110 115 80 130 65 170 C55 195 60 230 70 250 L85 245 C78 225 75 195 85 175 C95 155 120 135 130 130" fill="#FCE0E9"/>
-        <path d="M175 106 C190 115 220 130 235 170 C245 195 240 230 230 250 L215 245 C222 225 225 195 215 175 C205 155 180 135 170 130" fill="#FCE0E9"/>
-        <path d="M130 130 C120 150 100 180 100 210 C100 240 120 260 150 260 C180 260 200 240 200 210 C200 180 180 150 170 130 Z" fill="#FFE5EE"/>
-        <!-- Contornos de apoio para mamas -->
-        <circle cx="125" cy="200" r="28" stroke="#ED86A9" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
-        <circle cx="175" cy="200" r="28" stroke="#ED86A9" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
-        <circle cx="125" cy="200" r="3" fill="#D94B82"/>
-        <circle cx="175" cy="200" r="3" fill="#D94B82"/>
-      </svg>
+      <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Autoexame da mama">
     </div>
 
-    <!-- Hotspots posicionados anatomicamente em % -->
+    <!-- Hotspots posicionados anatomicamente -->
     <div class="hotspot-pin hotspot-item" id="pin-axila" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila">1</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-skin" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele">2</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-shape" data-hotspot="shape"><button class="hotspot" data-hotspot="shape" aria-label="Formato">3</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-nipple" data-hotspot="nipple"><button class="hotspot" data-hotspot="nipple" aria-label="Mamilo">4</button></div>
     <div class="hotspot-pin hotspot-item" id="pin-lump" data-hotspot="lump"><button class="hotspot" data-hotspot="lump" aria-label="Nódulo">5</button></div>
 
-    <div class="human-caption">Toque nos pontos numerados sobre a imagem 💗</div>
+    <div class="human-caption">Toque nos pontos numerados 💗</div>
   </div>
 
   <div id="mamaTip" class="hotspot-card"><strong>Toque em um ponto 💗</strong><span>Você não precisa decorar tudo. A ideia é reconhecer mudanças novas e persistentes.</span></div>
@@ -203,11 +171,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   
   <div class="body-map">
     <div class="figure-stage">
-      <svg viewBox="0 0 300 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M100 120 C100 120 150 140 200 120 C200 200 180 280 150 380 C120 280 100 200 100 120 Z" fill="#FFE5EE" stroke="#ED86A9" stroke-width="2"/>
-        <path d="M130 250 C130 230 170 230 170 250 C170 300 150 330 150 330 C150 330 130 300 130 250 Z" fill="#ED86A9"/>
-        <circle cx="150" cy="300" r="12" fill="#D94B82"/>
-      </svg>
+      <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" alt="Exame preventivo">
     </div>
 
     <div class="hotspot-pin hotspot-item" id="pin-cervix" data-hotspot="cervix"><button class="hotspot" data-hotspot="cervix" aria-label="Colo do útero">1</button></div>
