@@ -51,12 +51,12 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
 .result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
 .stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
-.body-map{position:relative;min-height:540px;border-radius:30px;background:linear-gradient(145deg,#fff7fa,#ffe8f1);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
-.body-map.human-map{padding:0;background:radial-gradient(circle at 50% 36%,#ffdce8 0 19%,transparent 20%),linear-gradient(145deg,#fff8fb,#fbe3ec)}
-.figure-stage{position:relative;width:min(48%,360px);height:100%;min-height:540px;display:flex;align-items:center;justify-content:center;z-index:2}
-.body-map .human-figure{width:100%;height:100%;min-height:540px;object-fit:contain;object-position:center center;display:block;filter:saturate(.98)}
-.hotspot-item{position:absolute;z-index:5;display:flex;align-items:center;gap:8px;pointer-events:none}
-.hotspot-item.left{right:calc(100% - 2px);flex-direction:row-reverse}.hotspot-item.right{left:calc(100% - 2px)}
+.body-map{position:relative;min-height:500px;border-radius:30px;background:radial-gradient(circle at 50% 38%,#ffdce8 0 23%,transparent 24%),linear-gradient(145deg,#fff8fb,#fbe3ec);border:1px solid var(--line);display:flex;justify-content:center;align-items:center;overflow:hidden;box-shadow:0 12px 35px rgba(99,37,63,.08)}
+.body-map.human-map{padding:0}
+.figure-stage{position:relative;width:min(46%,330px);height:100%;min-height:500px;display:flex;align-items:center;justify-content:center;z-index:2}
+.body-map .human-figure{width:100%;height:96%;min-height:0;object-fit:contain;object-position:center top;display:block;filter:saturate(.98)}
+.hotspot-item{position:absolute;z-index:5;display:flex;align-items:center;gap:7px;pointer-events:none}
+.hotspot-item.left{left:0;flex-direction:row}.hotspot-item.right{right:0;flex-direction:row-reverse}
 .hotspot{position:relative;flex:0 0 auto;width:30px;height:30px;border:3px solid #fff;background:var(--pink);border-radius:50%;box-shadow:0 0 0 7px rgba(217,75,130,.17);padding:0;animation:pulse 2.1s infinite;pointer-events:auto}
 .hotspot:after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(217,75,130,.35)}
 .hot-label{position:relative;min-width:112px;max-width:150px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.96);border:1px solid #f1cfdd;color:var(--deep);font-size:12px;font-weight:900;line-height:1.15;box-shadow:0 8px 20px rgba(99,37,63,.12);white-space:normal}
@@ -78,7 +78,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
 .note{font-size:12px;color:#8b737e;margin-top:12px}
 .footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
 .hidden{display:none!important}
-@media(max-width:560px){.body-map{min-height:520px}.figure-stage{width:46%;min-height:520px}.hotspot-item.left{right:auto;left:2%}.hotspot-item.right{left:auto;right:2%}.hotspot-item[data-hotspot="axila"]{top:27%}.hotspot-item[data-hotspot="skin"]{top:36%}.hotspot-item[data-hotspot="shape"]{top:47%}.hotspot-item[data-hotspot="nipple"]{top:36%}.hotspot-item[data-hotspot="lump"]{top:43%}.hot-label{min-width:94px;max-width:112px;font-size:11px;padding:7px 9px}.hotspot{width:27px;height:27px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:10px}.hotspot-item.left .hot-label:after{right:-10px}.hotspot-item.right .hot-label:after{left:-10px}.human-caption{font-size:11px}.body-map .human-figure{min-height:520px}}
+@media(max-width:560px){.body-map{min-height:500px}.figure-stage{width:46%;min-height:500px}.hotspot-item.left{left:0}.hotspot-item.right{right:0}.hotspot-item[data-hotspot="axila"]{top:34%}.hotspot-item[data-hotspot="skin"]{top:43%}.hotspot-item[data-hotspot="shape"]{top:56%}.hotspot-item[data-hotspot="nipple"]{top:43%}.hotspot-item[data-hotspot="lump"]{top:49%}.hot-label{min-width:92px;max-width:106px;font-size:11px;padding:7px 8px}.hotspot{width:27px;height:27px}.hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:9px}.hotspot-item.left .hot-label:after{right:-9px}.hotspot-item.right .hot-label:after{left:-9px}.human-caption{font-size:11px}.body-map .human-figure{height:94%;min-height:0}}
 @media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
 </style>
@@ -102,11 +102,11 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão. Sim, agora a página tem menos palestra e mais interação.</p></div>
   <div class="grid">
     <button class="tile fade" data-open="triagem">
-      <div class="tile-art"><img src="mulher-mamas-realista-cut.png" alt="Mulher iniciando uma jornada de cuidado"></div>
+      <div class="tile-art"><img src="mulher-mamas-torso.png" alt="Mulher iniciando uma jornada de cuidado"></div>
       <div class="tile-body"><span>Comece aqui</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
     </button>
     <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art"><img src="mulher-mamas-realista-cut.png" alt="Mulher conhecendo as próprias mamas"></div>
+      <div class="tile-art"><img src="mulher-mamas-torso.png" alt="Mulher conhecendo as próprias mamas"></div>
       <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Hotspots para descobrir o que observar.</p></div>
     </button>
     <button class="tile fade d3" data-open="preventivo">
@@ -140,7 +140,7 @@ p{line-height:1.55;color:var(--muted);margin:8px 0}
   <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore a imagem</h2><p>Toque nos pontos. Eles mostram alterações que merecem atenção.</p></div>
   <div class="body-map human-map">
     <div class="figure-stage">
-      <img class="human-figure" src="mulher-mamas-realista-cut.png" alt="Ilustração de uma mulher observando suas mamas">
+      <img class="human-figure" src="mulher-mamas-torso.png" alt="Ilustração de uma mulher observando suas mamas">
     </div>
     <div class="hotspot-item left" data-hotspot="axila"><button class="hotspot" data-hotspot="axila" aria-label="Axila"></button><span class="hot-label">Axila<br><small>gânglios</small></span></div>
     <div class="hotspot-item left" data-hotspot="skin"><button class="hotspot" data-hotspot="skin" aria-label="Pele"></button><span class="hot-label">Pele<br><small>alterações</small></span></div>
