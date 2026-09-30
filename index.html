@@ -4,357 +4,97 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#d94b82">
-<title>Outubro Rosa • Informação também é cuidado</title>
+<title>Outubro Rosa • Descubra seu próximo passo</title>
 <style>
-:root{
- --pink:#d94b82;--pink2:#ed86a9;--deep:#63253f;--ink:#24151c;--muted:#735f69;
- --soft:#fff2f7;--white:#fff;--line:#edd4df;--ok:#267a57;--warn:#9b5a12;--danger:#b33254;
- --shadow:0 18px 55px rgba(99,37,63,.13);--r:28px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff 0%,#fff6f9 100%);min-height:100vh}
-button,input{font:inherit}
-button{cursor:pointer}
-.app{max-width:760px;margin:auto;min-height:100vh;padding:18px 16px 48px}
-.screen{display:none;animation:screenIn .45s ease both}.screen.active{display:block}
-@keyframes screenIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.fade{animation:fadeUp .5s ease both}.d2{animation-delay:.08s}.d3{animation-delay:.16s}.d4{animation-delay:.24s}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.brand{font-weight:900;color:var(--deep);letter-spacing:-.03em}.brand small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.icon-btn{border:1px solid var(--line);background:#fff;width:44px;height:44px;border-radius:15px;color:var(--deep);font-weight:900;box-shadow:0 5px 18px rgba(99,37,63,.06)}
-.hero{background:radial-gradient(circle at 80% 15%,#ffdbe7 0 18%,transparent 19%),linear-gradient(145deg,#fff 0%,#ffe9f1 100%);border:1px solid var(--line);border-radius:36px;padding:34px 24px;box-shadow:var(--shadow);overflow:hidden;position:relative}
-.ribbon{font-size:58px;line-height:1;margin-bottom:16px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--pink);font-weight:900}
-h1{font-size:clamp(34px,9vw,58px);line-height:.96;letter-spacing:-.055em;margin:8px 0 14px;color:var(--deep)}
-h2{font-size:clamp(28px,7vw,40px);line-height:1;letter-spacing:-.045em;margin:6px 0 10px;color:var(--deep)}
-h3{font-size:20px;letter-spacing:-.025em;margin:0 0 8px;color:var(--deep)}
-p{line-height:1.55;color:var(--muted);margin:8px 0}
-.lead{font-size:17px;max-width:58ch}
-.primary,.secondary,.choice,.share{border:0;border-radius:18px;padding:14px 18px;font-weight:900;transition:.2s transform,.2s box-shadow,.2s background}
-.primary{background:var(--pink);color:#fff;box-shadow:0 12px 24px rgba(217,75,130,.25)}.primary:hover{transform:translateY(-2px)}
-.secondary{background:#fff;color:var(--deep);border:1px solid var(--line)}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 10px 32px rgba(99,37,63,.07)}
-.tile{border:1px solid var(--line);border-radius:28px;padding:0;background:#fff;text-align:left;overflow:hidden;box-shadow:0 12px 32px rgba(99,37,63,.08);transition:.25s transform,.25s box-shadow}.tile:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(99,37,63,.13)}
-.tile-art{height:210px;background:linear-gradient(135deg,#fff2f7,#fce0e9);display:flex;align-items:flex-end;justify-content:center;overflow:hidden;position:relative}.tile-art img{width:100%;height:100%;object-fit:cover;object-position:center 24%;display:block;transform:scale(1.04)}
-.tile-body{padding:18px}.tile-body span{color:var(--pink);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:.1em}
-.small-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.small-card{padding:18px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 25px rgba(99,37,63,.06);text-align:left}
-.section-head{margin:8px 0 18px}.section-head p{margin-top:4px}
-.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#ffe5ee;color:var(--deep);font-weight:900;font-size:12px}
-.progress{height:8px;background:#f1dbe4;border-radius:99px;overflow:hidden;margin:14px 0}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink2));width:0;transition:.35s}
-.q-card{padding:24px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
-.question{font-size:25px;font-weight:900;line-height:1.1;color:var(--deep);margin:10px 0 18px}
-.options{display:grid;gap:10px}.option{border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;text-align:left;font-weight:800;color:var(--ink);transition:.2s}.option:hover{border-color:var(--pink2);background:#fff8fb;transform:translateY(-1px)}
-.option.selected{border-color:var(--pink);background:#ffe9f1}
-.result{margin-top:16px;padding:18px;border-radius:22px;border:1px solid #cde8dc;background:#f1fbf6}.result.warn{border-color:#f2dbb8;background:#fff8eb}.result.alert{border-color:#f0c3cf;background:#fff0f4}
-.result strong{color:var(--deep)}.result ul{margin:10px 0 0;padding-left:20px;color:var(--muted);line-height:1.55}
-.stepper{display:flex;gap:7px;margin:18px 0}.dot{height:7px;flex:1;border-radius:99px;background:#ecd8e0}.dot.on{background:var(--pink)}
- 
-.human-caption{position:absolute;left:14px;right:14px;bottom:14px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);color:var(--deep);font-size:12px;font-weight:800;box-shadow:0 8px 24px rgba(99,37,63,.12);z-index:10}
-.hotspot-card{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:86px}
-.hotspot-card strong{display:block;color:var(--deep);margin-bottom:4px}
-.checklist{display:grid;gap:10px}.check{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fff}.check input{width:21px;height:21px;accent-color:var(--pink);margin-top:2px}.check.done{background:#fff7fa}
-.check.done label{text-decoration:line-through;color:#8b7680}
-.choices{display:grid;gap:10px}.choice{text-align:left;background:#fff;border:1px solid var(--line);color:var(--deep);display:flex;align-items:center;justify-content:space-between}.choice:hover{background:#fff4f8;transform:translateY(-1px)}
-.flow{margin-top:14px;padding:20px;border-radius:24px;background:linear-gradient(145deg,#fff,#fff1f6);border:1px solid var(--line)}.flow ol{margin:10px 0 0;padding-left:22px;color:var(--muted);line-height:1.65}
-.feedback{margin-top:15px;padding:15px;border-radius:18px;background:#f7f1f4;color:var(--muted)}.feedback.ok{background:#edf9f3;color:#246447}.feedback.no{background:#fff1f4;color:#8e3150}
-.score{text-align:center;padding:22px;background:linear-gradient(145deg,#fff0f6,#fff);border-radius:26px;border:1px solid var(--line)}
-.score-number{font-size:52px;font-weight:950;color:var(--pink);letter-spacing:-.06em}.share{background:#25d366;color:#fff;display:block;width:100%;margin-top:12px}
-.note{font-size:12px;color:#8b737e;margin-top:12px}
-.footer{text-align:center;color:#927b85;font-size:12px;padding:28px 8px}
-.hidden{display:none!important}
-@media(max-width:560px){
- .body-map{min-height:620px}
- .figure-stage{inset:0;align-items:flex-end}
- .body-map .human-figure{height:96%;max-width:92%;width:auto;transform:none}
- .hotspot-item{width:28px;height:28px}
- .hotspot{width:28px;height:28px}
- .hot-label{min-width:104px;max-width:128px;font-size:11px;padding:8px 10px}
- .hotspot-item.left .hot-label{right:calc(100% + 12px)}
- .hotspot-item.right .hot-label{left:calc(100% + 12px)}
- .hotspot-item.left .hot-label:after,.hotspot-item.right .hot-label:after{width:12px}
- .hotspot-item.left .hot-label:after{right:-12px}.hotspot-item.right .hot-label:after{left:-12px}
- .hotspot-item[data-hotspot="axila"]{top:27%;left:73%}
- .hotspot-item[data-hotspot="skin"]{top:53%;left:47%}
- .hotspot-item[data-hotspot="shape"]{top:60%;left:42%}
- .hotspot-item[data-hotspot="nipple"]{top:54%;left:64%}
- .hotspot-item[data-hotspot="lump"]{top:59%;left:68%}
- .body-map.preventivo-map .human-figure{height:95%;max-width:94%}
- .body-map.preventivo-map .hotspot-item[data-hotspot="uterus"]{top:49%;left:43%}
- .body-map.preventivo-map .hotspot-item[data-hotspot="tubes"]{top:43%;left:60%}
- .body-map.preventivo-map .hotspot-item[data-hotspot="cervix"]{top:57%;left:51%}
- .body-map.preventivo-map .hotspot-item[data-hotspot="vagina"]{top:64%;left:51%}
- .human-caption{font-size:11px;bottom:12px}
-}
-@media(min-width:650px){.grid{grid-template-columns:1fr 1fr}.grid .full{grid-column:1/-1}.tile-art{height:220px}.small-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:420px){.app{padding:12px 12px 36px}.hero{padding:28px 20px;border-radius:30px}.small-grid{grid-template-columns:1fr}.body-map{min-height:455px}.body-map .human-figure{min-height:455px}.tile-art{height:190px}}
-
-/* MAPAS INTERATIVOS SEM FOTOS: anatomia vetorial + cartões clicáveis */
-.interactive-map{background:linear-gradient(145deg,#fffafd,#fce5ef);border:1px solid var(--line);border-radius:32px;padding:18px;box-shadow:0 16px 42px rgba(99,37,63,.10)}
-.map-intro{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.map-intro strong{color:var(--deep);font-size:15px}.map-intro span{font-size:12px;color:var(--muted)}
-.anatomy-board{position:relative;min-height:360px;border-radius:26px;background:radial-gradient(circle at 50% 50%,#ffd6e4 0 26%,#ffeef5 27% 58%,#fff7fa 59%);display:grid;place-items:center;overflow:hidden;border:1px solid #f1d3df}
-.anatomy-board:before,.anatomy-board:after{content:"";position:absolute;border-radius:50%;background:rgba(217,75,130,.07);pointer-events:none}.anatomy-board:before{width:250px;height:250px}.anatomy-board:after{width:330px;height:330px;border:1px solid rgba(217,75,130,.09);background:transparent}
-.anatomy-svg{width:min(72%,300px);height:auto;position:relative;z-index:2;filter:drop-shadow(0 14px 22px rgba(99,37,63,.12))}
-.anatomy-svg .part{fill:#f59bb8;stroke:#b83e6c;stroke-width:4;transition:.25s}.anatomy-svg .part.soft{fill:#ffd1df}.anatomy-svg .part.active{fill:#d94b82;filter:drop-shadow(0 0 10px rgba(217,75,130,.45))}.anatomy-svg .outline{fill:none;stroke:#b83e6c;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
-.map-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;position:relative;z-index:4}.map-btn{border:1px solid var(--line);background:#fff;border-radius:18px;padding:12px;text-align:left;color:var(--deep);font-weight:900;box-shadow:0 6px 18px rgba(99,37,63,.06);transition:.2s}.map-btn small{display:block;color:var(--muted);font-weight:700;margin-top:3px}.map-btn:hover,.map-btn.active{border-color:var(--pink);background:#fff3f7;transform:translateY(-2px);box-shadow:0 10px 22px rgba(217,75,130,.14)}.map-btn .num{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#ffe0eb;color:var(--pink);margin-right:6px;font-size:12px}
-.map-tip{margin-top:12px;padding:16px 18px;border-radius:20px;background:#fff;border:1px solid var(--line);min-height:92px;box-shadow:0 8px 24px rgba(99,37,63,.06)}.map-tip strong{display:block;color:var(--deep);margin-bottom:4px}.map-tip p{margin:0}
-.map-mini{display:flex;align-items:center;gap:10px;margin-top:12px;padding:12px 14px;border-radius:18px;background:#fff7fa;border:1px solid var(--line);color:var(--muted);font-size:12px}.map-mini b{color:var(--deep)}
-.body-map{position:relative}
-@media(max-width:520px){.anatomy-board{min-height:310px}.anatomy-svg{width:68%;max-width:250px}.map-actions{grid-template-columns:1fr 1fr}.map-btn{font-size:13px;padding:11px}.map-btn small{font-size:11px}}
+:root{--p:#d94b82;--p2:#f28db0;--deep:#63253f;--ink:#25161d;--muted:#735f69;--bg:#fff7fa;--card:#fff;--line:#efd5df;--ok:#287a57;--soft:#ffe8f0;--shadow:0 16px 45px rgba(99,37,63,.11);--r:26px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#fff 0,#fff4f8 100%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}button{font:inherit;cursor:pointer}button,a{ -webkit-tap-highlight-color:transparent}.app{max-width:760px;margin:auto;padding:14px 14px 50px}.screen{display:none;animation:in .42s ease both}.screen.active{display:block}@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.brand{font-weight:950;color:var(--deep);font-size:18px}.brand small{display:block;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-top:2px}.back{width:44px;height:44px;border:1px solid var(--line);background:#fff;border-radius:15px;color:var(--deep);font-weight:900}.hero{position:relative;overflow:hidden;border-radius:34px;padding:30px 22px 24px;background:radial-gradient(circle at 90% 10%,#ffd5e4 0 20%,transparent 21%),linear-gradient(145deg,#fff,#ffe8f1);border:1px solid var(--line);box-shadow:var(--shadow)}.ribbon{font-size:52px}.eyebrow,.tag{display:inline-flex;align-items:center;gap:7px;border-radius:999px;background:var(--soft);color:var(--deep);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.08em;padding:8px 11px}.hero h1{font-size:clamp(39px,10vw,64px);line-height:.93;letter-spacing:-.06em;color:var(--deep);margin:14px 0}.hero p{font-size:17px;line-height:1.5;color:var(--muted);max-width:55ch}.primary,.secondary{border:0;border-radius:17px;padding:14px 18px;font-weight:950}.primary{background:var(--p);color:#fff;box-shadow:0 12px 24px #d94b8240}.secondary{background:#fff;border:1px solid var(--line);color:var(--deep)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.micro{font-size:12px;color:#8b747e;margin-top:13px}.section{margin:24px 0 0}.section h2{font-size:34px;line-height:1;letter-spacing:-.045em;color:var(--deep);margin:8px 0}.section p{color:var(--muted);line-height:1.5}.grid{display:grid;gap:12px}.journey{position:relative;display:flex;gap:14px;align-items:center;text-align:left;width:100%;padding:18px;border:1px solid var(--line);background:#fff;border-radius:24px;box-shadow:0 9px 28px #63253f0b;transition:.2s}.journey:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.journey .ico{width:52px;height:52px;border-radius:18px;background:var(--soft);display:grid;place-items:center;font-size:25px;flex:none}.journey b{color:var(--deep);font-size:18px}.journey span{display:block;color:var(--muted);font-size:13px;margin-top:3px}.arrow{margin-left:auto;color:var(--p);font-size:22px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.stat{padding:14px 10px;background:#fff;border:1px solid var(--line);border-radius:20px;text-align:center}.stat b{display:block;font-size:22px;color:var(--p)}.stat span{font-size:11px;color:var(--muted)}.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:0 9px 28px #63253f0a}.card h3{color:var(--deep);margin:5px 0 7px;font-size:21px}.card p{color:var(--muted);line-height:1.5}.notice{padding:15px 17px;border-radius:20px;background:#fff0f5;border:1px solid #f1c9d7;color:var(--deep);line-height:1.45}.step{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #f2e2e8}.step:last-child{border-bottom:0}.stepnum{width:34px;height:34px;border-radius:50%;background:var(--p);color:#fff;display:grid;place-items:center;font-weight:950;flex:none}.step b{color:var(--deep)}.step span{display:block;color:var(--muted);font-size:13px;line-height:1.4;margin-top:2px}.challenge{background:linear-gradient(145deg,#64253f,#a53e69);color:#fff;border-radius:30px;padding:22px;box-shadow:0 16px 45px #63253f28}.challenge h2{color:#fff;margin:7px 0;font-size:32px}.challenge p{color:#ffeaf1}.bar{height:8px;background:#ffffff2a;border-radius:99px;overflow:hidden;margin:16px 0}.bar i{display:block;height:100%;width:0;background:#fff;border-radius:99px;transition:.35s}.choices{display:grid;gap:9px}.choice{padding:15px;border-radius:17px;border:1px solid #ffffff40;background:#ffffff12;color:#fff;text-align:left;font-weight:850}.choice:active{transform:scale(.99)}.feedback{margin-top:13px;background:#fff;color:var(--ink);padding:15px;border-radius:18px}.feedback strong{color:var(--deep)}.mini-actions{display:flex;gap:8px;margin-top:12px}.mini-actions button{flex:1}.resultbox{margin-top:14px;padding:20px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}.resultbox h3{margin-top:0}.progress{height:7px;background:#f0dce4;border-radius:99px;overflow:hidden;margin:13px 0}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2));width:0;transition:.35s}.q{font-size:25px;font-weight:950;line-height:1.12;color:var(--deep);margin:12px 0 18px}.option{width:100%;padding:15px;border:1px solid var(--line);background:#fff;border-radius:17px;text-align:left;font-weight:850;color:var(--ink);margin-top:9px}.option:hover{background:#fff6fa;border-color:var(--p2)}.score{text-align:center}.score strong{font-size:58px;color:var(--p);letter-spacing:-.07em}.share{display:block;text-align:center;text-decoration:none;background:#25d366;color:#fff;padding:14px;border-radius:17px;font-weight:950;margin-top:12px}.flowgrid{display:grid;gap:9px}.flowbtn{border:1px solid var(--line);background:#fff;border-radius:18px;padding:15px;text-align:left;font-weight:850;color:var(--deep)}.flowresult{margin-top:13px;padding:18px;border-radius:22px;background:linear-gradient(145deg,#fff,#fff0f6);border:1px solid var(--line)}.flowresult ol{padding-left:21px;color:var(--muted);line-height:1.6}.check{display:flex;gap:11px;align-items:flex-start;padding:13px;border:1px solid var(--line);border-radius:16px;margin-top:9px}.check input{width:21px;height:21px;accent-color:var(--p);margin-top:1px}.check.done{background:#fff4f8}.check.done label{text-decoration:line-through;color:#927e86}.footer{text-align:center;color:#987f89;font-size:11px;padding:28px 5px}.hidden{display:none!important}
+/* Mamas sem foto */.anatomy{position:relative;margin-top:16px;padding:18px;background:linear-gradient(180deg,#fff3f7,#ffe6ef);border:1px solid var(--line);border-radius:30px;overflow:hidden}.breast-art{height:360px;display:grid;place-items:center}.torso{position:relative;width:250px;height:310px}.head{position:absolute;width:64px;height:64px;border-radius:50%;background:#f0b18e;left:93px;top:3px}.neck{position:absolute;width:50px;height:55px;background:#efad88;left:100px;top:53px;border-radius:20px}.body{position:absolute;width:190px;height:230px;left:30px;top:78px;background:#f39bb9;border-radius:95px 95px 28px 28px}.breast{position:absolute;width:84px;height:76px;background:#f7b4c9;border:5px solid #d94b82;border-radius:50% 48% 55% 45%;top:122px;z-index:2}.b1{left:40px;transform:rotate(8deg)}.b2{right:40px;transform:rotate(-8deg)}.nipple{position:absolute;width:13px;height:13px;border-radius:50%;background:#c53c70;top:153px;z-index:3}.n1{left:80px}.n2{right:80px}.arm{position:absolute;width:44px;height:170px;background:#efad88;border-radius:30px;right:6px;top:63px;transform:rotate(-28deg);z-index:4}.arm2{position:absolute;width:44px;height:160px;background:#efad88;border-radius:30px;left:8px;top:90px;transform:rotate(32deg);z-index:4}.hot{position:absolute;z-index:5;border:0;background:#fff;color:var(--deep);border:1px solid var(--line);box-shadow:0 7px 20px #63253f18;border-radius:18px;padding:9px 11px;font-weight:900;font-size:12px;text-align:left;max-width:130px}.hot small{display:block;color:var(--muted);font-weight:650;margin-top:1px}.hot.active{background:var(--p);color:#fff;border-color:var(--p);transform:scale(1.04)}.hot.active small{color:#ffe7ef}.h-ax{top:83px;left:4px}.h-skin{top:151px;left:2px}.h-shape{top:238px;left:8px}.h-nip{top:145px;right:2px}.h-lump{top:217px;right:2px}.h-pain{bottom:6px;right:50px}.focus{margin-top:12px;padding:16px;border-radius:21px;background:#fff;border:1px solid var(--line);min-height:96px}.focus strong{display:block;color:var(--deep);margin-bottom:4px}.focus span{color:var(--muted);line-height:1.45;font-size:14px}
+/* Preventivo sem foto */.uterus{margin-top:16px;background:linear-gradient(180deg,#fff3f7,#ffe6ef);border:1px solid var(--line);border-radius:30px;padding:18px}.uterus-svg{display:block;width:100%;height:330px}.u-part{cursor:pointer;transition:.2s}.u-part.active{filter:drop-shadow(0 0 7px #d94b82)}.u-labels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}.u-btn{border:1px solid var(--line);background:#fff;border-radius:16px;padding:12px;text-align:left;font-weight:850;color:var(--deep)}.u-btn.active{background:var(--p);color:#fff}.u-btn small{display:block;color:var(--muted);font-weight:600}.u-btn.active small{color:#ffe7ef}
+@media(max-width:520px){.app{padding:10px 12px 42px}.hero{padding:27px 19px}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.breast-art{height:350px}.hot{font-size:11px;padding:8px 9px}.h-ax{left:0}.h-skin{left:0}.h-shape{left:0}.h-nip{right:0}.h-lump{right:0}.h-pain{right:42px}.uterus-svg{height:285px}}
 </style>
 </head>
 <body>
 <main class="app">
-
-<section id="welcome" class="screen active">
-  <div class="hero fade">
-    <div class="ribbon">🎀</div>
-    <div class="eyebrow">Outubro Rosa</div>
-    <h1>Informação também é cuidado.</h1>
-    <p class="lead">Uma jornada rápida para conhecer seu corpo, entender os exames e descobrir qual é o próximo passo no SUS.</p>
-    <div class="actions"><button class="primary" data-open="menu">Começar a jornada ✨</button></div>
+<section id="home" class="screen active">
+  <div class="hero">
+    <div class="ribbon">🎀</div><span class="eyebrow">Outubro Rosa</span>
+    <h1>Você conhece suas mamas?</h1>
+    <p>Descubra em poucos minutos o que observar, quando procurar a UBS e qual pode ser seu próximo passo.</p>
+    <div class="actions"><button class="primary" data-open="choose">Começar agora ✨</button></div>
+    <div class="micro">Sem cadastro • gratuito • feito para celular</div>
   </div>
-  <div class="card fade d2" style="margin-top:14px"><strong>Sem textão obrigatório.</strong><p>Você escolhe o caminho. O site explica só o que importa para a sua situação.</p></div>
+  <div class="section"><span class="tag">💗 Uma jornada rápida</span><h2>Não precisa ler tudo.</h2><p>Você escolhe o que quer descobrir. O site vai guiando você.</p></div>
+  <div class="stats"><div class="stat"><b>60s</b><span>para começar</span></div><div class="stat"><b>4</b><span>caminhos</span></div><div class="stat"><b>1</b><span>próximo passo</span></div></div>
 </section>
 
-<section id="menu" class="screen">
-  <div class="topbar"><div class="brand">Outubro Rosa<small>Sua jornada de cuidado</small></div><button class="icon-btn" data-back="welcome">←</button></div>
-  <div class="section-head fade"><span class="pill">💗 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Toque em um cartão. Sim, agora a página tem menos palestra e mais interação.</p></div>
+<section id="choose" class="screen">
+  <div class="top"><div class="brand">Sua jornada<small>Escolha uma porta de entrada</small></div><button class="back" data-back="home">←</button></div>
+  <div class="section"><span class="tag">🎯 Comece por aqui</span><h2>O que você quer descobrir?</h2><p>Não existe ordem certa. Escolha o que mais combina com você hoje.</p></div>
   <div class="grid">
-    <button class="tile fade" data-open="triagem">
-      <div class="tile-art tile-icon"><span>🩷</span></div>
-      <div class="tile-body"><span>Comece aqui</span><h3>Minha triagem 💗</h3><p>4 perguntas e um próximo passo personalizado.</p></div>
-    </button>
-    <button class="tile fade d2" data-open="mamas">
-      <div class="tile-art tile-icon"><span>🎀</span></div>
-      <div class="tile-body"><span>Mamas</span><h3>Conheça suas mamas</h3><p>Hotspots para descobrir o que observar.</p></div>
-    </button>
-    <button class="tile fade d3" data-open="preventivo">
-      <div class="tile-art tile-icon"><span>🌷</span></div>
-      <div class="tile-body"><span>Colo do útero</span><h3>Entenda o preventivo</h3><p>Hotspots, preparo e checklist interativo.</p></div>
-    </button>
-    <button class="tile fade d4" data-open="situacoes">
-      <div class="tile-art tile-icon"><span>🩺</span></div>
-      <div class="tile-body"><span>Vida real</span><h3>O que eu faço?</h3><p>Escolha sua situação e veja o caminho resumido.</p></div>
-    </button>
-    <button class="small-card fade d3" data-open="quiz"><strong>🧠 Quiz Mito ou Verdade</strong><p>Responda, receba feedback e compartilhe sua pontuação.</p></button>
-    <button class="small-card fade d4" data-open="triagem"><strong>🩺 Minha próxima ação</strong><p>Não sabe por onde começar? A triagem resolve essa parte.</p></button>
+    <button class="journey" data-open="challenge"><div class="ico">🔎</div><div><b>Conhecer minhas mamas</b><span>Descubra 6 coisas para observar.</span></div><div class="arrow">›</div></button>
+    <button class="journey" data-open="preventivo"><div class="ico">🌷</div><div><b>Entender o preventivo</b><span>Veja como funciona sem complicação.</span></div><div class="arrow">›</div></button>
+    <button class="journey" data-open="quiz"><div class="ico">🧠</div><div><b>Testar meus conhecimentos</b><span>Mito ou verdade em poucos minutos.</span></div><div class="arrow">›</div></button>
+    <button class="journey" data-open="actions"><div class="ico">🩺</div><div><b>Quero saber o que fazer</b><span>Escolha uma situação e veja o caminho.</span></div><div class="arrow">›</div></button>
   </div>
-  <div class="footer">Informação educativa. Em caso de sintomas ou dúvida, procure a equipe de saúde.</div>
+  <div class="notice" style="margin-top:14px"><b>💡 Dica:</b> se você percebeu uma alteração nova, vá direto para “Quero saber o que fazer”.</div>
 </section>
 
-<section id="triagem" class="screen">
-  <div class="topbar"><div class="brand">Minha triagem<small>4 perguntas rápidas</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="card">
-    <span class="pill" id="triageLabel">Pergunta 1 de 4</span>
-    <div class="progress"><i id="triageProgress"></i></div>
-    <div id="triageQuestion"></div>
-    <div id="triageOptions" class="options"></div>
-    <div id="triageFeedback"></div>
+<section id="challenge" class="screen">
+  <div class="top"><div class="brand">Conheça suas mamas<small>Desafio de 60 segundos</small></div><button class="back" data-back="choose">←</button></div>
+  <div class="challenge"><span class="eyebrow" style="background:#ffffff20;color:#fff">🔎 DESAFIO</span><h2>Você consegue descobrir os 6 pontos?</h2><p>Toque nas áreas do desenho. A cada descoberta, uma informação aparece.</p><div class="bar"><i id="chBar"></i></div><div id="chCount">0 de 6 descobertos</div></div>
+  <div class="anatomy">
+    <div class="breast-art"><div class="torso"><div class="head"></div><div class="neck"></div><div class="body"></div><div class="breast b1"></div><div class="breast b2"></div><div class="nipple n1"></div><div class="nipple n2"></div><div class="arm"></div><div class="arm2"></div></div></div>
+    <button class="hot h-ax" data-point="ax">Axila<small>gânglios</small></button>
+    <button class="hot h-skin" data-point="skin">Pele<small>alterações</small></button>
+    <button class="hot h-shape" data-point="shape">Formato<small>e tamanho</small></button>
+    <button class="hot h-nip" data-point="nip">Mamilo<small>secreção</small></button>
+    <button class="hot h-lump" data-point="lump">Caroço<small>nódulo</small></button>
+    <button class="hot h-pain" data-point="pain">Dor persistente<small>merece avaliação</small></button>
   </div>
-  <div id="triageResult" class="hidden"></div>
-</section>
-
-<section id="mamas" class="screen">
-  <div class="topbar"><div class="brand">Saúde das mamas<small>Conhecer é perceber mudanças</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌸 Mamas</span><h2>Explore por partes</h2><p>Em vez de procurar pontos numa foto, escolha uma região para descobrir o que observar.</p></div>
-  <div class="interactive-map">
-    <div class="map-intro"><div><strong>Mapa interativo das mamas</strong><span> toque em uma região</span></div><span>💗</span></div>
-    <div class="anatomy-board" id="mamaBoard">
-      <svg class="anatomy-svg" id="mamaSvg" viewBox="0 0 320 320" aria-label="Ilustração estilizada das mamas">
-        <circle cx="160" cy="160" r="108" fill="#fff" opacity=".42"/>
-        <path id="mama-left" class="part soft" d="M155 116 C126 86 76 90 59 128 C42 167 72 213 122 221 C139 224 151 214 160 198 Z"/>
-        <path id="mama-right" class="part soft" d="M165 116 C194 86 244 90 261 128 C278 167 248 213 198 221 C181 224 169 214 160 198 Z"/>
-        <circle id="skin-zone" class="part soft" cx="160" cy="162" r="72" opacity=".22"/>
-        <circle cx="126" cy="169" r="13" fill="#ed86a9" stroke="#b83e6c" stroke-width="4"/>
-        <circle cx="194" cy="169" r="13" fill="#ed86a9" stroke="#b83e6c" stroke-width="4"/>
-        <circle id="lump-zone" cx="120" cy="143" r="8" fill="#d94b82"/>
-        <path class="outline" d="M64 119 C48 111 36 118 31 133"/>
-        <circle cx="30" cy="137" r="8" fill="#ffd1df" stroke="#b83e6c" stroke-width="4"/>
-        <path class="outline" d="M158 215 C156 235 151 248 140 260"/>
-        <path class="outline" d="M162 215 C164 235 169 248 180 260"/>
-      </svg>
-    </div>
-    <div class="map-actions" id="mamaChoices">
-      <button class="map-btn" data-map="axila"><span class="num">1</span>Axila<small>gânglios e caroços</small></button>
-      <button class="map-btn" data-map="skin"><span class="num">2</span>Pele<small>mudanças visíveis</small></button>
-      <button class="map-btn" data-map="shape"><span class="num">3</span>Formato<small>tamanho e contorno</small></button>
-      <button class="map-btn" data-map="nipple"><span class="num">4</span>Mamilo<small>secreção e alterações</small></button>
-      <button class="map-btn" data-map="lump"><span class="num">5</span>Caroço<small>nódulo novo</small></button>
-      <button class="map-btn" data-map="pain"><span class="num">6</span>Dor persistente<small>quando procurar avaliação</small></button>
-    </div>
-    <div id="mamaTip" class="map-tip"><strong>Escolha uma região 💗</strong><p>Você não precisa decorar tudo. A ideia é reconhecer mudanças novas e persistentes.</p></div>
-    <div class="map-mini"><span>💡</span><div><b>Importante:</b> uma alteração não significa automaticamente câncer. Se for nova ou persistente, procure a UBS.</div></div>
-  </div>
-  <div class="card" style="margin-top:14px"><span class="pill">📅 Rastreamento</span><h3>Mamografia de rotina</h3><p>No SUS, o rastreamento populacional é recomendado para mulheres de 50 a 74 anos, a cada dois anos. Fora dessa faixa, a conduta pode ser individualizada com profissional de saúde.</p><p class="note">Se houver sintoma ou alteração suspeita, não espere a idade de rastreamento: procure avaliação.</p></div>
+  <div id="focus" class="focus"><strong>Toque em um ponto 💗</strong><span>Você não precisa decorar tudo. A ideia é reconhecer mudanças novas e persistentes.</span></div>
+  <div class="card" style="margin-top:14px"><span class="tag">📅 Rastreamento</span><h3>Mamografia de rotina</h3><p>No SUS, a mamografia de rastreamento é recomendada para mulheres de 50 a 74 anos, a cada dois anos, quando não há sinais ou sintomas suspeitos.</p><p class="micro">Percebeu uma alteração? Não espere a idade do rastreamento para procurar avaliação.</p></div>
 </section>
 
 <section id="preventivo" class="screen">
-  <div class="topbar"><div class="brand">Exame preventivo<small>Colo do útero</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🌷 Colo do útero</span><h2>Monte o mapa do cuidado</h2><p>Toque em cada região para entender o que ela significa no preventivo.</p></div>
-  <div class="interactive-map">
-    <div class="map-intro"><div><strong>Anatomia simplificada</strong><span> escolha uma parte</span></div><span>🌷</span></div>
-    <div class="anatomy-board" id="uterusBoard">
-      <svg class="anatomy-svg" id="uterusSvg" viewBox="0 0 320 320" aria-label="Ilustração simplificada do útero">
-        <path id="tube-left" class="part soft" d="M139 101 C112 75 80 73 58 93 C47 103 43 117 50 127 C56 135 68 132 70 122 C74 106 93 101 111 112 L132 126 Z"/>
-        <path id="tube-right" class="part soft" d="M181 101 C208 75 240 73 262 93 C273 103 277 117 270 127 C264 135 252 132 250 122 C246 106 227 101 209 112 L188 126 Z"/>
-        <circle cx="51" cy="123" r="11" fill="#f7a9c0" stroke="#b83e6c" stroke-width="4"/><circle cx="269" cy="123" r="11" fill="#f7a9c0" stroke="#b83e6c" stroke-width="4"/>
-        <path id="uterus-zone" class="part" d="M125 95 C137 79 183 79 195 95 C205 109 199 139 190 153 C183 164 176 174 174 193 L146 193 C144 174 137 164 130 153 C121 139 115 109 125 95 Z"/>
-        <path id="cervix-zone" class="part soft" d="M146 190 L174 190 L177 220 C177 232 143 232 143 220 Z"/>
-        <path id="vagina-zone" class="part soft" d="M148 220 L172 220 L177 268 C178 284 142 284 143 268 Z"/>
-        <path class="outline" d="M151 268 Q160 278 169 268"/>
-      </svg>
-    </div>
-    <div class="map-actions" id="uterusChoices">
-      <button class="map-btn" data-map="uterus"><span class="num">1</span>Útero<small>onde a gestação se desenvolve</small></button>
-      <button class="map-btn" data-map="tubes"><span class="num">2</span>Trompas<small>ligação com os ovários</small></button>
-      <button class="map-btn" data-map="cervix"><span class="num">3</span>Colo do útero<small>região do rastreamento</small></button>
-      <button class="map-btn" data-map="vagina"><span class="num">4</span>Vagina<small>canal vaginal</small></button>
-    </div>
-    <div id="cervixTip" class="map-tip"><strong>Escolha uma região 🌸</strong><p>O mapa é educativo. A equipe da UBS orienta qual exame e intervalo são adequados para você.</p></div>
+  <div class="top"><div class="brand">Entenda o preventivo<small>Colo do útero</small></div><button class="back" data-back="choose">←</button></div>
+  <div class="section"><span class="tag">🌷 Sem mistério</span><h2>O que o exame procura?</h2><p>Toque nas partes para entender a região e depois avance para o preparo.</p></div>
+  <div class="uterus">
+    <svg class="uterus-svg" viewBox="0 0 400 330" aria-label="Ilustração do útero"><path class="u-part" data-u="tube" d="M120 120C80 80 45 105 58 132C67 150 87 137 82 123C76 107 98 105 130 126" fill="#f8b3c9" stroke="#c93f72" stroke-width="6"/><path class="u-part" data-u="tube2" d="M280 120C320 80 355 105 342 132C333 150 313 137 318 123C324 107 302 105 270 126" fill="#f8b3c9" stroke="#c93f72" stroke-width="6"/><path class="u-part" data-u="uterus" d="M130 105C130 65 270 65 270 105C270 158 235 180 228 213L172 213C165 180 130 158 130 105Z" fill="#f5a0bc" stroke="#c93f72" stroke-width="6"/><path class="u-part" data-u="cervix" d="M173 210H227L220 257H180Z" fill="#c43b6e" stroke="#a72f5b" stroke-width="5"/><path class="u-part" data-u="vagina" d="M180 257H220V314H180Z" fill="#f7a9c1" stroke="#c93f72" stroke-width="5"/></svg>
+    <div class="u-labels"><button class="u-btn" data-u-btn="uterus">Útero<small>onde a gestação se desenvolve</small></button><button class="u-btn" data-u-btn="tube">Trompas<small>ligam o útero aos ovários</small></button><button class="u-btn" data-u-btn="cervix">Colo do útero<small>região examinada no rastreamento</small></button><button class="u-btn" data-u-btn="vagina">Vagina<small>canal que se conecta ao colo</small></button></div>
   </div>
-  <div class="card" style="margin-top:14px">
-    <span class="pill">☑️ Preparação</span><h3>Checklist antes da coleta</h3>
-    <div class="checklist">
-      <div class="check"><input id="c1" type="checkbox"><label for="c1">Se possível, evitei relações sexuais nas 48 horas anteriores.</label></div>
-      <div class="check"><input id="c2" type="checkbox"><label for="c2">Evitei medicamentos vaginais, espermicidas e lubrificantes nas 48 horas anteriores.</label></div>
-      <div class="check"><input id="c3" type="checkbox"><label for="c3">Evitei exames intravaginais nesse período.</label></div>
-      <div class="check"><input id="c4" type="checkbox"><label for="c4">Se possível, programei a coleta para depois do fim da menstruação.</label></div>
-    </div>
-    <p class="note">As orientações podem variar conforme a situação. A equipe da UBS pode orientar você.</p>
-  </div>
-  <div class="card" style="margin-top:14px"><span class="pill">🧬 Rastreamento</span><h3>DNA-HPV e Papanicolau</h3><p>O teste molecular para DNA-HPV oncogênico passou a ser o método primário de rastreamento no Brasil, com implantação progressiva. Onde ele ainda não está disponível, o Papanicolau continua sendo utilizado.</p><p>O rastreamento é destinado a pessoas com colo do útero de 25 a 64 anos que já tiveram atividade sexual.</p></div>
+  <div id="uFocus" class="focus"><strong>Toque em uma parte 🌸</strong><span>O rastreamento procura alterações no colo do útero antes que possam evoluir para câncer.</span></div>
+  <div class="card" style="margin-top:14px"><span class="tag">🧬 Rastreamento</span><h3>DNA-HPV e Papanicolau</h3><p>O rastreamento é indicado para mulheres e outras pessoas com colo do útero, de 25 a 64 anos, que já tiveram atividade sexual. O teste de DNA-HPV passou a ser o método principal, com implantação progressiva; onde ele ainda não estiver disponível, o Papanicolau continua sendo utilizado.</p><div class="notice"><b>Importante:</b> sintomas como sangramento fora do habitual precisam de avaliação, mesmo fora da faixa de rastreamento.</div></div>
+  <div class="card" style="margin-top:14px"><span class="tag">☑️ Prepare-se</span><h3>Checklist antes da coleta</h3><div class="check"><input type="checkbox" id="c1"><label for="c1">Evitei relações sexuais nas 48 horas anteriores.</label></div><div class="check"><input type="checkbox" id="c2"><label for="c2">Evitei duchas, medicamentos vaginais e lubrificantes nas 48 horas anteriores.</label></div><div class="check"><input type="checkbox" id="c3"><label for="c3">Se possível, agendei fora do período menstrual.</label></div></div>
 </section>
 
-<section id="situacoes" class="screen">
-  <div class="topbar"><div class="brand">O que eu faço?<small>Escolha sua situação</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div class="section-head"><span class="pill">🧭 Caminho rápido</span><h2>Qual dessas situações parece com a sua?</h2></div>
-  <div class="choices">
-    <button class="choice" data-flow="alteracao">🔴 Senti uma alteração na mama <span>→</span></button>
-    <button class="choice" data-flow="preventivo">🩺 Quero fazer meu preventivo <span>→</span></button>
-    <button class="choice" data-flow="atrasado">📅 Meu exame está atrasado <span>→</span></button>
-    <button class="choice" data-flow="particular">📄 Fiz o exame no particular <span>→</span></button>
-  </div>
-  <div id="flowResult" class="flow hidden"></div>
-</section>
+<section id="quiz" class="screen"><div class="top"><div class="brand">Mito ou Verdade<small>Teste em 60 segundos</small></div><button class="back" data-back="choose">←</button></div><div id="quizBox"></div></section>
 
-<section id="quiz" class="screen">
-  <div class="topbar"><div class="brand">Quiz<small>Mito ou Verdade</small></div><button class="icon-btn" data-back="menu">←</button></div>
-  <div id="quizBox"></div>
-</section>
+<section id="actions" class="screen"><div class="top"><div class="brand">O que eu faço?<small>Escolha sua situação</small></div><button class="back" data-back="choose">←</button></div><div class="section"><span class="tag">🩺 Vida real</span><h2>Qual dessas situações parece com a sua?</h2><p>Toque em uma. Você verá apenas o caminho que importa.</p></div><div class="flowgrid"><button class="flowbtn" data-flow="alter">🔴 Senti uma alteração na mama</button><button class="flowbtn" data-flow="routine">📅 Meu exame está atrasado</button><button class="flowbtn" data-flow="private">📄 Fiz o exame no particular</button><button class="flowbtn" data-flow="fear">😰 Tenho vergonha ou medo</button><button class="flowbtn" data-flow="doubt">❓ Não sei se preciso fazer</button></div><div id="flowResult" class="flowresult hidden"></div></section>
 
+<section id="next" class="screen"><div class="top"><div class="brand">Seu próximo passo<small>Transforme informação em cuidado</small></div><button class="back" data-back="choose">←</button></div><div class="hero"><span class="eyebrow">💗 Jornada concluída</span><h1>Você já sabe por onde começar.</h1><p>Se ficou com dúvida, procure a UBS. Se percebeu uma alteração, não espere o período de rastreamento.</p><div class="actions"><button class="primary" data-open="actions">Ver o que fazer</button><button class="secondary" data-open="home">Voltar ao início</button></div></div><div class="card" style="margin-top:14px"><h3>Uma informação que vale compartilhar</h3><p>Conhecimento ajuda a reconhecer mudanças e a procurar cuidado no momento certo.</p><button class="primary" style="width:100%;margin-top:8px" id="share">Compartilhar no WhatsApp 💚</button></div></section>
+
+<footer class="footer">Conteúdo educativo. Este site não substitui avaliação de profissional de saúde.</footer>
 </main>
 <script>
-const screens=[...document.querySelectorAll('.screen')];
-const show=id=>{screens.forEach(s=>s.classList.toggle('active',s.id===id));window.scrollTo({top:0,behavior:'smooth'})};
-document.addEventListener('click',e=>{
- const open=e.target.closest('[data-open]'); if(open){show(open.dataset.open); if(open.dataset.open==='triagem') startTriage(); if(open.dataset.open==='quiz') startQuiz(); return;}
- const back=e.target.closest('[data-back]'); if(back){show(back.dataset.back);return;}
- const map=e.target.closest('[data-map]'); if(map){showMap(map.dataset.map);return;}
- const flow=e.target.closest('[data-flow]'); if(flow){showFlow(flow.dataset.flow);return;}
- const ans=e.target.closest('[data-answer]'); if(ans){answerQuiz(ans.dataset.answer==='true');return;}
-});
-
-const mapText={
- axila:['Axila','Gânglios aumentados ou um caroço novo na axila podem precisar de avaliação, principalmente se persistirem.','mama'],
- skin:['Pele da mama','Observe mudanças novas, como retração, alteração persistente da pele ou aspecto diferente do habitual.','mama'],
- shape:['Formato e tamanho','Mudanças novas e persistentes no tamanho ou formato de uma mama merecem avaliação.','mama'],
- nipple:['Mamilo e secreção','Alterações novas no mamilo ou secreção, especialmente sanguinolenta, precisam de avaliação.','mama'],
- lump:['Caroço ou nódulo','Um nódulo novo pode ter várias causas. O importante é procurar avaliação e não tentar descobrir sozinha o que é.','mama'],
- pain:['Dor persistente','Dor localizada e persistente, especialmente quando é nova ou diferente do habitual, merece conversa com a equipe de saúde.','mama'],
- uterus:['Útero','É o órgão onde a gestação se desenvolve. No rastreamento, a região do colo do útero é a parte central da avaliação.','uterus'],
- tubes:['Trompas','São estruturas que conectam a região do útero aos ovários. Elas não são o foco do preventivo do colo do útero.','uterus'],
- cervix:['Colo do útero','É a região examinada no rastreamento do câncer do colo do útero. O método pode ser DNA-HPV ou Papanicolau, conforme a implantação local.','uterus'],
- vagina:['Vagina','É o canal que leva ao colo do útero. O exame utiliza essa via para alcançar a região que será coletada.','uterus']
-};
-function showMap(k){
- const d=mapText[k];
- const target=d[2]==='mama'?document.getElementById('mamaTip'):document.getElementById('cervixTip');
- target.innerHTML='<strong>'+d[0]+'</strong><p>'+d[1]+'</p>';
- const container=d[2]==='mama'?document.getElementById('mamaChoices'):document.getElementById('uterusChoices');
- container.querySelectorAll('.map-btn').forEach(b=>b.classList.toggle('active',b.dataset.map===k));
- const svg=d[2]==='mama'?document.getElementById('mamaSvg'):document.getElementById('uterusSvg');
- svg.querySelectorAll('.part').forEach(el=>el.classList.remove('active'));
- const idMap={axila:'mama-left',skin:'skin-zone',shape:'mama-right',nipple:'mama-right',lump:'lump-zone',pain:'skin-zone',uterus:'uterus-zone',tubes:'tube-left',cervix:'cervix-zone',vagina:'vagina-zone'};
- const part=svg.querySelector('#'+idMap[k]); if(part) part.classList.add('active');
- target.scrollIntoView({behavior:'smooth',block:'nearest'});
-}
-
-document.querySelectorAll('.check input').forEach(c=>c.addEventListener('change',()=>c.closest('.check').classList.toggle('done',c.checked)));
-
-const triageQuestions=[
- {label:'Idade',q:'Quantos anos você tem?',opts:['Menos de 25','25 a 49','50 a 64','65 a 74','75 ou mais']},
- {label:'Sintomas',q:'Você percebeu algum caroço, alteração nova na mama ou outro sintoma que preocupa?',opts:['Sim','Não','Não tenho certeza']},
- {label:'Histórico',q:'Existe histórico familiar importante de câncer de mama ou ovário, especialmente em parentes próximos?',opts:['Sim','Não','Não sei']},
- {label:'Último exame',q:'Quando foi seu último exame de rastreamento?',opts:['Há menos de 1 ano','Entre 1 e 2 anos','Há mais de 2 anos','Há mais de 5 anos / não lembro','Nunca fiz']}
-];
-let triage={i:0,a:[]};
-function startTriage(){triage={i:0,a:[]};renderTriage();}
-function renderTriage(){
- const q=triageQuestions[triage.i]; document.getElementById('triageLabel').textContent=`${q.label} • pergunta ${triage.i+1} de 4`;
- document.getElementById('triageProgress').style.width=`${((triage.i)/4)*100}%`;
- document.getElementById('triageQuestion').innerHTML=`<div class="question">${q.q}</div>`;
- document.getElementById('triageOptions').innerHTML=q.opts.map((x,n)=>`<button class="option" data-tri="${n}">${x}</button>`).join('');
- document.getElementById('triageFeedback').innerHTML='';
- document.querySelectorAll('[data-tri]').forEach(b=>b.addEventListener('click',()=>{triage.a.push(q.opts[Number(b.dataset.tri)]);triage.i++;triage.i<4?renderTriage():finishTriage();}));
-}
-function finishTriage(){
- document.getElementById('triageProgress').style.width='100%';
- const age=triage.a[0],sym=triage.a[1],fam=triage.a[2],last=triage.a[3];
- const symptomatic=sym==='Sim'||sym==='Não tenho certeza';
- const breastRoutine=['50 a 64','65 a 74'].includes(age);
- const cervixRoutine=['25 a 49','50 a 64'].includes(age);
- let cls=symptomatic?'alert':(breastRoutine||cervixRoutine?'':'warn');
- let title=symptomatic?'Seu próximo passo é avaliação na UBS':'Seu caminho depende da idade e do exame';
- let html='<div class="result '+cls+'"><strong>'+title+'</strong><ul>';
- if(symptomatic) html+='<li>Procure a unidade de saúde para avaliação. Sintomas não devem ser tratados como simples rastreamento de rotina.</li>';
- if(breastRoutine&&!symptomatic) html+='<li><b>Mamas:</b> você está na faixa de rastreamento populacional de 50 a 74 anos. A mamografia de rotina é recomendada a cada dois anos.</li>';
- if(!breastRoutine&&!symptomatic) html+='<li><b>Mamas:</b> fora de 50 a 74 anos, a mamografia de rotina não é automaticamente indicada para toda pessoa. Converse com profissional sobre riscos, benefícios e seu contexto.</li>';
- if(cervixRoutine) html+='<li><b>Colo do útero:</b> se você tem colo do útero, tem 25 a 64 anos e já teve atividade sexual, está na população-alvo do rastreamento.</li>';
- if(!cervixRoutine&&['Menos de 25','65 a 74','75 ou mais'].includes(age)) html+='<li><b>Colo do útero:</b> a faixa populacional de rastreamento é 25 a 64 anos. Situações individuais podem exigir conduta diferente.</li>';
- if(fam==='Sim'||fam==='Não sei') html+='<li><b>Histórico familiar:</b> leve essa informação à equipe. Histórico importante pode justificar avaliação individualizada do risco.</li>';
- if(last==='Há mais de 2 anos'||last==='Há mais de 5 anos / não lembro'||last==='Nunca fiz') html+='<li>Se você não lembra quando fez o exame ou está há bastante tempo sem rastrear, a UBS pode conferir seu histórico e orientar o próximo passo.</li>';
- html+='</ul><div class="actions"><button class="primary" data-open="situacoes">Ver caminhos rápidos</button><button class="secondary" data-open="menu">Voltar ao início</button></div><p class="note">Esta triagem é educativa e não substitui avaliação profissional.</p></div>';
- document.getElementById('triageResult').innerHTML=html;document.getElementById('triageResult').classList.remove('hidden');
- document.getElementById('triageQuestion').innerHTML='<div class="question">Pronto. Seu caminho foi organizado. 💗</div>';
- document.getElementById('triageOptions').innerHTML='';
- document.getElementById('triageFeedback').innerHTML='';
-}
-document.addEventListener('click',e=>{const t=e.target.closest('[data-tri]');});
-
-const flows={
- alteracao:{title:'Você percebeu uma alteração',text:'Não espere a próxima mamografia de rotina.',steps:['Procure a UBS e conte o que mudou e há quanto tempo.','A equipe fará a avaliação e, se necessário, encaminhará para investigação diagnóstica.','Não tente concluir pelo sintoma sozinho. Nem toda alteração é câncer.']},
- preventivo:{title:'Você quer fazer o preventivo',text:'Comece pela UBS e confira qual método está disponível no seu território.',steps:['Verifique a faixa etária e seu histórico.','Agende conforme o fluxo da unidade.','Siga as orientações de preparo da equipe.']},
- atrasado:{title:'Seu exame está atrasado',text:'Atraso não é motivo para culpa. É motivo para retomar o cuidado.',steps:['Procure a UBS.','A equipe pode conferir seu histórico no SUS.','Você receberá orientação sobre qual exame e quando realizar.']},
- particular:{title:'Você fez o exame no particular',text:'Leve o resultado para a UBS.',steps:['Entregue uma cópia à equipe.','Peça para o resultado ser registrado no prontuário do SUS.','Assim o acompanhamento fica mais organizado.']}
-};
-function showFlow(k){const f=flows[k];const el=document.getElementById('flowResult');el.innerHTML=`<h3>${f.title}</h3><p>${f.text}</p><ol>${f.steps.map(s=>`<li>${s}</li>`).join('')}</ol>`;el.classList.remove('hidden');el.scrollIntoView({behavior:'smooth',block:'nearest'});}
-
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function show(id){$$('.screen').forEach(x=>x.classList.toggle('active',x.id===id));scrollTo({top:0,behavior:'smooth'});if(id==='quiz')startQuiz()}
+document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o){show(o.dataset.open);return}const b=e.target.closest('[data-back]');if(b){show(b.dataset.back);return}const p=e.target.closest('[data-point]');if(p){point(p.dataset.point,p);return}const u=e.target.closest('[data-u-btn]');if(u){uterus(u.dataset.uBtn);return}const f=e.target.closest('[data-flow]');if(f){flow(f.dataset.flow);return}const a=e.target.closest('[data-answer]');if(a){quizAnswer(a.dataset.answer==='true');return}});
+const points={ax:['Axila','Caroços ou inchaço persistente na axila também merecem avaliação.'],skin:['Pele','Observe mudanças novas e persistentes, como retração, vermelhidão ou aspecto de casca de laranja.'],shape:['Formato e tamanho','Uma mudança recente no formato ou tamanho de uma mama merece ser investigada.'],nip:['Mamilo','Secreção espontânea, especialmente com sangue, ou inversão recente do mamilo precisam de avaliação.'],lump:['Caroço','Nem todo caroço é câncer. Um nódulo novo ou persistente deve ser avaliado.'],pain:['Dor persistente','Dor persistente ou localizada merece conversa com um profissional, especialmente se for nova.']};
+let discovered=new Set();function point(k,el){discovered.add(k);$$('.hot').forEach(x=>x.classList.toggle('active',x===el));const d=points[k];$('#focus').innerHTML='<strong>'+d[0]+' 💗</strong><span>'+d[1]+'</span>';$('#chCount').textContent=discovered.size+' de 6 descobertos';$('#chBar').style.width=(discovered.size/6*100)+'%';}
+const uInfo={uterus:['Útero','É o órgão central do aparelho reprodutor. O rastreamento do câncer do colo não examina o útero inteiro, e sim principalmente o colo.'],tube:['Trompas','São estruturas que conectam a região dos ovários ao útero. Elas não são o alvo principal do preventivo.'],cervix:['Colo do útero','É a região examinada no rastreamento do câncer do colo do útero.'],vagina:['Vagina','É o canal que se conecta ao colo do útero. Durante a coleta, o profissional consegue visualizar a região com o espéculo.']};
+function uterus(k){$$('[data-u-btn]').forEach(x=>x.classList.toggle('active',x.dataset.uBtn===k));$$('.u-part').forEach(x=>x.classList.toggle('active',x.dataset.u===k));if(k==='tube')document.querySelector('[data-u="tube2"]').classList.add('active');const d=uInfo[k];$('#uFocus').innerHTML='<strong>'+d[0]+' 🌸</strong><span>'+d[1]+'</span>';}
+$$('.check input').forEach(x=>x.addEventListener('change',()=>x.closest('.check').classList.toggle('done',x.checked)));
 const quiz=[
- {q:'“Se eu não sinto nada, nunca preciso pensar em rastreamento.”',a:false,why:'O rastreamento existe justamente para pessoas sem sintomas. Para mama, a recomendação populacional atual no SUS é mamografia de 50 a 74 anos a cada dois anos.'},
- {q:'“Um caroço na mama significa que a pessoa tem câncer.”',a:false,why:'Não. Um caroço pode ter várias causas. O ponto importante é procurar avaliação para descobrir o que está acontecendo.'},
- {q:'“O teste de DNA-HPV passou a ser o método primário de rastreamento do colo do útero no Brasil.”',a:true,why:'Verdade. A implantação é progressiva. Onde o DNA-HPV ainda não está disponível, o Papanicolau continua sendo utilizado.'},
- {q:'“Se fiz o exame no particular, posso levar o resultado para a UBS.”',a:true,why:'Sim. Levar uma cópia ajuda a equipe a registrar o resultado no prontuário do SUS e manter o acompanhamento organizado.'}
-];
-let qi=0,score=0,locked=false;
-function startQuiz(){qi=0;score=0;locked=false;renderQuiz();}
-function renderQuiz(){
- if(qi>=quiz.length){finishQuiz();return}
- const q=quiz[qi];const pct=(qi/quiz.length)*100;
- document.getElementById('quizBox').innerHTML=`<div class="q-card"><span class="pill">🧠 Mito ou Verdade</span><div class="progress"><i style="width:${pct}%"></i></div><p><b>${qi+1} de ${quiz.length}</b></p><div class="question">${q.q}</div><div class="options"><button class="option" data-answer="true">VERDADE</button><button class="option" data-answer="false">MITO</button></div><div id="quizFeedback"></div></div>`;
-}
-function answerQuiz(v){
- if(locked)return;locked=true;const q=quiz[qi];const correct=v===q.a;if(correct)score++;
- const fb=document.getElementById('quizFeedback');fb.className='feedback '+(correct?'ok':'no');fb.innerHTML=(correct?'✅ <b>Acertou!</b> ':'💡 <b>Quase!</b> ')+q.why+`<div class="actions"><button class="primary" id="nextQuiz">Continuar →</button></div>`;
- document.getElementById('nextQuiz').onclick=()=>{qi++;locked=false;renderQuiz()};
-}
-function finishQuiz(){
- const msg=encodeURIComponent(`Fiz o Quiz do Outubro Rosa e acertei ${score}/${quiz.length}! 💗 Faça você também: ${location.href}`);
- document.getElementById('quizBox').innerHTML=`<div class="score"><div class="pill">🎀 Resultado</div><div class="score-number">${score}/${quiz.length}</div><h2>Você terminou!</h2><p>Informação boa é aquela que ajuda a tomar um próximo passo com mais segurança.</p><a class="share" href="https://wa.me/?text=${msg}" target="_blank" rel="noopener">Compartilhar no WhatsApp 💚</a><div class="actions"><button class="secondary" data-open="menu">Voltar ao início</button><button class="secondary" id="againQuiz">Refazer quiz</button></div></div>`;
- document.getElementById('againQuiz').onclick=startQuiz;
-}
+ ['Se eu não sinto nada, não preciso fazer rastreamento.',false,'Mito. O rastreamento existe justamente para encontrar alterações antes de aparecerem sintomas.'],
+ ['Nem todo caroço na mama significa câncer.',true,'Verdade. Existem várias causas benignas. Mesmo assim, um nódulo novo ou persistente deve ser avaliado.'],
+ ['A mamografia de rotina no SUS é recomendada dos 50 aos 74 anos, a cada dois anos.',true,'Verdade. Essa é a recomendação atual para rastreamento populacional.'],
+ ['O teste de DNA-HPV passou a ser o método principal de rastreamento do colo do útero no Brasil.',true,'Verdade. A implantação é progressiva; onde o DNA-HPV ainda não está disponível, o Papanicolau continua sendo utilizado.']
+];let qi=0,score=0,locked=false;
+function startQuiz(){qi=0;score=0;locked=false;renderQuiz()}function renderQuiz(){const q=quiz[qi];$('#quizBox').innerHTML='<div class="challenge"><span class="eyebrow" style="background:#ffffff20;color:#fff">🧠 MITO OU VERDADE</span><div class="bar"><i style="width:'+(qi/quiz.length*100)+'%"></i></div><p style="color:#ffeaf1">'+(qi+1)+' de '+quiz.length+'</p><h2>'+q[0]+'</h2><div class="choices"><button class="choice" data-answer="true">VERDADE</button><button class="choice" data-answer="false">MITO</button></div><div id="qfb"></div></div>'}
+function quizAnswer(v){if(locked)return;locked=true;const q=quiz[qi],ok=v===q[1];if(ok)score++;$('#qfb').innerHTML='<div class="feedback"><strong>'+(ok?'✅ Acertou!':'💡 Quase!')+'</strong><p>'+q[2]+'</p><button class="primary" id="next" style="width:100%">'+(qi===quiz.length-1?'Ver meu resultado':'Próxima')+' →</button></div>';$('#next').onclick=()=>{qi++;locked=false;if(qi<quiz.length)renderQuiz();else finishQuiz()}}
+function finishQuiz(){const msg=encodeURIComponent('Fiz o Quiz do Outubro Rosa e acertei '+score+'/'+quiz.length+'! 🎀 '+location.href);$('#quizBox').innerHTML='<div class="card score"><span class="tag">🎉 Resultado</span><p><strong>'+score+'/'+quiz.length+'</strong></p><h2>Você chegou até o fim.</h2><p>Agora use o que descobriu para cuidar melhor de você e orientar quem está perto.</p><a class="share" href="https://wa.me/?text='+msg+'" target="_blank">Compartilhar no WhatsApp 💚</a><div class="actions"><button class="secondary" data-open="next">Meu próximo passo</button><button class="secondary" id="again">Refazer</button></div></div>';$('#again').onclick=startQuiz}
+const flows={alter:['Você percebeu uma alteração','Não espere a idade do rastreamento.', ['Procure a UBS para avaliação.','Conte o que mudou e há quanto tempo.','A equipe decide se são necessários exame clínico ou exames complementares.']],routine:['Seu exame está atrasado','Retomar o acompanhamento é o mais importante.',['Procure a UBS e informe quando foi seu último exame.','A equipe verifica seu histórico e orienta o próximo passo.']],private:['Você fez no particular','Seu resultado também pode ajudar a equipe do SUS.',['Leve uma cópia do resultado à UBS.','Peça que a informação seja registrada no prontuário.','Siga a orientação sobre acompanhamento.']],fear:['Você está com medo ou vergonha','Você não precisa chegar sabendo tudo.',['Converse com a equipe sobre sua preocupação.','Peça que expliquem cada etapa antes do exame.','Se algo incomodar, comunique o profissional.']],doubt:['Você não sabe se precisa fazer','Vamos pelo básico.',['Veja sua faixa etária e seu histórico.','Se estiver com sintomas, procure avaliação independentemente da idade.','Na dúvida, a UBS pode orientar seu caso.']]};
+function flow(k){const f=flows[k];$('#flowResult').classList.remove('hidden');$('#flowResult').innerHTML='<h3>'+f[0]+'</h3><p>'+f[1]+'</p><ol>'+f[2].map(x=>'<li>'+x+'</li>').join('')+'</ol>'}
+$('#share')?.addEventListener('click',()=>{const t=encodeURIComponent('Conheci o Outubro Rosa e descobri meu próximo passo. 🎀 '+location.href);location.href='https://wa.me/?text='+t});
 </script>
-</body>
-</html>
+</body></html>
