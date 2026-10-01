@@ -80,8 +80,25 @@
 </main>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-function show(id){$$('.screen').forEach(x=>x.classList.toggle('active',x.id===id));scrollTo({top:0,behavior:'smooth'});if(id==='quiz')startQuiz()}
-document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o){show(o.dataset.open);return}const b=e.target.closest('[data-back]');if(b){show(b.dataset.back);return}const p=e.target.closest('[data-point]');if(p){point(p.dataset.point,p);return}const u=e.target.closest('[data-u-btn]');if(u){uterus(u.dataset.uBtn);return}const f=e.target.closest('[data-flow]');if(f){flow(f.dataset.flow);return}const a=e.target.closest('[data-answer]');if(a){quizAnswer(a.dataset.answer==='true');return}});
+let currentScreen='home';
+let navigatingHistory=false;
+function render(id){$$('.screen').forEach(x=>x.classList.toggle('active',x.id===id));scrollTo({top:0,behavior:'smooth'});if(id==='quiz')startQuiz();currentScreen=id}
+function show(id,push=true){
+  if(id===currentScreen)return;
+  if(push && !navigatingHistory){history.pushState({screen:id},'',location.href.split('#')[0]+'#'+id)}
+  render(id);
+}
+window.addEventListener('popstate',()=>{
+  navigatingHistory=true;
+  const id=location.hash.replace('#','') || 'home';
+  if($(''+id)) render(id); else render('home');
+  navigatingHistory=false;
+});
+if(location.hash && $(location.hash.slice(1))) render(location.hash.slice(1));
+else render('home');
+document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o){show(o.dataset.open);return}const b=e.target.closest('[data-back]');if(b){
+  if(history.length>1){history.back();}else{show(b.dataset.back);}
+  return}const p=e.target.closest('[data-point]');if(p){point(p.dataset.point,p);return}const u=e.target.closest('[data-u-btn]');if(u){uterus(u.dataset.uBtn);return}const f=e.target.closest('[data-flow]');if(f){flow(f.dataset.flow);return}const a=e.target.closest('[data-answer]');if(a){quizAnswer(a.dataset.answer==='true');return}});
 const points={ax:['Axila','Caroços ou inchaço persistente na axila também merecem avaliação.'],skin:['Pele','Observe mudanças novas e persistentes, como retração, vermelhidão ou aspecto de casca de laranja.'],shape:['Formato e tamanho','Uma mudança recente no formato ou tamanho de uma mama merece ser investigada.'],nip:['Mamilo','Secreção espontânea, especialmente com sangue, ou inversão recente do mamilo precisam de avaliação.'],lump:['Caroço','Nem todo caroço é câncer. Um nódulo novo ou persistente deve ser avaliado.'],pain:['Dor persistente','Dor persistente ou localizada merece conversa com um profissional, especialmente se for nova.']};
 let discovered=new Set();function point(k,el){discovered.add(k);$$('.hot').forEach(x=>x.classList.toggle('active',x===el));const d=points[k];$('#focus').innerHTML='<strong>'+d[0]+' 💗</strong><span>'+d[1]+'</span>';$('#chCount').textContent=discovered.size+' de 6 descobertos';$('#chBar').style.width=(discovered.size/6*100)+'%';}
 const uInfo={uterus:['Útero','É o órgão central do aparelho reprodutor. O rastreamento do câncer do colo não examina o útero inteiro, e sim principalmente o colo.'],tube:['Trompas','São estruturas que conectam a região dos ovários ao útero. Elas não são o alvo principal do preventivo.'],cervix:['Colo do útero','É a região examinada no rastreamento do câncer do colo do útero.'],vagina:['Vagina','É o canal que se conecta ao colo do útero. Durante a coleta, o profissional consegue visualizar a região com o espéculo.']};
